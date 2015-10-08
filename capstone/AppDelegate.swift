@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        // show splash screen for 2 seconds
-        sleep(2)
+        // Minimum time for splash screen
+        sleep(GCSplashScreenDisplayTime)
         
         return true
     }
