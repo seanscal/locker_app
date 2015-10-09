@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  MapViewController.swift
 //  capstone
 //
 //  Created by Eliot Johnson on 10/4/15.
@@ -7,12 +7,25 @@
 //
 
 import UIKit
+import GoogleMaps
 
-class FirstViewController: UIViewController {
+class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // setup sample map
+        let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
+            longitude: 151.20, zoom: 6)
+        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+        mapView.myLocationEnabled = true
+        self.view = mapView
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
+        marker.title = "Sydney"
+        marker.snippet = "Australia"
+        marker.map = mapView
     }
 
     override func didReceiveMemoryWarning() {

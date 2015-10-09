@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Minimum time for splash screen
         sleep(GCSplashScreenDisplayTime)
+        
+        // Provide Google Maps API key
+        GMSServices.provideAPIKey(GCGoogleMapsApiKey);
         
         return true
     }

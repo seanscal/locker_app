@@ -16,5 +16,6 @@ import Foundation
 //  - Use the "GC" prefix to help distinguish these from local variables
 //
 
-// Enforces a 2-second sleep call during application load to showcase the splash screen
-let GCSplashScreenDisplayTime = UInt32(2)
+// Enforces a 1-second sleep call during application load to showcase the splash screen
+let GCSplashScreenDisplayTime = UInt32(1)
+let GCGoogleMapsApiKey = "AIzaSyBdTKw3CeFmUPYNjlQ2tMpQ29h6HFEvbJ0";
