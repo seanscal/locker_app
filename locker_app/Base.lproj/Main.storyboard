@@ -8,11 +8,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -65,15 +64,19 @@
                             <constraint firstItem="Bpz-h2-3YV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pFz-3X-j5q"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="historyButton" destination="UnL-U2-5UM" id="TkU-9a-4vV"/>
+                        <outlet property="menuButton" destination="80l-BB-Vfq" id="qD7-H1-iHU"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="105" y="290"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="XjU-ay-LRw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="jEx-WF-Mgh" sceneMemberID="viewController">
+                <viewController id="jEx-WF-Mgh" customClass="MenuViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hV8-Me-PKs"/>
                         <viewControllerLayoutGuide type="bottom" id="sD4-bn-ux7"/>
@@ -90,36 +93,36 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7h-nd-jDx">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rp7-tX-Vea">
                                 <rect key="frame" x="484" y="528" width="96" height="52"/>
                                 <color key="backgroundColor" red="0.73345467929999997" green="0.73345467929999997" blue="0.73345467929999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="HxO-og-rsY"/>
+                                    <constraint firstAttribute="width" constant="96" id="YmN-oU-udl"/>
                                 </constraints>
                                 <state key="normal" title="Map"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="modal" id="Ma9-Og-e2v"/>
+                                    <segue destination="BYZ-38-t0r" kind="modal" id="Ksq-P3-1IT"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="l7h-nd-jDx" firstAttribute="top" secondItem="hV8-Me-PKs" secondAttribute="bottom" constant="508" id="0Xy-lt-Xig"/>
-                            <constraint firstItem="l7h-nd-jDx" firstAttribute="leading" secondItem="tEw-dT-e6k" secondAttribute="leadingMargin" id="5Qg-zp-da5"/>
                             <constraint firstItem="mkc-PK-3T1" firstAttribute="top" secondItem="hV8-Me-PKs" secondAttribute="bottom" constant="19" id="7kW-5v-Fv7"/>
-                            <constraint firstAttribute="bottom" secondItem="l7h-nd-jDx" secondAttribute="bottom" constant="20" symbolic="YES" id="Kcm-1m-fpq"/>
                             <constraint firstItem="mkc-PK-3T1" firstAttribute="centerX" secondItem="tEw-dT-e6k" secondAttribute="centerX" id="vhb-OU-iPz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapButton" destination="rp7-tX-Vea" id="fso-G9-zIa"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="-32"/>
         </scene>
-        <!--View Controller-->
+        <!--History View Controller-->
         <scene sceneID="Grp-Ml-GYv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a7d-B7-VeK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="4Uf-LA-tUR" sceneMemberID="viewController">
+                <viewController id="4Uf-LA-tUR" customClass="HistoryViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FYj-ss-bdc"/>
                         <viewControllerLayoutGuide type="bottom" id="mve-bR-bgP"/>
@@ -154,12 +157,16 @@
                             <constraint firstItem="svN-hJ-Bku" firstAttribute="top" secondItem="FYj-ss-bdc" secondAttribute="bottom" constant="8" symbolic="YES" id="fgT-Hr-qRU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapButton" destination="UYd-po-0Jo" id="SQm-5P-WZn"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a7d-B7-VeK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="629"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ma9-Og-e2v"/>
+        <segue reference="Ksq-P3-1IT"/>
     </inferredMetricsTieBreakers>
 </document>
