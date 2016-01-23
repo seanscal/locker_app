@@ -1,16 +1,3 @@
-# Uncomment this line to define a global platform for your project
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.1'
 pod 'GoogleMaps'
-
-target 'capstone' do
-
-end
-
-target 'capstoneTests' do
-
-end
-
-target 'capstoneUITests' do
-
-end
-
