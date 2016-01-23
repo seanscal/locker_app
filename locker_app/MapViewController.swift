@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GoogleMaps
 
-class ViewController: UIViewController {
+class MapViewController: UIViewController {
 
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var historyButton: UIButton!
@@ -27,6 +28,7 @@ class ViewController: UIViewController {
         marker.title = "Sydney"
         marker.snippet = "Australia"
         marker.map = mapView
+        
     }
 
     override func didReceiveMemoryWarning() {
