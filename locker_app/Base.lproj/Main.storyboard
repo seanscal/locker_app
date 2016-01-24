@@ -11,7 +11,7 @@
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -93,7 +93,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rp7-tX-Vea">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rp7-tX-Vea">
                                 <rect key="frame" x="484" y="528" width="96" height="52"/>
                                 <color key="backgroundColor" red="0.73345467929999997" green="0.73345467929999997" blue="0.73345467929999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -107,7 +107,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rp7-tX-Vea" firstAttribute="trailing" secondItem="tEw-dT-e6k" secondAttribute="trailingMargin" id="7UD-hq-k4c"/>
                             <constraint firstItem="mkc-PK-3T1" firstAttribute="top" secondItem="hV8-Me-PKs" secondAttribute="bottom" constant="19" id="7kW-5v-Fv7"/>
+                            <constraint firstItem="rp7-tX-Vea" firstAttribute="top" secondItem="hV8-Me-PKs" secondAttribute="bottom" constant="508" id="Dfh-7m-aKu"/>
+                            <constraint firstAttribute="bottom" secondItem="rp7-tX-Vea" secondAttribute="bottom" constant="20" symbolic="YES" id="KLa-QX-Hbx"/>
                             <constraint firstItem="mkc-PK-3T1" firstAttribute="centerX" secondItem="tEw-dT-e6k" secondAttribute="centerX" id="vhb-OU-iPz"/>
                         </constraints>
                     </view>

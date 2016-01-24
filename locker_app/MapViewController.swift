@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import GoogleMaps
 
-class ViewController: UIViewController {
+class MapViewController: UIViewController {
 
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var historyButton: UIButton!
