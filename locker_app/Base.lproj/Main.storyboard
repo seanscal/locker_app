@@ -11,7 +11,7 @@
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -111,6 +111,9 @@
                             <constraint firstItem="mkc-PK-3T1" firstAttribute="centerX" secondItem="tEw-dT-e6k" secondAttribute="centerX" id="vhb-OU-iPz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapButton" destination="rp7-tX-Vea" id="fso-G9-zIa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -164,6 +167,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sGf-We-72e"/>
+        <segue reference="Ksq-P3-1IT"/>
     </inferredMetricsTieBreakers>
 </document>
