@@ -14,6 +14,24 @@ class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.navigationItem.hidesBackButton = true
+        
+        let backButton = UIBarButtonItem(title: "Map", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
+        self.navigationItem.rightBarButtonItem = backButton
+        
+        self.navigationItem.title = "History"
+        
+    }
+    
+    func pop() {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFromRight;
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        self.navigationController?.view.layer.addAnimation(transition, forKey: nil)
+        self.navigationController?.popViewControllerAnimated(false)
     }
     
     override func didReceiveMemoryWarning() {

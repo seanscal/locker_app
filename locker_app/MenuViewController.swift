@@ -15,6 +15,23 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.navigationItem.hidesBackButton = true
+        
+        let backButton = UIBarButtonItem(title: "Map", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
+        self.navigationItem.leftBarButtonItem = backButton
+        
+        self.navigationItem.title = "Menu"
+    }
+    
+    func pop() {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFromLeft;
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        self.navigationController?.view.layer.addAnimation(transition, forKey: nil)
+        self.navigationController?.popViewControllerAnimated(false)
     }
     
     override func didReceiveMemoryWarning() {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961231C56C7C500114D33 /* ScreenUtils.swift */; settings = {ASSET_TAGS = (); }; };
+		2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */; settings = {ASSET_TAGS = (); }; };
+		2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961281C56D1A400114D33 /* SlideRightSegue.swift */; settings = {ASSET_TAGS = (); }; };
 		CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */; };
 		CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3291C5413C300FE8406 /* MenuViewController.swift */; };
 		CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE64BED1C53003C00C8A637 /* AppDelegate.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2BB961231C56C7C500114D33 /* ScreenUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
+		2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideLeftSegue.swift; sourceTree = "<group>"; };
+		2BB961281C56D1A400114D33 /* SlideRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideRightSegue.swift; sourceTree = "<group>"; };
 		54D0622FC5E4BB07C6C6874C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		92B848286EF6F9BDFC03C7C7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +71,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BB961251C56CD4A00114D33 /* custom segues */ = {
+			isa = PBXGroup;
+			children = (
+				2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */,
+				2BB961281C56D1A400114D33 /* SlideRightSegue.swift */,
+			);
+			name = "custom segues";
+			sourceTree = "<group>";
+		};
 		9DDCB00712987602E3AEE0D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +111,7 @@
 		CCE64BEC1C53003C00C8A637 /* locker_app */ = {
 			isa = PBXGroup;
 			children = (
+				2BB961251C56CD4A00114D33 /* custom segues */,
 				CCE64BED1C53003C00C8A637 /* AppDelegate.swift */,
 				CCE64BEF1C53003C00C8A637 /* MapViewController.swift */,
 				CCE64BF11C53003C00C8A637 /* Main.storyboard */,
@@ -104,6 +120,7 @@
 				CCE64BF91C53003C00C8A637 /* Info.plist */,
 				CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */,
 				CCC9E3291C5413C300FE8406 /* MenuViewController.swift */,
+				2BB961231C56C7C500114D33 /* ScreenUtils.swift */,
 			);
 			path = locker_app;
 			sourceTree = "<group>";
@@ -138,6 +155,7 @@
 				CCE64BE71C53003C00C8A637 /* Frameworks */,
 				CCE64BE81C53003C00C8A637 /* Resources */,
 				077D6C40F21928358A3FBD5A /* Copy Pods Resources */,
+				E8B809029E52D85474FE0C79 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -257,6 +275,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		E8B809029E52D85474FE0C79 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -264,9 +297,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */,
 				CCE64BF01C53003C00C8A637 /* MapViewController.swift in Sources */,
 				CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */,
 				CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */,
+				2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */,
+				2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */,
 				CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
