@@ -13,6 +13,7 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var historyButton: UIButton!
+    @IBOutlet weak var vcMapView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +22,20 @@ class MapViewController: UIViewController {
             longitude: 151.20, zoom: 6)
         let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
         mapView.myLocationEnabled = true
-        self.view = mapView
+        vcMapView = mapView
         
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
         marker.title = "Sydney"
         marker.snippet = "Australia"
         marker.map = mapView
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+
     }
 
     override func didReceiveMemoryWarning() {
