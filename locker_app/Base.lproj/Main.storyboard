@@ -2,14 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -18,91 +17,13 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80l-BB-Vfq">
-                                <rect key="frame" x="20" y="550" width="96" height="30"/>
-                                <color key="backgroundColor" red="0.73345467931937169" green="0.73345467931937169" blue="0.73345467931937169" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="Qsw-9V-XJH"/>
-                                </constraints>
-                                <state key="normal" title="Menu"/>
-                                <connections>
-                                    <segue destination="jEx-WF-Mgh" kind="modal" id="x1a-mu-tgn"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Map" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bpz-h2-3YV">
-                                <rect key="frame" x="252" y="50" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="GRR-ap-Vy8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UnL-U2-5UM">
-                                <rect key="frame" x="484" y="550" width="96" height="30"/>
-                                <color key="backgroundColor" red="0.73345467929999997" green="0.73345467929999997" blue="0.73345467929999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="w6r-aV-f7x"/>
-                                </constraints>
-                                <state key="normal" title="History"/>
-                                <connections>
-                                    <segue destination="4Uf-LA-tUR" kind="modal" id="ke4-Ta-AzG"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fI-wo-aY7" userLabel="Map View" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="90" width="600" height="450"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="80l-BB-Vfq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="1qP-Bw-bNb"/>
-                            <constraint firstItem="UnL-U2-5UM" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="3c2-mV-OZa"/>
-                            <constraint firstItem="UnL-U2-5UM" firstAttribute="baseline" secondItem="80l-BB-Vfq" secondAttribute="firstBaseline" id="983-rP-KGd"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3fI-wo-aY7" secondAttribute="bottom" id="BYV-9K-RwK"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="top" secondItem="Bpz-h2-3YV" secondAttribute="bottom" id="FuB-pB-SVq"/>
-                            <constraint firstAttribute="bottom" secondItem="80l-BB-Vfq" secondAttribute="bottom" constant="20" symbolic="YES" id="JnE-Jk-3jG"/>
-                            <constraint firstItem="80l-BB-Vfq" firstAttribute="baseline" secondItem="UnL-U2-5UM" secondAttribute="firstBaseline" id="LwD-cS-2vI"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="PRf-M9-dJA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3fI-wo-aY7" secondAttribute="trailing" id="QY2-5l-80L"/>
-                            <constraint firstItem="Bpz-h2-3YV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="R9k-UN-ngH"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="top" secondItem="Bpz-h2-3YV" secondAttribute="bottom" constant="10" id="W4Y-M3-0aD"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fuN-Dw-l3c"/>
-                            <constraint firstItem="80l-BB-Vfq" firstAttribute="top" secondItem="3fI-wo-aY7" secondAttribute="bottom" constant="10" id="gdc-oR-Trg"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="h2j-OD-5p7"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="hAZ-pa-Tff"/>
-                            <constraint firstItem="80l-BB-Vfq" firstAttribute="top" secondItem="UnL-U2-5UM" secondAttribute="top" id="hyO-aW-dr9"/>
-                            <constraint firstItem="UnL-U2-5UM" firstAttribute="top" secondItem="3fI-wo-aY7" secondAttribute="bottom" id="kIa-Oa-wGk"/>
-                            <constraint firstItem="80l-BB-Vfq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="508" id="nqt-Nw-e49"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="top" secondItem="Bpz-h2-3YV" secondAttribute="bottom" constant="10" id="o9u-9O-pkx"/>
-                            <constraint firstItem="Bpz-h2-3YV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pFz-3X-j5q"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="72" id="qvM-bI-mQd"/>
-                            <constraint firstItem="80l-BB-Vfq" firstAttribute="top" secondItem="3fI-wo-aY7" secondAttribute="bottom" constant="10" id="sA0-g2-i6Z"/>
-                            <constraint firstItem="3fI-wo-aY7" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="sqC-Al-caz"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="FuB-pB-SVq"/>
-                                <exclude reference="QY2-5l-80L"/>
-                                <exclude reference="W4Y-M3-0aD"/>
-                                <exclude reference="fuN-Dw-l3c"/>
-                                <exclude reference="h2j-OD-5p7"/>
-                                <exclude reference="hAZ-pa-Tff"/>
-                                <exclude reference="qvM-bI-mQd"/>
-                                <exclude reference="nqt-Nw-e49"/>
-                                <exclude reference="sA0-g2-i6Z"/>
-                                <exclude reference="BYV-9K-RwK"/>
-                                <exclude reference="kIa-Oa-wGk"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="historyButton" destination="UnL-U2-5UM" id="TkU-9a-4vV"/>
-                        <outlet property="menuButton" destination="80l-BB-Vfq" id="qD7-H1-iHU"/>
-                        <outlet property="vcMapView" destination="3fI-wo-aY7" id="iqH-P5-gkq"/>
+                        <segue destination="jEx-WF-Mgh" kind="showDetail" identifier="menuSegue" id="EgS-Le-STH"/>
+                        <segue destination="4Uf-LA-tUR" kind="showDetail" identifier="historySegue" id="yas-ao-9na"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="105" y="290"/>
         </scene>
@@ -134,7 +55,7 @@
                                 </constraints>
                                 <state key="normal" title="Map"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="modal" id="Ksq-P3-1IT"/>
+                                    <segue destination="BYZ-38-t0r" kind="modal" identifier="" id="Ksq-P3-1IT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -147,6 +68,7 @@
                             <constraint firstItem="mkc-PK-3T1" firstAttribute="centerX" secondItem="tEw-dT-e6k" secondAttribute="centerX" id="vhb-OU-iPz"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="SBU-au-5Uz"/>
                     <connections>
                         <outlet property="mapButton" destination="rp7-tX-Vea" id="fso-G9-zIa"/>
                     </connections>
@@ -180,7 +102,7 @@
                                 </constraints>
                                 <state key="normal" title="Map"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="modal" id="sGf-We-72e"/>
+                                    <segue destination="BYZ-38-t0r" kind="modal" identifier="" id="sGf-We-72e"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -203,6 +125,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ksq-P3-1IT"/>
+        <segue reference="sGf-We-72e"/>
     </inferredMetricsTieBreakers>
 </document>
