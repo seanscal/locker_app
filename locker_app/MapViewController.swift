@@ -50,7 +50,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         //self.view = mapView
         
         // add boston marker
-        let marker = MapManager.BOSTON_MARKER
+        let marker = MapManager.BOSTON_MARKER_CUSTOM
         marker.map = mapView
         
         // setup buttons
