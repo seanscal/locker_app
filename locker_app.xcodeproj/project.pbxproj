@@ -12,6 +12,8 @@
 		2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961281C56D1A400114D33 /* SlideRightSegue.swift */; settings = {ASSET_TAGS = (); }; };
 		2BB9612E1C56F92800114D33 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9612D1C56F92800114D33 /* WebClient.swift */; settings = {ASSET_TAGS = (); }; };
 		2BB961301C57041500114D33 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9612F1C57041500114D33 /* Extensions.swift */; settings = {ASSET_TAGS = (); }; };
+		2BB961331C57DB2600114D33 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961321C57DB2600114D33 /* MapManager.swift */; settings = {ASSET_TAGS = (); }; };
+		2BB961351C57DB4A00114D33 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961341C57DB4A00114D33 /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */; };
 		CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3291C5413C300FE8406 /* MenuViewController.swift */; };
 		CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE64BED1C53003C00C8A637 /* AppDelegate.swift */; };
@@ -39,6 +41,8 @@
 		2BB961281C56D1A400114D33 /* SlideRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideRightSegue.swift; sourceTree = "<group>"; };
 		2BB9612D1C56F92800114D33 /* WebClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
 		2BB9612F1C57041500114D33 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		2BB961321C57DB2600114D33 /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
+		2BB961341C57DB4A00114D33 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		54D0622FC5E4BB07C6C6874C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		CCC9E3291C5413C300FE8406 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -106,8 +110,17 @@
 				2BB961231C56C7C500114D33 /* ScreenUtils.swift */,
 				2BB9612D1C56F92800114D33 /* WebClient.swift */,
 				2BB9612F1C57041500114D33 /* Extensions.swift */,
+				2BB961341C57DB4A00114D33 /* Constants.swift */,
 			);
 			name = util;
+			sourceTree = "<group>";
+		};
+		2BB961311C57DB1A00114D33 /* managers */ = {
+			isa = PBXGroup;
+			children = (
+				2BB961321C57DB2600114D33 /* MapManager.swift */,
+			);
+			name = managers;
 			sourceTree = "<group>";
 		};
 		9DDCB00712987602E3AEE0D8 /* Frameworks */ = {
@@ -141,6 +154,7 @@
 		CCE64BEC1C53003C00C8A637 /* locker_app */ = {
 			isa = PBXGroup;
 			children = (
+				2BB961311C57DB1A00114D33 /* managers */,
 				2BB9612C1C56F90700114D33 /* util */,
 				2BB9612B1C56F8F200114D33 /* view controllers */,
 				2BB9612A1C56F8CA00114D33 /* storyboards */,
@@ -324,11 +338,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */,
+				2BB961351C57DB4A00114D33 /* Constants.swift in Sources */,
 				2BB961301C57041500114D33 /* Extensions.swift in Sources */,
 				CCE64BF01C53003C00C8A637 /* MapViewController.swift in Sources */,
 				CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */,
 				CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */,
 				2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */,
+				2BB961331C57DB2600114D33 /* MapManager.swift in Sources */,
 				2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */,
 				CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */,
 				2BB9612E1C56F92800114D33 /* WebClient.swift in Sources */,

@@ -11,6 +11,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="I6j-e4-TSo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.77615591340000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QH3-yL-xmD"/>
@@ -46,7 +52,6 @@
         <!--Menu View Controller-->
         <scene sceneID="XjU-ay-LRw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="jEx-WF-Mgh" customClass="MenuViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hV8-Me-PKs"/>
@@ -59,6 +64,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="SBU-au-5Uz"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="-32"/>
         </scene>

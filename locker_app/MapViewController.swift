@@ -9,35 +9,58 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, GMSMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.titleView = UIImageView(image: UIImage(named: "navBarTitle"))
+        styleNavBar()
+        setupMap()
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    func performMenuSegue() {
+        performSegueWithIdentifier("menuSegue", sender: nil)
+    }
+    
+    func performHistorySegue() {
+        performSegueWithIdentifier("historySegue", sender: nil)
+    }
+    
+    func styleNavBar() {
+        
+        // add title view to nav bar
+        self.navigationItem.titleView = UIImageView(image: (UIImage(named: "navBarTitle"))?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
+        self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
         self.navigationItem.titleView?.frame = CGRectMake(ScreenUtils.screenWidth/2 - 25, 2, 50, 30)
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
         
-        let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
-            longitude: 151.20, zoom: 6)
-        let mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-        mapView.myLocationEnabled = true
+    }
+    
+    func setupMap() {
         
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
+        // setup sample map
+        let mapView = MapManager.BOSTON_MAP
+        mapView.delegate = self
+        //self.view = mapView
+        
+        // add boston marker
+        let marker = MapManager.BOSTON_MARKER
         marker.map = mapView
         
+        // setup buttons
         let buttonWidth = 80 as CGFloat
         let buttonHeight = 35 as CGFloat
         let buttonPadding = 20 as CGFloat
         
-        //TODO: create button factory, string constants, and screen size utility class
+        //TODO: create string constants
         
         // create menu button overlay (bottom right)
-        //let menuButton = UIButton(type: UIButtonType.RoundedRect) as UIButton
-        
         let menuButton = ScreenUtils.primaryButtonWithTitle("Menu")
         menuButton.frame = CGRectMake(ScreenUtils.screenWidth - buttonWidth - buttonPadding, self.view.frame.size.height - buttonHeight - buttonPadding, buttonWidth, buttonHeight)
         menuButton.addTarget(self, action: "performMenuSegue", forControlEvents: UIControlEvents.TouchUpInside)
@@ -54,20 +77,8 @@ class MapViewController: UIViewController {
         mapView.padding = mapInsets
         
         self.view = mapView
-        
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
-    func performMenuSegue() {
-        performSegueWithIdentifier("menuSegue", sender: nil)
-    }
-    
-    func performHistorySegue() {
-        performSegueWithIdentifier("historySegue", sender: nil)
     }
 
 }
