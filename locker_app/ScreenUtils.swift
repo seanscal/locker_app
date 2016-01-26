@@ -37,6 +37,13 @@ class ScreenUtils {
         button.setTitle(title, forState: UIControlState.Normal)
         return button
     }
+    
+    static func button(title: String, background: UIColor, tint: UIColor) -> UIButton {
+        let button = primaryButtonWithTitle(title)
+        button.backgroundColor = background
+        button.tintColor = tint
+        return button
+    }
 
     
 }
