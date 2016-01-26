@@ -11,16 +11,12 @@ import GoogleMaps
 
 class MapViewController: UIViewController {
     
-    let screenSize: CGRect = UIScreen.mainScreen().bounds
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: figure this out
-//        self.navigationItem.titleView = UIImageView(image: UIImage(named: "navBarTitle"))
-//        self.navigationItem.titleView?.sizeToFit()
-        
-        self.navigationItem.title = "Map"
+        self.navigationItem.titleView = UIImageView(image: UIImage(named: "navBarTitle"))
+        self.navigationItem.titleView?.frame = CGRectMake(ScreenUtils.screenWidth/2 - 25, 2, 50, 30)
+        self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
         
         let camera = GMSCameraPosition.cameraWithLatitude(-33.86,
             longitude: 151.20, zoom: 6)
@@ -43,7 +39,7 @@ class MapViewController: UIViewController {
         //let menuButton = UIButton(type: UIButtonType.RoundedRect) as UIButton
         
         let menuButton = ScreenUtils.primaryButtonWithTitle("Menu")
-        menuButton.frame = CGRectMake(self.view.frame.size.width - buttonWidth - buttonPadding, self.view.frame.size.height - buttonHeight - buttonPadding, buttonWidth, buttonHeight)
+        menuButton.frame = CGRectMake(ScreenUtils.screenWidth - buttonWidth - buttonPadding, self.view.frame.size.height - buttonHeight - buttonPadding, buttonWidth, buttonHeight)
         menuButton.addTarget(self, action: "performMenuSegue", forControlEvents: UIControlEvents.TouchUpInside)
         mapView.addSubview(menuButton)
         
@@ -54,7 +50,7 @@ class MapViewController: UIViewController {
         mapView.addSubview(historyButton)
         
         // add insets to preserve Google logo
-        let mapInsets = UIEdgeInsets(top: 0, left: screenSize.width/2 - 35, bottom: 20, right: 0) as UIEdgeInsets
+        let mapInsets = UIEdgeInsets(top: 0, left: ScreenUtils.screenWidth/2 - 35, bottom: 20, right: 0) as UIEdgeInsets
         mapView.padding = mapInsets
         
         self.view = mapView

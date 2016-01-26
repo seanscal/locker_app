@@ -22,6 +22,10 @@ let kPrimaryBackgroundColor = UIColor.greenColor()
 
 class ScreenUtils {
     
+    static let screenSize: CGRect = UIScreen.mainScreen().bounds
+    static let screenHeight = screenSize
+    static let screenWidth = screenSize.width
+    
     static func primaryButtonWithTitle(title: String) -> UIButton {
         let button = UIButton(type: UIButtonType.RoundedRect) as UIButton
         button.layer.cornerRadius = kPrimaryRadius
@@ -33,5 +37,6 @@ class ScreenUtils {
         button.setTitle(title, forState: UIControlState.Normal)
         return button
     }
+
     
 }
