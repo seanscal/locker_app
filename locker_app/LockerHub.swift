@@ -13,6 +13,8 @@ class LockerHub : Mappable {
     
     var name: String?
     var openUnits: Int?
+    var lat : Double?
+    var long : Double?
     
     required init?(_ map: Map) {
         
@@ -21,6 +23,8 @@ class LockerHub : Mappable {
     func mapping(map: Map) {
         name        <- map["name"]
         openUnits   <- map["openUnits"]
+        lat         <- map["lat"]
+        long        <- map["long"]
     }
     
     func availabilityString() -> String {
