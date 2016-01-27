@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import ObjectMapper
 
 class MapViewController: UIViewController, GMSMapViewDelegate {
     
@@ -47,11 +48,14 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         // setup sample map
         let mapView = MapManager.BOSTON_MAP
         mapView.delegate = self
-        //self.view = mapView
         
-        // add boston marker
-        let marker = MapManager.BOSTON_MARKER_CUSTOM
-        marker.map = mapView
+        WebClient.hubs { (response) -> Void in
+            for jsonHub in response {
+                let hub = Mapper<LockerHub>().map(jsonHub)!
+                let marker = MapManager.customMarkerWithLatitude(kCoordinateBostonLatitude, longitude: kCoordinateBostonLongitude, title: hub.name!, snippet: hub.availabilityString())
+                marker.map = mapView
+            }
+        }
         
         // setup buttons
         let buttonWidth = 80 as CGFloat

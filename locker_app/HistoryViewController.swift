@@ -21,11 +21,7 @@ class HistoryViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = backButton
         
         self.navigationItem.title = "History"
-        
-        // TODO: remove
-        // API TEST
-        WebClient.get("users")
-        
+    
     }
     
     func pop() {

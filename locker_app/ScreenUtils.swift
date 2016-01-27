@@ -14,7 +14,7 @@ import UIKit
 // primary button
 
 let kPrimaryRadius          = 15 as CGFloat
-let kPrimaryBorderWidth     = 1 as CGFloat
+let kPrimaryBorderWidth     = 2 as CGFloat
 let kPrimaryTintColor       = UIColor.whiteColor()
 let kPrimaryBorderColor     = UIColor.whiteColor().CGColor
 let kPrimaryFont            = UIFont.boldSystemFontOfSize(16)

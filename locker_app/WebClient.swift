@@ -7,31 +7,43 @@
 //
 
 import Alamofire
+import SwiftyJSON
 
 class WebClient {
 
-    static let kLockrAPI = "http://nulockerhub.com/api/"
+    static let kLockrAPI = WebUtils.webApi
     
-    static func get(method: String) {
-        WebClient.get(method, parameters:[:])
+    static func get(method: String,
+                    completion: (json: JSON) -> Void)
+    {
+        WebClient.get(method, parameters:[:], completion: completion)
     }
     
-    
-    //TODO - fill this out to return useful info
-    static func get(method: String, parameters: Dictionary<String, AnyObject>) {
+    static func get(method: String,
+                    parameters: Dictionary<String, AnyObject>,
+                    completion: (json: JSON) -> Void)
+    {
     
         Alamofire.request(.GET, kLockrAPI + method, parameters: parameters)
             .responseJSON { response in
-                print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
-                
-                if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
+                switch response.result {
+                    case .Success:
+                        if let value = response.result.value {
+                            let json = JSON(value)
+                            completion(json: json)
+                        }
+                    case .Failure(let error):
+                        print(error)
                 }
         }
         
+    }
+    
+    static func hubs(completion: (response: Array<AnyObject>) -> Void)
+    {
+        get(WebUtils.kApiMethodHubs) { (json) -> Void in
+            completion(response: json.object as! Array<AnyObject>)
+        }
     }
     
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CD997F401FF619B09302FB9 /* Pods_locker_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4614872C47042DFD3DC07017 /* Pods_locker_app.framework */; };
 		2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961231C56C7C500114D33 /* ScreenUtils.swift */; settings = {ASSET_TAGS = (); }; };
 		2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */; settings = {ASSET_TAGS = (); }; };
 		2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961281C56D1A400114D33 /* SlideRightSegue.swift */; settings = {ASSET_TAGS = (); }; };
@@ -15,6 +16,8 @@
 		2BB961331C57DB2600114D33 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961321C57DB2600114D33 /* MapManager.swift */; settings = {ASSET_TAGS = (); }; };
 		2BB961351C57DB4A00114D33 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961341C57DB4A00114D33 /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		2BB961371C57ECA500114D33 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961361C57ECA500114D33 /* Colors.swift */; settings = {ASSET_TAGS = (); }; };
+		2BB9613C1C59283700114D33 /* WebUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9613B1C59283700114D33 /* WebUtils.swift */; settings = {ASSET_TAGS = (); }; };
+		2BB9613E1C592E6F00114D33 /* LockerHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9613D1C592E6F00114D33 /* LockerHub.swift */; settings = {ASSET_TAGS = (); }; };
 		CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */; };
 		CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3291C5413C300FE8406 /* MenuViewController.swift */; };
 		CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE64BED1C53003C00C8A637 /* AppDelegate.swift */; };
@@ -45,6 +48,9 @@
 		2BB961321C57DB2600114D33 /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		2BB961341C57DB4A00114D33 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2BB961361C57ECA500114D33 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		2BB9613B1C59283700114D33 /* WebUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebUtils.swift; sourceTree = "<group>"; };
+		2BB9613D1C592E6F00114D33 /* LockerHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerHub.swift; sourceTree = "<group>"; };
+		4614872C47042DFD3DC07017 /* Pods_locker_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locker_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D0622FC5E4BB07C6C6874C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		CCC9E3291C5413C300FE8406 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDD6ED3153876B4F8386D254 /* Pods.framework in Frameworks */,
+				0CD997F401FF619B09302FB9 /* Pods_locker_app.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +121,7 @@
 				2BB9612F1C57041500114D33 /* Extensions.swift */,
 				2BB961341C57DB4A00114D33 /* Constants.swift */,
 				2BB961361C57ECA500114D33 /* Colors.swift */,
+				2BB9613B1C59283700114D33 /* WebUtils.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -126,10 +134,19 @@
 			name = managers;
 			sourceTree = "<group>";
 		};
+		2BB961381C59113700114D33 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				2BB9613D1C592E6F00114D33 /* LockerHub.swift */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
 		9DDCB00712987602E3AEE0D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				07A1CD1BEBDBB73BCAB13775 /* Pods.framework */,
+				4614872C47042DFD3DC07017 /* Pods_locker_app.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,6 +174,7 @@
 		CCE64BEC1C53003C00C8A637 /* locker_app */ = {
 			isa = PBXGroup;
 			children = (
+				2BB961381C59113700114D33 /* models */,
 				2BB961311C57DB1A00114D33 /* managers */,
 				2BB9612C1C56F90700114D33 /* util */,
 				2BB9612B1C56F8F200114D33 /* view controllers */,
@@ -300,7 +318,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-locker_app/Pods-locker_app-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		33583C97549488AB0E45AEF6 /* Check Pods Manifest.lock */ = {
@@ -330,7 +348,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-locker_app/Pods-locker_app-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -345,6 +363,8 @@
 				2BB961351C57DB4A00114D33 /* Constants.swift in Sources */,
 				2BB961301C57041500114D33 /* Extensions.swift in Sources */,
 				CCE64BF01C53003C00C8A637 /* MapViewController.swift in Sources */,
+				2BB9613E1C592E6F00114D33 /* LockerHub.swift in Sources */,
+				2BB9613C1C59283700114D33 /* WebUtils.swift in Sources */,
 				CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */,
 				CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */,
 				2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */,

@@ -39,7 +39,8 @@ class MapManager
         marker.position = CLLocationCoordinate2DMake(latitude, longitude)
         marker.title = title
         marker.snippet = snippet
-        marker.icon = UIImage(named: "lockMarker")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate).imageWithColor(Colors.markerColor)
+        //marker.icon = UIImage(named: "lockMarker")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate).imageWithColor(Colors.markerColor)
+        marker.icon = UIImage(named: "lockMarker")
         return marker
     }
 }
