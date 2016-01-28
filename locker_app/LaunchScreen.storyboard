@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockOutline" translatesAutoresizingMaskIntoConstraints="NO" id="scf-Fh-UFA">
+                                <rect key="frame" x="112" y="208" width="150" height="150"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="kI8-iO-zal"/>
+                                    <constraint firstAttribute="width" constant="150" id="pZ6-bv-CXG"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockrOutline" translatesAutoresizingMaskIntoConstraints="NO" id="8nF-od-PAj">
+                                <rect key="frame" x="85" y="392" width="204" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="204" id="St4-9l-Zbr"/>
+                                    <constraint firstAttribute="height" constant="65" id="eKr-fW-9ep"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="8nF-od-PAj" firstAttribute="top" secondItem="scf-Fh-UFA" secondAttribute="bottom" constant="33.5" id="3AJ-SQ-SOK"/>
+                            <constraint firstItem="scf-Fh-UFA" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="K9w-YQ-MCt"/>
+                            <constraint firstItem="scf-Fh-UFA" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-50" id="ab2-6F-Zgi"/>
+                            <constraint firstItem="8nF-od-PAj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="sth-OF-mTC"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="lockOutline" width="256" height="256"/>
+        <image name="lockrOutline" width="204" height="65"/>
+    </resources>
+</document>

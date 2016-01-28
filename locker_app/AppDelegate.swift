@@ -16,7 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        GMSServices.provideAPIKey("AIzaSyBvb-eMlzzdXeAEr0JeAUuZaddciMeYwxI")
+        
+        // provide google maps api key
+        GMSServices.provideAPIKey(kGMSApiKey)
+        
+        // wait 1 sec to show splash screen
+        sleep(kSplashScreenDisplayTime)
+        
         // Override point for customization after application launch.
         return true
     }
