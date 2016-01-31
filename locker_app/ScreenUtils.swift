@@ -23,7 +23,7 @@ let kPrimaryBackgroundColor = UIColor.greenColor()
 class ScreenUtils {
     
     static let screenSize: CGRect = UIScreen.mainScreen().bounds
-    static let screenHeight = screenSize
+    static let screenHeight = screenSize.height
     static let screenWidth = screenSize.width
     
     static func primaryButtonWithTitle(title: String) -> UIButton {

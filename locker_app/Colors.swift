@@ -12,4 +12,5 @@ import UIKit
 
 struct Colors {
     static let markerColor = UIColor(red: 0, green: 150, blue: 0)
+    static let mapBackgroundColor = UIColor(red: 243, green: 239, blue: 224)
 }
