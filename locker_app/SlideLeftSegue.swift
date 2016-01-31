@@ -16,7 +16,7 @@ class SlideLeftSegue: UIStoryboardSegue {
         let dst: UIViewController = self.destinationViewController 
         let transition: CATransition = CATransition()
         let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.duration = 0.25
+        transition.duration = kDefaultSegueDuration
         transition.timingFunction = timeFunc
         transition.type = kCATransitionPush
         transition.subtype = kCATransitionFromRight

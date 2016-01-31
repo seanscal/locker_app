@@ -26,7 +26,7 @@ class MenuViewController: UIViewController {
     
     func pop() {
         let transition = CATransition()
-        transition.duration = 0.5
+        transition.duration = kDefaultSegueDuration
         transition.type = kCATransitionPush;
         transition.subtype = kCATransitionFromLeft;
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
