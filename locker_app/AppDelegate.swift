@@ -21,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(kGMSApiKey)
         
         // wait 1 sec to show splash screen
-        sleep(kSplashScreenDisplayTime)
+        // sleep(kSplashScreenDisplayTime)
+        // EWJ: nixing this for now, don't want to impact performance
         
         // Override point for customization after application launch.
         return true

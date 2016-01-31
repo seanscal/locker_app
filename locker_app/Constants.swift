@@ -26,3 +26,6 @@ let kMapStandardZoom = 15 as Float
 
 let kStringBoston = "Boston"
 let kStringMassachusetts = "Massachusetts"
+
+// default segue animation duration is 0.3 seconds
+let kDefaultSegueDuration = 0.3
