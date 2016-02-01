@@ -10,8 +10,6 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    @IBOutlet weak var mapButton: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -34,7 +32,7 @@ class MenuViewController: UIViewController {
         // create account button overlay
         let accountButton = ScreenUtils.primaryButtonWithTitle("Account")
         accountButton.frame = CGRectMake(ScreenUtils.screenWidth/2 - buttonWidth/2, ScreenUtils.screenHeight/2 - buttonHeight/2 - 2*buttonOffset,buttonWidth, buttonHeight)
-        //accountButton.addTarget(self, action: "performMenuSegue", forControlEvents: UIControlEvents.TouchUpInside)
+        accountButton.addTarget(self, action: "performAccountSegue", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(accountButton)
         
         // create payment button overlay
@@ -75,6 +73,10 @@ class MenuViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func performAccountSegue() {
+        performSegueWithIdentifier("accountSegue", sender: nil)
     }
     
     

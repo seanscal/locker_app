@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
+class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,10 +16,10 @@ class HistoryViewController: UIViewController {
         
         self.navigationItem.hidesBackButton = true
         
-        let backButton = UIBarButtonItem(title: "Map", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
+        let backButton = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
         self.navigationItem.rightBarButtonItem = backButton
         
-        self.navigationItem.title = "History"
+        self.navigationItem.title = "Account"
         
         //set view background color
         self.view.backgroundColor = Colors.mapBackgroundColor
