@@ -79,8 +79,26 @@
                     <view key="view" contentMode="scaleToFill" id="taV-zk-sbn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rCZ-d6-64x">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mve-bR-bgP" firstAttribute="top" secondItem="rCZ-d6-64x" secondAttribute="bottom" id="5LT-LB-5YU"/>
+                            <constraint firstItem="rCZ-d6-64x" firstAttribute="leading" secondItem="taV-zk-sbn" secondAttribute="leading" id="FUg-gR-216"/>
+                            <constraint firstItem="rCZ-d6-64x" firstAttribute="top" secondItem="FYj-ss-bdc" secondAttribute="bottom" id="Fhs-Ue-peW"/>
+                            <constraint firstAttribute="trailing" secondItem="rCZ-d6-64x" secondAttribute="trailing" id="xOx-44-wOK"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="rCZ-d6-64x" id="Rpr-fA-YLB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7d-B7-VeK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
