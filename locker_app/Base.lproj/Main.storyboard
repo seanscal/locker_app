@@ -64,7 +64,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="SBU-au-5Uz"/>
                     <connections>
-                        <segue destination="GkZ-uS-Fod" kind="modal" identifier="accountSegue" id="XN7-nv-Bof"/>
+                        <segue destination="GkZ-uS-Fod" kind="show" identifier="accountSegue" id="XN7-nv-Bof"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>

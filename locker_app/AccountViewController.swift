@@ -14,11 +14,11 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.navigationItem.hidesBackButton = true
-        
-        let backButton = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
-        self.navigationItem.rightBarButtonItem = backButton
-        
+//        self.navigationItem.hidesBackButton = true
+//        
+//        let backButton = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
+//        self.navigationItem.rightBarButtonItem = backButton
+//        
         self.navigationItem.title = "Account"
         
         //set view background color
