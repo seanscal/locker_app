@@ -77,8 +77,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="SBU-au-5Uz"/>
                     <connections>
-                        <outlet property="tableView" destination="fRU-Uf-ls5" id="oQI-3K-h8r"/>
-                        <segue destination="GkZ-uS-Fod" kind="modal" identifier="accountSegue" id="XN7-nv-Bof"/>
+                        <segue destination="GkZ-uS-Fod" kind="show" identifier="accountSegue" id="XN7-nv-Bof"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>
