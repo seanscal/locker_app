@@ -8,56 +8,30 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: AbstractTableViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
+
         self.navigationItem.hidesBackButton = true
         
         let backButton = UIBarButtonItem(title: "Map", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
-        self.navigationItem.leftBarButtonItem = backButton
+        navigationItem.leftBarButtonItem = backButton
+        navigationItem.title = "Menu"
         
-        self.navigationItem.title = "Menu"
+        // configure abstract table view
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        //set view background color
-        self.view.backgroundColor = Colors.mapBackgroundColor
+        // set header & cell titles for menu
+        initWithTitles(header("Account"), "Profile", "Payment", "Settings", header("Help"), "About", "Report an issue", "Logout")
         
-        // setup buttons
-        let buttonWidth = 250 as CGFloat
-        let buttonHeight = 60 as CGFloat
-        let buttonOffset = buttonHeight + 10 as CGFloat
+        // add "built in boston" footer
+        footerView = UIImageView(image: UIImage(named: "builtInBoston"))
+        footerView?.contentMode = .ScaleAspectFit
         
-        // create account button overlay
-        let accountButton = ScreenUtils.primaryButtonWithTitle("Account")
-        accountButton.frame = CGRectMake(ScreenUtils.screenWidth/2 - buttonWidth/2, ScreenUtils.screenHeight/2 - buttonHeight/2 - 2*buttonOffset,buttonWidth, buttonHeight)
-        accountButton.addTarget(self, action: "performAccountSegue", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(accountButton)
-        
-        // create payment button overlay
-        let paymentButton = ScreenUtils.primaryButtonWithTitle("Payment")
-        paymentButton.frame = CGRectMake(ScreenUtils.screenWidth/2 - buttonWidth/2, ScreenUtils.screenHeight/2 - buttonHeight/2 - buttonOffset, buttonWidth, buttonHeight)
-        //paymentButton.addTarget(self, action: "performMenuSegue", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(paymentButton)
-        
-        // create settings button overlay
-        let settingsButton = ScreenUtils.primaryButtonWithTitle("Settings")
-        settingsButton.frame = CGRectMake(ScreenUtils.screenWidth/2 - buttonWidth/2, ScreenUtils.screenHeight/2 - buttonHeight/2, buttonWidth, buttonHeight)
-        //settingsButton.addTarget(self, action: "performMenuSegue", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(settingsButton)
-        
-        // create help button overlay
-        let helpButton = ScreenUtils.primaryButtonWithTitle("Help")
-        helpButton.frame = CGRectMake(ScreenUtils.screenWidth/2 - buttonWidth/2, ScreenUtils.screenHeight/2 - buttonHeight/2 + buttonOffset, buttonWidth, buttonHeight)
-        //helpButton.addTarget(self, action: "performMenuSegue", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(helpButton)
-        
-        // create about button overlay
-        let aboutButton = ScreenUtils.primaryButtonWithTitle("About")
-        aboutButton.frame = CGRectMake(ScreenUtils.screenWidth/2 - buttonWidth/2, ScreenUtils.screenHeight/2 - buttonHeight/2 + 2*buttonOffset, buttonWidth, buttonHeight)
-        //aboutButton.addTarget(self, action: "performMenuSegue", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(aboutButton)
     }
     
     func pop() {
@@ -70,15 +44,37 @@ class MenuViewController: UIViewController {
         self.navigationController?.popViewControllerAnimated(false)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func performAccountSegue() {
         performSegueWithIdentifier("accountSegue", sender: nil)
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let titleForCell = titleForCellAtIndexPath(indexPath)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        let alert = UIAlertController(title: titleForCell, message: "You clicked the " + titleForCell + " button.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.addAction(okAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        
+        switch titleForCell {
+            case "Profile":
+                break
+            case "Payment":
+                break
+            case "Settings":
+                break
+            case "About":
+                break
+            case "Report an issue":
+                break
+            case "Logout":
+                break
+            default:
+                break
+        }
+    }
     
 }
 

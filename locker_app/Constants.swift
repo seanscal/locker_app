@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: Global Constants
 // ========================
@@ -29,3 +30,7 @@ let kStringMassachusetts = "Massachusetts"
 
 // default segue animation duration is 0.3 seconds
 let kDefaultSegueDuration = 0.3
+
+let kDefaultCellHeight = CGFloat.init(72)
+
+let kHeaderPrefix = "@header:"

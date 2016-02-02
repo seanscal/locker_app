@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0CD997F401FF619B09302FB9 /* Pods_locker_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4614872C47042DFD3DC07017 /* Pods_locker_app.framework */; };
+		2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961231C56C7C500114D33 /* ScreenUtils.swift */; };
 		2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */; };
 		2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961281C56D1A400114D33 /* SlideRightSegue.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		07A1CD1BEBDBB73BCAB13775 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewController.swift; sourceTree = "<group>"; };
 		2BB961231C56C7C500114D33 /* ScreenUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
 		2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideLeftSegue.swift; sourceTree = "<group>"; };
 		2BB961281C56D1A400114D33 /* SlideRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideRightSegue.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				CCE64BEF1C53003C00C8A637 /* MapViewController.swift */,
 				CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */,
 				CCC9E3291C5413C300FE8406 /* MenuViewController.swift */,
+				2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				2BB961351C57DB4A00114D33 /* Constants.swift in Sources */,
 				2BB961301C57041500114D33 /* Extensions.swift in Sources */,
 				CCE64BF01C53003C00C8A637 /* MapViewController.swift in Sources */,
+				2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */,
 				2BB9613E1C592E6F00114D33 /* LockerHub.swift in Sources */,
 				2BB9613C1C59283700114D33 /* WebUtils.swift in Sources */,
 				CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */,
