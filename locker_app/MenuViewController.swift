@@ -51,28 +51,16 @@ class MenuViewController: AbstractTableViewController {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let titleForCell = titleForCellAtIndexPath(indexPath)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        let alert = UIAlertController(title: titleForCell, message: "You clicked the " + titleForCell + " button.", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alert.addAction(okAction)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-        
         switch titleForCell {
             case "Profile":
-                break
-            case "Payment":
-                break
-            case "Settings":
-                break
-            case "About":
-                break
-            case "Report an issue":
-                break
-            case "Logout":
+                performAccountSegue()
                 break
             default:
-                break
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+                let alert = UIAlertController(title: titleForCell, message: "You clicked the " + titleForCell + " button.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+                alert.addAction(okAction)
+                self.presentViewController(alert, animated: true, completion: nil)
+            
         }
     }
     
