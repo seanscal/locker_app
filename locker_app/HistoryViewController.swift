@@ -36,15 +36,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.navigationController?.popViewControllerAnimated(false)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
-    
-    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2    // active and past
     }
@@ -71,8 +62,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
-        
-        cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
+        cell.accessoryType = .DisclosureIndicator
         
         switch(indexPath.section) {
         case 0:
@@ -96,7 +86,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CGFloat.init(72)
+        return kDefaultCellHeight
     }
     
     
