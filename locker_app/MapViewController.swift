@@ -41,6 +41,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         self.navigationItem.titleView?.frame = CGRectMake(ScreenUtils.screenWidth/2 - 25, 2, 50, 30)
         self.navigationItem.titleView?.contentMode = UIViewContentMode.ScaleAspectFit
         
+        self.navigationController?.navigationBar.barTintColor = kPrimaryBackgroundColor
+        
     }
     
     func setupMap() {
@@ -83,6 +85,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         self.view = mapView
 
 
+    }
+    
+    func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
+        navigationController?.pushViewController(LockerHubViewController(lockerName: marker.title), animated: true)
     }
 
 }

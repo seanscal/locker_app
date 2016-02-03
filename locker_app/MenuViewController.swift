@@ -26,7 +26,7 @@ class MenuViewController: AbstractTableViewController {
         tableView.delegate = self
         
         // set header & cell titles for menu
-        initWithTitles(header("Account"), "Profile", "Payment", "Settings", header("Help"), "About", "Report an issue", "Logout")
+        initTableViewWithTitles(header("Account"), "Profile", "Payment", "Settings", header("Help"), "About", "Report an issue", "Logout")
         
         // add "built in boston" footer
         footerView = UIImageView(image: UIImage(named: "builtInBoston"))

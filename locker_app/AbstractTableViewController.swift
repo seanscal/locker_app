@@ -31,7 +31,7 @@ class AbstractTableViewController : UIViewController, UITableViewDelegate, UITab
 //        }
 //    }
     
-    func initWithTitles(titles: String...) {
+    func initTableViewWithTitles(titles: String...) {
         for title in titles {
             if(isHeader(title)) {
                 if(titles.indexOf(title) != 0) {
@@ -137,10 +137,10 @@ class AbstractTableViewController : UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if(section == cellSections - 1) {
-            return (footerView?.frame.size.height)!
+        guard let footerView = footerView else {
+            return 0
         }
         
-        return 0
+        return (section == cellSections - 1) ? footerView.frame.size.height : 0
     }
 }
