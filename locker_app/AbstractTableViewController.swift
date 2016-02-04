@@ -9,27 +9,25 @@
 import Foundation
 import UIKit
 
-//enum TableViewType {
-//    case Plain
-//    case Styled
-//}
+enum TableViewType {
+    case Plain     
+    case Disclosure
+    case Image
+    case Both
+}
 
 class AbstractTableViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var cellSections = 1
-    private var cellTitles : Array<String> = []
+    var cellTitles : Array<String> = []
+    
     private var cellHeaders: Array<String> = []
     
     var footerView : UIView? = nil
+    private var imageDict = Dictionary<String, Array<String>>()  //String represents the image name; array represents titles for which to display the image
     
     private var cellHeight : CGFloat = kDefaultCellHeight
-//    var tableViewType : TableViewType = .Plain {
-//        didSet {
-//            if(tableViewType == .Styled) {
-//                
-//            }
-//        }
-//    }
+    var tableViewType : TableViewType = .Plain
     
     func initTableViewWithTitles(titles: String...) {
         for title in titles {
@@ -54,11 +52,43 @@ class AbstractTableViewController : UIViewController, UITableViewDelegate, UITab
         return nil
     }
     
+    func registerImageNameForTitles(imageName: String, titles: Array<String>) {
+        imageDict[imageName] = titles
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        cell.textLabel?.text = titleForCellAtIndexPath(indexPath)
+        let cellTitle = titleForCellAtIndexPath(indexPath
+        )
+        cell.textLabel?.text = cellTitle
+        
+        switch tableViewType {
+            case .Plain:
+                break
+            case .Disclosure:
+                cell.accessoryType = .DisclosureIndicator
+                break
+            case .Image:
+                cell.imageView?.image = cellImageForTitle(cellTitle)
+                break
+            case .Both:
+                cell.accessoryType = .DisclosureIndicator
+                cell.imageView?.image = cellImageForTitle(cellTitle)
+                break
+        }
+        
         return cell
+    }
+    
+    private func cellImageForTitle(title: String) -> UIImage {
+        for (imageName, titles) in imageDict {
+            if titles.contains(title) {
+                return UIImage(named: imageName)!
+            }
+        }
+        
+        return UIImage()
     }
     
     func titleForCellAtIndexPath(indexPath: NSIndexPath) -> String {
