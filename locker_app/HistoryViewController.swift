@@ -24,6 +24,8 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.navigationItem.rightBarButtonItem = backButton
         
         self.navigationItem.title = "History"
+        
+        tableView.registerNib(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "HistoryTableViewCell")
     }
 
     func pop() {
@@ -61,24 +63,36 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: nil)
-        cell.accessoryType = .DisclosureIndicator
+        let cell = tableView.dequeueReusableCellWithIdentifier("HistoryTableViewCell", forIndexPath: indexPath) as! HistoryTableViewCell //UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: nil)
+        //cell.accessoryType = .DisclosureIndicator
         
         switch(indexPath.section) {
         case 0:
-            cell.textLabel?.text = "NEU Hub - 1 hr, 15 min"
-            cell.detailTextLabel?.text = "$4.99"
+//            cell.textLabel?.text = "NEU Hub - 1 hr, 15 min"
+//            cell.detailTextLabel?.text = "$4.99"
+            cell.fareLabel.text = "$4.99"
+            cell.hubNameLabel.text = "NEU Hub"
+            cell.elapsedTimeLabel.text = "1 hr, 15 min"
         default:
             switch(indexPath.row) {
             case 0:
-                cell.textLabel?.text = "NYC Hub - 0 hr, 45 min"
-                cell.detailTextLabel?.text = "$2.01"
+//                cell.textLabel?.text = "NYC Hub - 0 hr, 45 min"
+//                cell.detailTextLabel?.text = "$2.01"
+                cell.fareLabel.text = "$2.01"
+                cell.hubNameLabel.text = "NYC Hub"
+                cell.elapsedTimeLabel.text = "0 hr, 45 min"
             case 1:
-                cell.textLabel?.text = "NEU Hub - 0 hr, 32 min"
-                cell.detailTextLabel?.text = "$2.23"
+//                cell.textLabel?.text = "NEU Hub - 0 hr, 32 min"
+//                cell.detailTextLabel?.text = "$2.23"
+                cell.fareLabel.text = "$2.23"
+                cell.hubNameLabel.text = "NEU Hub"
+                cell.elapsedTimeLabel.text = "0 hr, 32 min"
             default:
-                cell.textLabel?.text = "Prudential Hub - 2 hr, 36 min"
-                cell.detailTextLabel?.text = "$10.54"
+//                cell.textLabel?.text = "Prudential Hub - 2 hr, 36 min"
+//                cell.detailTextLabel?.text = "$10.54"
+                cell.fareLabel.text = "$10.54"
+                cell.hubNameLabel.text = "Prudential Hub"
+                cell.elapsedTimeLabel.text = "2 hr, 36 min"
             }
         }
         
