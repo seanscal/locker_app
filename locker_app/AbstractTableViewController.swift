@@ -25,6 +25,7 @@ class AbstractTableViewController : UIViewController, UITableViewDelegate, UITab
     
     var footerView : UIView? = nil
     private var imageDict = Dictionary<String, Array<String>>()  //String represents the image name; array represents titles for which to display the image
+    private var cellStyleDict = Dictionary<TableViewType, Array<String>>()
     
     private var cellHeight : CGFloat = kDefaultCellHeight
     var tableViewType : TableViewType = .Plain
@@ -52,18 +53,33 @@ class AbstractTableViewController : UIViewController, UITableViewDelegate, UITab
         return nil
     }
     
-    func registerImageNameForTitles(imageName: String, titles: Array<String>) {
+    func registerImageNameForTitles(imageName: String, titles: String...) {
         imageDict[imageName] = titles
+    }
+    
+    // overrides the table-wide cell type for the specified cells
+    func registerCellTypeForTitles(cellType: TableViewType, titles: String...) {
+        cellStyleDict[cellType] = titles
+    }
+    
+    func tableViewTypeForTitle(cellTitle: String) -> TableViewType {
+        for (type, titles) in cellStyleDict {
+            if titles.contains(cellTitle) {
+                return type
+            }
+        }
+        return tableViewType
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
-        let cellTitle = titleForCellAtIndexPath(indexPath
-        )
+        let cellTitle = titleForCellAtIndexPath(indexPath)
         cell.textLabel?.text = cellTitle
         
-        switch tableViewType {
+        let cellType = tableViewTypeForTitle(cellTitle)
+        
+        switch cellType {
             case .Plain:
                 break
             case .Disclosure:

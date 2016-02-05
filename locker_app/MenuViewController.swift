@@ -30,11 +30,14 @@ class MenuViewController: AbstractTableViewController {
         initTableViewWithTitles(header("Account"), "Profile", "Payment", "Settings", header("Help"), "About", "Report an issue", "Logout")
         
         // configure images for cells
-        registerImageNameForTitles("profileIcon", titles: ["Profile"])
-        registerImageNameForTitles("paymentIcon", titles: ["Payment"])
-        registerImageNameForTitles("settingsIcon", titles: ["Settings"])
-        registerImageNameForTitles("aboutIcon", titles: ["About"])
-        registerImageNameForTitles("reportIcon", titles: ["Report an issue"])
+        registerImageNameForTitles("profileIcon", titles: "Profile")
+        registerImageNameForTitles("paymentIcon", titles: "Payment")
+        registerImageNameForTitles("settingsIcon", titles: "Settings")
+        registerImageNameForTitles("aboutIcon", titles: "About")
+        registerImageNameForTitles("reportIcon", titles: "Report an issue")
+        
+        // register any outlier cell types
+        registerCellTypeForTitles(.Plain, titles: "Logout")
         
         // add "built in boston" footer
         footerView = UIImageView(image: UIImage(named: "builtInBoston"))
