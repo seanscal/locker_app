@@ -80,7 +80,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         mapView.addSubview(historyButton)
         
         // add insets to preserve Google logo
-        let mapInsets = UIEdgeInsets(top: 0, left: ScreenUtils.screenWidth/2 - 35, bottom: 20, right: ScreenUtils.screenWidth/2 - 35) as UIEdgeInsets
+        let mapInsets = UIEdgeInsets(top: 0, left: ScreenUtils.screenWidth/2 - 34, bottom: 20, right: ScreenUtils.screenWidth/2 - 34) as UIEdgeInsets
         mapView.padding = mapInsets
         
         self.view = mapView
