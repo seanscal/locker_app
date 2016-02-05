@@ -12,13 +12,18 @@ import UIKit
 class LockerHubViewController : AbstractTableViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    private var lockerName: String? = nil
+    private var lockerName: String?
+    private var lockerId: Int?
     
-    init(lockerName: String) {
+    init(lockerName: String, lockerId: Int) {
         super.init(nibName: "LockerHubViewController", bundle: nil)
         
         self.lockerName = lockerName
+        self.lockerId = lockerId
+        
         navigationItem.title = lockerName
+        
+        
     }
     
     override func viewDidLoad() {

@@ -11,6 +11,7 @@ import ObjectMapper
 
 class LockerHub : Mappable {
     
+    var uid: Int?
     var name: String?
     var openUnits: Int?
     var lat : Double?
@@ -21,6 +22,7 @@ class LockerHub : Mappable {
     }
     
     func mapping(map: Map) {
+        uid         <- map["uid"]
         name        <- map["name"]
         openUnits   <- map["openUnits"]
         lat         <- map["lat"]
