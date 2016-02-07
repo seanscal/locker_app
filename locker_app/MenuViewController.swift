@@ -59,12 +59,19 @@ class MenuViewController: AbstractTableViewController {
         performSegueWithIdentifier("profileSegue", sender: nil)
     }
     
+    func performPaymentSegue() {
+        performSegueWithIdentifier("paymentSegue", sender: nil)
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let titleForCell = titleForCellAtIndexPath(indexPath)
         
         switch titleForCell {
             case "Profile":
                 performProfileSegue()
+                break
+            case "Payment":
+                performPaymentSegue()
                 break
             default:
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)

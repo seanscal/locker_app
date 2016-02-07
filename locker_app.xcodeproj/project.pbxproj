@@ -24,6 +24,7 @@
 		2BB961401C59804D00114D33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB9613F1C59804D00114D33 /* LaunchScreen.storyboard */; };
 		2BC3CD401C6279A000C8C40B /* LockerHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */; };
 		2BC3CD431C627AEB00C8C40B /* LockerHubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BC3CD421C627AEB00C8C40B /* LockerHubViewController.xib */; };
+		CC1907481C67EFB100589A5C /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1907471C67EFB100589A5C /* PaymentViewController.swift */; };
 		CC22A02B1C5EE5C500D74310 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22A02A1C5EE5C500D74310 /* ProfileViewController.swift */; };
 		CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */; };
 		CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3291C5413C300FE8406 /* MenuViewController.swift */; };
@@ -65,6 +66,7 @@
 		2BC3CD421C627AEB00C8C40B /* LockerHubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LockerHubViewController.xib; sourceTree = "<group>"; };
 		4614872C47042DFD3DC07017 /* Pods_locker_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locker_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D0622FC5E4BB07C6C6874C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CC1907471C67EFB100589A5C /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		CC22A02A1C5EE5C500D74310 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		CCC9E3291C5413C300FE8406 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				CCC9E3291C5413C300FE8406 /* MenuViewController.swift */,
 				2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */,
 				2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */,
+				CC1907471C67EFB100589A5C /* PaymentViewController.swift */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 			files = (
 				2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */,
 				2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */,
+				CC1907481C67EFB100589A5C /* PaymentViewController.swift in Sources */,
 				2BB961371C57ECA500114D33 /* Colors.swift in Sources */,
 				2BB961351C57DB4A00114D33 /* Constants.swift in Sources */,
 				2BB961301C57041500114D33 /* Extensions.swift in Sources */,

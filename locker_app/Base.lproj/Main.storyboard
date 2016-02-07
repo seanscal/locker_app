@@ -78,30 +78,13 @@
                     <navigationItem key="navigationItem" id="SBU-au-5Uz"/>
                     <connections>
                         <outlet property="tableView" destination="fRU-Uf-ls5" id="3ec-59-sD5"/>
-                        <segue destination="GkZ-uS-Fod" kind="show" identifier="profileSegue" id="XN7-nv-Bof"/>
+                        <segue destination="Qw4-t3-xKl" kind="show" identifier="profileSegue" id="ysc-vK-qHa"/>
+                        <segue destination="BLu-Pp-WHF" kind="show" identifier="paymentSegue" id="MMM-NN-trT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="-32"/>
-        </scene>
-        <!--Profile View Controller-->
-        <scene sceneID="axP-hp-G18">
-            <objects>
-                <viewController id="GkZ-uS-Fod" customClass="ProfileViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cdE-RY-3eN"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pfb-OY-OSz"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Vlh-b3-p1Z" customClass="Prof">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nPq-NW-bFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1670" y="-371"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="Grp-Ml-GYv">
@@ -148,6 +131,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7d-B7-VeK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="629"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="cLC-wX-999">
+            <objects>
+                <viewController id="Qw4-t3-xKl" customClass="ProfileViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RfE-k8-BPg"/>
+                        <viewControllerLayoutGuide type="bottom" id="Z6h-Bf-1py"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GPw-xW-ajW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="XQi-tC-U3J">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XQi-tC-U3J" firstAttribute="leading" secondItem="GPw-xW-ajW" secondAttribute="leading" id="Auf-Od-eWI"/>
+                            <constraint firstItem="Z6h-Bf-1py" firstAttribute="top" secondItem="XQi-tC-U3J" secondAttribute="bottom" id="Jpg-Ce-chD"/>
+                            <constraint firstAttribute="trailing" secondItem="XQi-tC-U3J" secondAttribute="trailing" id="n2r-vF-rkb"/>
+                            <constraint firstItem="XQi-tC-U3J" firstAttribute="top" secondItem="RfE-k8-BPg" secondAttribute="bottom" id="xK1-Bo-yma"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="d1J-MN-IO0"/>
+                    <connections>
+                        <outlet property="tableView" destination="XQi-tC-U3J" id="dLI-no-WE5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAS-fg-EY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1621" y="-786"/>
+        </scene>
+        <!--Payment View Controller-->
+        <scene sceneID="oD2-3b-aWS">
+            <objects>
+                <viewController id="BLu-Pp-WHF" customClass="PaymentViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eSH-KS-Ao6"/>
+                        <viewControllerLayoutGuide type="bottom" id="cX2-B0-3hL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hiK-c2-ROU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="AWB-Eu-CYn">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="AWB-Eu-CYn" secondAttribute="trailing" id="AXZ-7O-cIp"/>
+                            <constraint firstItem="cX2-B0-3hL" firstAttribute="top" secondItem="AWB-Eu-CYn" secondAttribute="bottom" id="EXI-hG-4ex"/>
+                            <constraint firstItem="AWB-Eu-CYn" firstAttribute="leading" secondItem="hiK-c2-ROU" secondAttribute="leading" id="T1z-5C-Q8f"/>
+                            <constraint firstItem="AWB-Eu-CYn" firstAttribute="top" secondItem="eSH-KS-Ao6" secondAttribute="bottom" id="oUS-uf-p7X"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="Sj6-oJ-fww"/>
+                    <connections>
+                        <outlet property="tableView" destination="AWB-Eu-CYn" id="afl-Gc-nrg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F3a-jT-HVV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2293" y="-786"/>
         </scene>
     </scenes>
 </document>
