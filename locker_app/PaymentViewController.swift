@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ProfileViewController: AbstractTableViewController {
+class PaymentViewController: AbstractTableViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        self.navigationItem.title = "Profile"
+        
+        self.navigationItem.title = "Payment"
         
         // configure abstract table view
         tableView.dataSource = self
@@ -23,12 +23,12 @@ class ProfileViewController: AbstractTableViewController {
         tableViewType = .Both
         
         // set header & cell titles for menu
-        initTableViewWithTitles("FirstName LastName", "Bio", header(""), "Edit")
-
-        // configure images for cells
-        registerImageNameForTitles("profilePicture", titles: "FirstName LastName")
+        initTableViewWithTitles(header("Cards"), "Visa Debit", "Visa Credit", "MasterCard", header("Edit"), "Add/Remove Card")
         
-    
+        // register any outlier cell types
+        registerCellTypeForTitles(.Plain, titles: "Add/Remove Card")
+        
+        
     }
     
     func pop() {
