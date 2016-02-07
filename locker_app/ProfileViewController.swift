@@ -8,18 +8,14 @@
 
 import UIKit
 
-class AccountViewController: UIViewController {
+class ProfileViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-//        self.navigationItem.hidesBackButton = true
-//        
-//        let backButton = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
-//        self.navigationItem.rightBarButtonItem = backButton
-//        
-        self.navigationItem.title = "Account"
+    
+        self.navigationItem.title = "Profile"
         
         //set view background color
         self.view.backgroundColor = Colors.mapBackgroundColor
