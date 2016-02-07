@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zUT-Nl-lot">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zUT-Nl-lot">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -78,22 +78,22 @@
                     <navigationItem key="navigationItem" id="SBU-au-5Uz"/>
                     <connections>
                         <outlet property="tableView" destination="fRU-Uf-ls5" id="3ec-59-sD5"/>
-                        <segue destination="GkZ-uS-Fod" kind="show" identifier="accountSegue" id="XN7-nv-Bof"/>
+                        <segue destination="GkZ-uS-Fod" kind="show" identifier="profileSegue" id="XN7-nv-Bof"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djL-Nu-85o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="-32"/>
         </scene>
-        <!--Account View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="axP-hp-G18">
             <objects>
-                <viewController id="GkZ-uS-Fod" customClass="AccountViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GkZ-uS-Fod" customClass="ProfileViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cdE-RY-3eN"/>
                         <viewControllerLayoutGuide type="bottom" id="Pfb-OY-OSz"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Vlh-b3-p1Z">
+                    <view key="view" contentMode="scaleToFill" id="Vlh-b3-p1Z" customClass="Prof">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

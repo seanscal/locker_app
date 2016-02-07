@@ -55,8 +55,8 @@ class MenuViewController: AbstractTableViewController {
         self.navigationController?.popViewControllerAnimated(false)
     }
     
-    func performAccountSegue() {
-        performSegueWithIdentifier("accountSegue", sender: nil)
+    func performProfileSegue() {
+        performSegueWithIdentifier("profileSegue", sender: nil)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -64,7 +64,7 @@ class MenuViewController: AbstractTableViewController {
         
         switch titleForCell {
             case "Profile":
-                performAccountSegue()
+                performProfileSegue()
                 break
             default:
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
