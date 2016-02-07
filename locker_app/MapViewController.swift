@@ -51,7 +51,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let mapView = MapManager.BOSTON_MAP
         mapView.delegate = self
         
-        WebClient.hubs { (response) -> Void in
+        WebClient.getAllHubs { (response) -> Void in
             for jsonHub in response {
                 let hub = Mapper<LockerHub>().map(jsonHub)!
                 let marker = MapManager.customMarkerWithLatitude(hub.lat!, longitude: hub.long!, title: hub.name!, snippet: hub.availabilityString())
@@ -89,7 +89,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     }
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        navigationController?.pushViewController(LockerHubViewController(lockerName: marker.title, lockerId: marker.userData as! Int), animated: true)
+        navigationController?.pushViewController(LockerHubViewController(marker: marker), animated: true)
     }
 
 }
