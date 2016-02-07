@@ -44,6 +44,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         hubMarker.map = mapView
         mapView.camera = camera
         mapView.delegate = self
+        mapView.settings.setAllGesturesEnabled(false) // disable scrolling, zooming, rotating, etc...
         
         getHubInfo()
         _ = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "getHubInfo", userInfo: nil, repeats: true)
@@ -59,6 +60,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
         giveDirections()
     }
+    
     
     func giveDirections() {
         if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
