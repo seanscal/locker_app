@@ -18,7 +18,7 @@ let kPrimaryBorderWidth     = 2 as CGFloat
 let kPrimaryTintColor       = UIColor.whiteColor()
 let kPrimaryBorderColor     = UIColor.whiteColor().CGColor
 let kPrimaryFont            = UIFont.boldSystemFontOfSize(16)
-let kPrimaryBackgroundColor = UIColor(red: 204, green: 00, blue: 00)
+let kPrimaryBackgroundColor = UIColor(red: 0, green: 215, blue: 0)
 
 class ScreenUtils {
     
