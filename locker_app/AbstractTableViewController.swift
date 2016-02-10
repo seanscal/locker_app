@@ -24,7 +24,7 @@ class AbstractTableViewController : UIViewController, UITableViewDelegate, UITab
     private var cellHeaders: Array<String> = []
     
     var footerView : UIView? = nil
-    private var imageDict = Dictionary<String, Array<String>>()  //String represents the image name; array represents titles for which to display the image
+    private var imageDict = Dictionary<String, Array<String>>()  //String represents the image name; array represents titles for which to display the image.
     private var cellStyleDict = Dictionary<TableViewType, Array<String>>()
     
     private var cellHeight : CGFloat = kDefaultCellHeight
