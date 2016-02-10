@@ -19,12 +19,40 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QH3-yL-xmD"/>
+                        <segue destination="lFM-Z8-bPl" kind="relationship" relationship="rootViewController" id="p5M-hF-99h"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEx-rG-IL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-616" y="290"/>
+            <point key="canvasLocation" x="-1288" y="290"/>
+        </scene>
+        <!--Google Sign In View Controller-->
+        <scene sceneID="sIs-lf-ACa">
+            <objects>
+                <viewController id="lFM-Z8-bPl" customClass="GoogleSignInViewController" customModule="locker_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DQc-UJ-2lH"/>
+                        <viewControllerLayoutGuide type="bottom" id="lod-YZ-64Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zf7-BB-1kK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KAb-OE-7oh" customClass="GIDSignInButton">
+                                <rect key="frame" x="214" y="268" width="173" height="63"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pY2-I0-hzI"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="mapSegue" id="PE9-Rh-Q8M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O9k-bI-NXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-610" y="290"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">

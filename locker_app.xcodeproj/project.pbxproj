@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0CD997F401FF619B09302FB9 /* Pods_locker_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4614872C47042DFD3DC07017 /* Pods_locker_app.framework */; };
+		141C03131C6BD94800E51E9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 141C03121C6BD94800E51E9B /* GoogleService-Info.plist */; };
+		141C03151C6BD95400E51E9B /* GoogleSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03141C6BD95400E51E9B /* GoogleSignInViewController.swift */; };
 		2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */; };
 		2B8C31421C650D72009AF6F9 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */; };
 		2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */; };
@@ -48,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		07A1CD1BEBDBB73BCAB13775 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		141C03121C6BD94800E51E9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "locker_app/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		141C03141C6BD95400E51E9B /* GoogleSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignInViewController.swift; sourceTree = "<group>"; };
+		141C03161C6BDB4800E51E9B /* locker_app-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "locker_app-Bridging-Header.h"; path = "locker_app/locker_app-Bridging-Header.h"; sourceTree = "<group>"; };
 		2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewController.swift; sourceTree = "<group>"; };
 		2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 				CC22A02A1C5EE5C500D74310 /* ProfileViewController.swift */,
 				CCE64BEF1C53003C00C8A637 /* MapViewController.swift */,
 				CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */,
+				141C03141C6BD95400E51E9B /* GoogleSignInViewController.swift */,
 				CCC9E3291C5413C300FE8406 /* MenuViewController.swift */,
 				2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */,
 				2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */,
@@ -202,6 +208,8 @@
 		CCE64BE11C53003C00C8A637 = {
 			isa = PBXGroup;
 			children = (
+				141C03161C6BDB4800E51E9B /* locker_app-Bridging-Header.h */,
+				141C03121C6BD94800E51E9B /* GoogleService-Info.plist */,
 				CCE64BEC1C53003C00C8A637 /* locker_app */,
 				CCE64C011C53003C00C8A637 /* locker_appTests */,
 				CCE64BEB1C53003C00C8A637 /* Products */,
@@ -344,6 +352,7 @@
 				CCE64BF51C53003C00C8A637 /* Assets.xcassets in Resources */,
 				2BC3CD431C627AEB00C8C40B /* LockerHubViewController.xib in Resources */,
 				CCE64BF31C53003C00C8A637 /* Main.storyboard in Resources */,
+				141C03131C6BD94800E51E9B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +424,7 @@
 				2BB961371C57ECA500114D33 /* Colors.swift in Sources */,
 				2BB961351C57DB4A00114D33 /* Constants.swift in Sources */,
 				2BB961301C57041500114D33 /* Extensions.swift in Sources */,
+				141C03151C6BD95400E51E9B /* GoogleSignInViewController.swift in Sources */,
 				2BC3CD401C6279A000C8C40B /* LockerHubViewController.swift in Sources */,
 				CCE64BF01C53003C00C8A637 /* MapViewController.swift in Sources */,
 				2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */,
@@ -553,6 +563,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Test.locker-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "locker_app/locker_app-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -565,6 +576,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Test.locker-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "locker_app/locker_app-Bridging-Header.h";
 			};
 			name = Release;
 		};
