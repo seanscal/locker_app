@@ -9,6 +9,7 @@ pod 'Google/SignIn'
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
+pod 'TTTAttributedLabel'
 target ‘locker_app’ do
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end

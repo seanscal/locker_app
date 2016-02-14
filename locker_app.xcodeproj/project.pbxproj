@@ -10,6 +10,7 @@
 		0CD997F401FF619B09302FB9 /* Pods_locker_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4614872C47042DFD3DC07017 /* Pods_locker_app.framework */; };
 		141C03131C6BD94800E51E9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 141C03121C6BD94800E51E9B /* GoogleService-Info.plist */; };
 		141C03151C6BD95400E51E9B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03141C6BD95400E51E9B /* SignInViewController.swift */; };
+		141C03301C6E581300E51E9B /* SignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C032F1C6E581300E51E9B /* SignInManager.swift */; };
 		2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */; };
 		2B8C31421C650D72009AF6F9 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */; };
 		2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */; };
@@ -53,6 +54,7 @@
 		141C03121C6BD94800E51E9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "locker_app/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		141C03141C6BD95400E51E9B /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		141C03161C6BDB4800E51E9B /* locker_app-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "locker_app-Bridging-Header.h"; path = "locker_app/locker_app-Bridging-Header.h"; sourceTree = "<group>"; };
+		141C032F1C6E581300E51E9B /* SignInManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInManager.swift; sourceTree = "<group>"; };
 		2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewController.swift; sourceTree = "<group>"; };
 		2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				2BB961321C57DB2600114D33 /* MapManager.swift */,
+				141C032F1C6E581300E51E9B /* SignInManager.swift */,
 			);
 			name = managers;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 			files = (
 				2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */,
 				2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */,
+				141C03301C6E581300E51E9B /* SignInManager.swift in Sources */,
 				CC1907481C67EFB100589A5C /* PaymentViewController.swift in Sources */,
 				2BB961371C57ECA500114D33 /* Colors.swift in Sources */,
 				2BB961351C57DB4A00114D33 /* Constants.swift in Sources */,
