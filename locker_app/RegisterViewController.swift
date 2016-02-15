@@ -38,7 +38,7 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
       mapViewController = segue.destinationViewController as! MapViewController
     }
   }
-  
+   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
