@@ -25,7 +25,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEx-rG-IL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1288" y="290"/>
+            <point key="canvasLocation" x="-1292" y="266"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="sIs-lf-ACa">
@@ -57,11 +57,33 @@
                     <navigationItem key="navigationItem" id="pY2-I0-hzI"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="mapSegue" id="PE9-Rh-Q8M"/>
+                        <segue destination="R8S-R9-dOA" kind="show" id="mzD-xV-skE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O9k-bI-NXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-610" y="290"/>
+            <point key="canvasLocation" x="-594" y="266"/>
+        </scene>
+        <!--Register View Controller-->
+        <scene sceneID="o6N-9T-gqB">
+            <objects>
+                <viewController id="R8S-R9-dOA" customClass="RegisterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JxY-yE-zA5"/>
+                        <viewControllerLayoutGuide type="bottom" id="zi1-oz-Yd2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bha-Hs-oqq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="mapSegue" id="yEE-bN-WZH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dci-dl-yR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-588" y="1113"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -240,4 +262,7 @@
             <point key="canvasLocation" x="2293" y="-786"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="yEE-bN-WZH"/>
+    </inferredMetricsTieBreakers>
 </document>

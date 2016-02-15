@@ -13,9 +13,10 @@ import FBSDKShareKit
 import FBSDKLoginKit
 import TTTAttributedLabel
 
-class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDelegate, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate, TTTAttributedLabelDelegate {
+class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDelegate, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
   
   var mapViewController: MapViewController!
+  var registerViewController: RegisterViewController!
   
   var fbLoginButton = SignInManager.FBBUTTON;
   var emailField = SignInManager.EMAILFIELD;
@@ -43,9 +44,13 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     self.view.addSubview(passwordField);
     
     
-    registerButton.addTarget(self, action: "mapsegue", forControlEvents: UIControlEvents.TouchUpInside)
+    registerButton.addTarget(self, action: "registersegue:", forControlEvents: UIControlEvents.TouchUpInside)
     self.view.addSubview(registerButton);
     self.view.addSubview(registerLabel);
+  }
+  
+  func regsegue(sender:UIButton!){
+    performSegueWithIdentifier("registerSegue", sender: self);
   }
   
   func mapsegue(){
@@ -55,6 +60,9 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "mapSegue" {
       mapViewController = segue.destinationViewController as! MapViewController
+    }
+    if segue.identifier == "registerSegue" {
+      registerViewController = segue.destinationViewController as! RegisterViewController
     }
   }
   

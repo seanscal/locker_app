@@ -14,8 +14,8 @@ import FBSDKLoginKit
 import TTTAttributedLabel
 
 class SignInManager{
-  static let EMAILFIELD = SignInManager.makeLoginButton(350, text: "Email Address");
-  static let PASSWORDFIELD = SignInManager.makeLoginButton(400, text: "Password");
+  static let EMAILFIELD = CommonManager.makeTextField(350, text: "Email Address");
+  static let PASSWORDFIELD = CommonManager.makeTextField(400, text: "Password");
   static let FBBUTTON = SignInManager.makeFBLoginButton();
   static let REGISTERLABEL = SignInManager.createRegLabel();
   static let REGISTERBUTTON = SignInManager.createRegButton();
@@ -25,19 +25,6 @@ class SignInManager{
     fbLoginButton.frame = CGRectMake(70, 200, 180, 40);
     fbLoginButton.readPermissions = ["public_profile", "email", "user_friends","user_birthday"];
     return fbLoginButton;
-  }
-  
-  static func makeLoginButton(placement: CGFloat, text: String)->UITextField{
-    let textField = UITextField(frame: CGRectMake(70, placement, 180, 40))
-    textField.placeholder = text
-    textField.font = UIFont.systemFontOfSize(15)
-    textField.borderStyle = UITextBorderStyle.RoundedRect
-    textField.autocorrectionType = UITextAutocorrectionType.No
-    textField.keyboardType = UIKeyboardType.Default
-    textField.returnKeyType = UIReturnKeyType.Done
-    textField.clearButtonMode = UITextFieldViewMode.WhileEditing;
-    textField.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
-    return textField;
   }
   
   //Custom FB Function
