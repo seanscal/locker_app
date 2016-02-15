@@ -43,6 +43,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         
         self.navigationController?.navigationBar.barTintColor = kPrimaryBackgroundColor
         
+        navigationItem.hidesBackButton = true
+        
     }
     
     func setupMap() {

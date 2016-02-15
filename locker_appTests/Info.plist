@@ -18,7 +18,18 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb250952828570066</string>
+      </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>250952828570066</string>
+  <key>FacebookDisplayName</key>
+  <string>Lockr</string>
 </dict>
 </plist>
