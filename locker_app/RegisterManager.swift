@@ -15,9 +15,9 @@ import TTTAttributedLabel
 
 class RegisterManager{
 
-  static let EMAIL = CommonManager.makeTextField(50, text: "Email Address");
-  static let PASSWORD = CommonManager.makeTextField(100, text: "Password");
-  static let FIRSTNAME = CommonManager.makeTextField(150, text: "First Name");
-  static let LASTNAME = CommonManager.makeTextField(200, text: "Last Name");
-  static let REGISTER = CommonManager.createButton("Register", posx: 70, posy: 250);
+  static let EMAIL = CommonManager.makeTextField(100, text: "Email Address");
+  static let PASSWORD = CommonManager.makeTextField(150, text: "Password");
+  static let FIRSTNAME = CommonManager.makeTextField(200, text: "First Name");
+  static let LASTNAME = CommonManager.makeTextField(250, text: "Last Name");
+  static let REGISTER = CommonManager.createButton("Register", posx: 120, posy: 300);
 }

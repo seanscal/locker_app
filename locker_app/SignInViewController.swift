@@ -44,12 +44,12 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     self.view.addSubview(passwordField);
     
     
-    registerButton.addTarget(self, action: "registersegue:", forControlEvents: UIControlEvents.TouchUpInside)
+    registerButton.addTarget(self, action: "regsegue", forControlEvents: UIControlEvents.TouchUpInside)
     self.view.addSubview(registerButton);
     self.view.addSubview(registerLabel);
   }
   
-  func regsegue(sender:UIButton!){
+  func regsegue(){
     performSegueWithIdentifier("registerSegue", sender: self);
   }
   

@@ -57,7 +57,7 @@
                     <navigationItem key="navigationItem" id="pY2-I0-hzI"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="mapSegue" id="PE9-Rh-Q8M"/>
-                        <segue destination="R8S-R9-dOA" kind="show" id="mzD-xV-skE"/>
+                        <segue destination="R8S-R9-dOA" kind="show" identifier="registerSegue" id="IkT-Pd-IbW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O9k-bI-NXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -67,7 +67,7 @@
         <!--Register View Controller-->
         <scene sceneID="o6N-9T-gqB">
             <objects>
-                <viewController id="R8S-R9-dOA" customClass="RegisterViewController" sceneMemberID="viewController">
+                <viewController id="R8S-R9-dOA" customClass="RegisterViewController" customModule="locker_app" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JxY-yE-zA5"/>
                         <viewControllerLayoutGuide type="bottom" id="zi1-oz-Yd2"/>

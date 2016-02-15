@@ -33,7 +33,6 @@ class CommonManager{
     let button   = UIButton(type: UIButtonType.System) as UIButton
     button.frame = CGRectMake(posx, posy, 100, 21)
     button.setTitle(text, forState: UIControlState.Normal)
-    button.titleLabel!.font=button.titleLabel!.font.fontWithSize(10);
     return button
   }
   
