@@ -27,7 +27,7 @@ class MenuViewController: AbstractTableViewController {
         tableViewType = .Both
         
         // set header & cell titles for menu
-        initTableViewWithTitles(header("Account"), "Profile", "Payment", "Settings", header("Help"), "About", "Report an issue", "Logout")
+        initTableViewWithTitles(header("Account"), "Profile", "Payment", "Settings", header("Help"), "About", "Report an issue")
         
         // configure images for cells
         registerImageNameForTitles("profileIcon", titles: "Profile")
@@ -35,9 +35,6 @@ class MenuViewController: AbstractTableViewController {
         registerImageNameForTitles("settingsIcon", titles: "Settings")
         registerImageNameForTitles("aboutIcon", titles: "About")
         registerImageNameForTitles("reportIcon", titles: "Report an issue")
-        
-        // register any outlier cell types
-        registerCellTypeForTitles(.Plain, titles: "Logout")
         
         // add "built in boston" footer
         footerView = UIImageView(image: UIImage(named: "builtInBoston"))
@@ -58,10 +55,19 @@ class MenuViewController: AbstractTableViewController {
     func performProfileSegue() {
         performSegueWithIdentifier("profileSegue", sender: nil)
     }
-    
     func performPaymentSegue() {
         performSegueWithIdentifier("paymentSegue", sender: nil)
     }
+    func performSettingsSegue() {
+        performSegueWithIdentifier("settingsSegue", sender: nil)
+    }
+    func performAboutSegue() {
+        performSegueWithIdentifier("aboutSegue", sender: nil)
+    }
+    func performReportSegue() {
+        performSegueWithIdentifier("reportSegue", sender: nil)
+    }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let titleForCell = titleForCellAtIndexPath(indexPath)
@@ -72,6 +78,15 @@ class MenuViewController: AbstractTableViewController {
                 break
             case "Payment":
                 performPaymentSegue()
+                break
+            case "Settings":
+                performSettingsSegue()
+                break
+            case "About":
+                performAboutSegue()
+                break
+            case "Report an issue":
+                performReportSegue()
                 break
             default:
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
