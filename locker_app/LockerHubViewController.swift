@@ -44,6 +44,10 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         hubMarker.map = mapView
         mapView.camera = camera
         mapView.delegate = self
+        
+        let mapInsets = UIEdgeInsets(top: ScreenUtils.screenWidth/2 + 160, left: 0, bottom: 0, right: 0) as UIEdgeInsets
+        mapView.padding = mapInsets
+        
         mapView.settings.setAllGesturesEnabled(false) // disable scrolling, zooming, rotating, etc...
         
         getHubInfo()
