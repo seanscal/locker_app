@@ -40,7 +40,8 @@ class WebClient {
     
     private static func post(method: String,
                              parameters: Dictionary<String, AnyObject>,
-                             completion: (json: JSON) -> Void)
+                             completion: (json: JSON) -> Void,
+                             failure: (error: NSError) -> Void)
     {
         Alamofire.request(.POST, kLockrAPI + method, parameters: parameters)
             .responseJSON { response in
@@ -51,7 +52,7 @@ class WebClient {
                         completion(json: json)
                     }
                 case .Failure(let error):
-                    print(error)
+                    failure(error: error)
                 }
         }
     }
@@ -67,6 +68,15 @@ class WebClient {
     {
         get(WebUtils.kApiMethodHubs + "/" + String(hubId)) { (json) -> Void in
             completion(response: json.object as! Dictionary<String, AnyObject>)
+        }
+    }
+    
+    static func makeReservation(hubId: Int, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
+    {
+        post(WebUtils.kApiMethodReserve, parameters: ["hubId" : hubId, "userId" : UserSettings.userId], completion: { (json) -> Void in
+                completion(response: json.object as! Dictionary<String, AnyObject>)
+            }) { (error) -> Void in
+                failure(error: error)
         }
     }
     

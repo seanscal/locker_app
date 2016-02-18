@@ -119,7 +119,20 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 
     }
     
+    func makeReservation() {
+        WebClient.makeReservation(hubId!, completion: { (response) -> Void in
+            self.performSegueWithIdentifier("reserveSegue", sender: response)
+            }) { (error) -> Void in
+                //TODO: handle error
+        }
+    }
+    
     @IBAction func reservePressed(sender: AnyObject) {
-        performSegueWithIdentifier("reserveSegue", sender: nil)
+        let confirmReservationAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
+            self.makeReservation()
+        }
+        let alert = UIAlertController(title: "Confirm Reservation", message: "Reserve a locker in " + self.hubName! + "? Your unit will be held for 20 minutes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.addAction(confirmReservationAction)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }
