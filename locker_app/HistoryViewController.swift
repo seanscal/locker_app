@@ -35,7 +35,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         transition.subtype = kCATransitionFromRight;
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         self.navigationController?.view.layer.addAnimation(transition, forKey: nil)
-        self.navigationController?.popViewControllerAnimated(false)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
