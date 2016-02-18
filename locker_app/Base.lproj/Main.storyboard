@@ -22,7 +22,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="lFM-Z8-bPl" kind="relationship" relationship="rootViewController" id="p5M-hF-99h"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="aw8-ah-MFB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEx-rG-IL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -38,11 +38,11 @@
                         <viewControllerLayoutGuide type="bottom" id="lod-YZ-64Q"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Zf7-BB-1kK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KAb-OE-7oh" customClass="GIDSignInButton">
-                                <rect key="frame" x="70" y="268" width="460" height="63"/>
+                                <rect key="frame" x="66" y="252" width="188" height="63"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="3Cf-C0-qT8"/>
@@ -57,14 +57,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pY2-I0-hzI"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="mapSegue" id="PE9-Rh-Q8M"/>
                         <segue destination="R8S-R9-dOA" kind="show" identifier="registerSegue" id="IkT-Pd-IbW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O9k-bI-NXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-594" y="266"/>
+            <point key="canvasLocation" x="-789" y="686"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="o6N-9T-gqB">
@@ -75,17 +76,14 @@
                         <viewControllerLayoutGuide type="bottom" id="zi1-oz-Yd2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bha-Hs-oqq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="mapSegue" id="yEE-bN-WZH"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dci-dl-yR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-588" y="1113"/>
+            <point key="canvasLocation" x="-372" y="686"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -105,6 +103,7 @@
                         <segue destination="jEx-WF-Mgh" kind="custom" identifier="menuSegue" customClass="SlideLeftSegue" customModule="locker_app" customModuleProvider="target" id="EgS-Le-STH"/>
                         <segue destination="4Uf-LA-tUR" kind="custom" identifier="historySegue" customClass="SlideRightSegue" customModule="locker_app" customModuleProvider="target" id="yas-ao-9na"/>
                         <segue destination="9Ty-cx-NmW" kind="custom" identifier="lockerHubSegue" customClass="SlideLeftSegue" customModule="locker_app" customModuleProvider="target" id="k0y-z0-Sfi"/>
+                        <segue destination="lFM-Z8-bPl" kind="presentation" identifier="authSegue" id="tDe-Zu-SBa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -617,7 +616,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PE9-Rh-Q8M"/>
         <segue reference="yas-ao-9na"/>
     </inferredMetricsTieBreakers>
 </document>

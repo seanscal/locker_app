@@ -10,4 +10,8 @@ import Foundation
 
 class UserSettings {
     static let userId = 1 // TODO: implement this class
+    
+    static func needsAuth() -> Bool {
+        return true
+    }
 }

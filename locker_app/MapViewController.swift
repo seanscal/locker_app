@@ -15,6 +15,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkAuth()
+        
         styleNavBar()
         setupMap()
         
@@ -31,6 +33,13 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     
     func performHistorySegue() {
         performSegueWithIdentifier("historySegue", sender: nil)
+    }
+    
+    func checkAuth() {
+        if(UserSettings.needsAuth())
+        {
+            performSegueWithIdentifier("authSegue", sender: nil)
+        }
     }
     
     func styleNavBar() {
