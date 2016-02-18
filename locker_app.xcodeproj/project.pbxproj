@@ -15,6 +15,7 @@
 		141C03341C71081400E51E9B /* CommonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03331C71081400E51E9B /* CommonManager.swift */; };
 		141C03361C71088000E51E9B /* RegisterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03351C71088000E51E9B /* RegisterManager.swift */; };
 		2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */; };
+		2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84DC071C763F3600E52F3E /* UserSettings.swift */; settings = {ASSET_TAGS = (); }; };
 		2B8C31421C650D72009AF6F9 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */; };
 		2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */; };
 		2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961231C56C7C500114D33 /* ScreenUtils.swift */; };
@@ -61,6 +62,7 @@
 		141C03331C71081400E51E9B /* CommonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonManager.swift; sourceTree = "<group>"; };
 		141C03351C71088000E51E9B /* RegisterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterManager.swift; sourceTree = "<group>"; };
 		2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewController.swift; sourceTree = "<group>"; };
+		2B84DC071C763F3600E52F3E /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		2BB961231C56C7C500114D33 /* ScreenUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				2BB961341C57DB4A00114D33 /* Constants.swift */,
 				2BB961361C57ECA500114D33 /* Colors.swift */,
 				2BB9613B1C59283700114D33 /* WebUtils.swift */,
+				2B84DC071C763F3600E52F3E /* UserSettings.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				CC22A02B1C5EE5C500D74310 /* ProfileViewController.swift in Sources */,
 				2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */,
 				CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */,
+				2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */,
 				2BB9612E1C56F92800114D33 /* WebClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
