@@ -91,7 +91,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     }
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        navigationController?.pushViewController(LockerHubViewController(marker: marker), animated: true)
+        //navigationController?.pushViewController(LockerHubViewController(marker: marker), animated: true)
+        performSegueWithIdentifier("lockerHubSegue", sender: marker)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "lockerHubSegue") {
+            let hubVc = segue.destinationViewController as! LockerHubViewController
+            let marker = sender as! GMSMarker
+            
+            hubVc.initWithMarker(marker)
+            
+//            hubVc.hubName = marker.title
+//            hubVc.hubId = marker.userData as! Int?
+//            hubVc.latitude = marker.position.latitude
+//            hubVc.longitude = marker.position.longitude
+        }
     }
 
 }
