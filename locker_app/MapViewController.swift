@@ -87,7 +87,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         mapView.addSubview(menuButton)
         
         // create history button overlay (bottom left)
-        let historyButton = ScreenUtils.primaryButtonWithTitle("History")
+        let historyButton = ScreenUtils.primaryButtonWithTitle("Rentals")
         historyButton.frame = CGRectMake(buttonPadding, self.view.frame.size.height - buttonHeight - buttonPadding, buttonWidth, buttonHeight)
         historyButton.addTarget(self, action: "performHistorySegue", forControlEvents: UIControlEvents.TouchUpInside)
         mapView.addSubview(historyButton)
