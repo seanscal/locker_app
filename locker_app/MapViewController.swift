@@ -15,6 +15,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkAuth()
+        
         styleNavBar()
         setupMap()
         
@@ -31,6 +33,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     
     func performHistorySegue() {
         performSegueWithIdentifier("historySegue", sender: nil)
+    }
+    
+    func checkAuth() {
+
+        UserSettings.checkAuth { (needsAuth) -> Void in
+            if(needsAuth) {
+                self.performSegueWithIdentifier("authSegue", sender: nil)
+            }
+        }
     }
     
     func styleNavBar() {
@@ -76,7 +87,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         mapView.addSubview(menuButton)
         
         // create history button overlay (bottom left)
-        let historyButton = ScreenUtils.primaryButtonWithTitle("History")
+        let historyButton = ScreenUtils.primaryButtonWithTitle("Rentals")
         historyButton.frame = CGRectMake(buttonPadding, self.view.frame.size.height - buttonHeight - buttonPadding, buttonWidth, buttonHeight)
         historyButton.addTarget(self, action: "performHistorySegue", forControlEvents: UIControlEvents.TouchUpInside)
         mapView.addSubview(historyButton)
@@ -91,7 +102,17 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     }
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        navigationController?.pushViewController(LockerHubViewController(marker: marker), animated: true)
+        performSegueWithIdentifier("lockerHubSegue", sender: marker)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "lockerHubSegue") {
+            let hubVc = segue.destinationViewController as! LockerHubViewController
+            let marker = sender as! GMSMarker
+            
+            hubVc.initWithMarker(marker)
+
+        }
     }
 
 }

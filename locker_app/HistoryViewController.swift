@@ -23,7 +23,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         let backButton = UIBarButtonItem(title: "Map", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
         self.navigationItem.rightBarButtonItem = backButton
         
-        self.navigationItem.title = "History"
+        self.navigationItem.title = "Rentals"
         
         tableView.registerNib(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "HistoryTableViewCell")
     }
@@ -35,7 +35,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         transition.subtype = kCATransitionFromRight;
         transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         self.navigationController?.view.layer.addAnimation(transition, forKey: nil)
-        self.navigationController?.popViewControllerAnimated(false)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

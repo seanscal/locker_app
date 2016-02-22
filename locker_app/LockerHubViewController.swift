@@ -16,15 +16,17 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var inUseCountLabel: UILabel!
     @IBOutlet weak var openUnitsCountLabel: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
+
+    @IBOutlet weak var detailsBarHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
     
-    private var hubName: String?
-    private var hubId: Int?
-    private var latitude: CLLocationDegrees?
-    private var longitude: CLLocationDegrees?
+    var hubName: String?
+    var hubId: Int?
+    var latitude: CLLocationDegrees?
+    var longitude: CLLocationDegrees?
     
-    init(marker: GMSMarker) {
-        super.init(nibName: "LockerHubViewController", bundle: nil)
-        
+    func initWithMarker(marker: GMSMarker) {
         self.hubName = marker.title
         self.hubId = marker.userData as! Int?
         self.latitude = marker.position.latitude
@@ -38,10 +40,12 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         
         self.edgesForExtendedLayout = .None
         
-        let camera = GMSCameraPosition.cameraWithLatitude(latitude!, longitude: longitude!, zoom: kMapStandardZoom)
+        formatMapViewHeight()
         
-        let hubMarker = MapManager.customMarkerWithLatitude(latitude!, longitude: longitude!, title: hubName!, snippet: "Tap for directions")
-        hubMarker.map = mapView
+        let mapInsets = UIEdgeInsets(top: ScreenUtils.screenWidth/2 + detailsBarHeightConstraint.constant, left: 0, bottom: 0, right: 0) as UIEdgeInsets
+        mapView.padding = mapInsets
+        
+        let camera = GMSCameraPosition.cameraWithLatitude(latitude!, longitude: longitude!, zoom: kMapStandardZoom)
         mapView.camera = camera
         mapView.delegate = self
         mapView.settings.setAllGesturesEnabled(false) // disable scrolling, zooming, rotating, etc...
@@ -51,12 +55,25 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         
     }
     
+    func formatMapViewHeight() {
+        let availableScreenHeight = ScreenUtils.screenHeight - navigationController!.navigationBar.frame.size.height - UIApplication.sharedApplication().statusBarFrame.height - buttonHeightConstraint.constant
+        let mapViewHeight = ScreenUtils.screenWidth/2 + detailsBarHeightConstraint.constant + 200
+        let finalHeight = max(availableScreenHeight, mapViewHeight)
+        mapHeightConstraint.constant = finalHeight
+    }
+    
+    func mapViewDidStartTileRendering(mapView: GMSMapView!) {
+        // only display marker once tiles have rendered
+        let hubMarker = MapManager.customMarkerWithLatitude(latitude!, longitude: longitude!, title: hubName!, snippet: "Tap for directions")
+        hubMarker.map = mapView
+    }
+    
     func getHubInfo() {
         WebClient.getHubInfo(hubId!) { (response) -> Void in
             self.updateAvailabilityLabels(response)
         }
     }
-    
+
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
         giveDirections()
     }
@@ -102,8 +119,20 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func makeReservation() {
+        WebClient.makeReservation(hubId!, completion: { (response) -> Void in
+            self.performSegueWithIdentifier("reserveSegue", sender: response)
+            }) { (error) -> Void in
+                //TODO: handle error
+        }
     }
-
+    
+    @IBAction func reservePressed(sender: AnyObject) {
+        let confirmReservationAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
+            self.makeReservation()
+        }
+        let alert = UIAlertController(title: "Confirm Reservation", message: "Reserve a locker in " + self.hubName! + "? Your unit will be held for 20 minutes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        alert.addAction(confirmReservationAction)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 }
