@@ -54,9 +54,8 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
   }
   
   func mapsegue(){
-    //performSegueWithIdentifier("mapSegue", sender: self);
     self.dismissViewControllerAnimated(true) { () -> Void in
-        //
+        //handle dismiss
     }
   }
   
