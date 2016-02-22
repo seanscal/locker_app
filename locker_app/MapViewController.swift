@@ -36,9 +36,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     }
     
     func checkAuth() {
-        if(UserSettings.needsAuth())
-        {
-            performSegueWithIdentifier("authSegue", sender: nil)
+
+        UserSettings.checkAuth { (needsAuth) -> Void in
+            if(needsAuth) {
+                self.performSegueWithIdentifier("authSegue", sender: nil)
+            }
         }
     }
     
