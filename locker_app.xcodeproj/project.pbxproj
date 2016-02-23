@@ -30,6 +30,9 @@
 		2BB9613E1C592E6F00114D33 /* LockerHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9613D1C592E6F00114D33 /* LockerHub.swift */; };
 		2BB961401C59804D00114D33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB9613F1C59804D00114D33 /* LaunchScreen.storyboard */; };
 		2BC3CD401C6279A000C8C40B /* LockerHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */; };
+		2BE981021C7CC053000E0B26 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE980FF1C7CC053000E0B26 /* AboutViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2BE981031C7CC053000E0B26 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981001C7CC053000E0B26 /* ReportViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2BE981041C7CC053000E0B26 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981011C7CC053000E0B26 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CC1907481C67EFB100589A5C /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1907471C67EFB100589A5C /* PaymentViewController.swift */; };
 		CC22A02B1C5EE5C500D74310 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22A02A1C5EE5C500D74310 /* ProfileViewController.swift */; };
 		CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */; };
@@ -77,6 +80,9 @@
 		2BB9613D1C592E6F00114D33 /* LockerHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerHub.swift; sourceTree = "<group>"; };
 		2BB9613F1C59804D00114D33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerHubViewController.swift; sourceTree = "<group>"; };
+		2BE980FF1C7CC053000E0B26 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		2BE981001C7CC053000E0B26 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		2BE981011C7CC053000E0B26 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4614872C47042DFD3DC07017 /* Pods_locker_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locker_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54D0622FC5E4BB07C6C6874C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CC1907471C67EFB100589A5C /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +124,9 @@
 		2B8C31431C650EFF009AF6F9 /* view controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2BE980FF1C7CC053000E0B26 /* AboutViewController.swift */,
+				2BE981001C7CC053000E0B26 /* ReportViewController.swift */,
+				2BE981011C7CC053000E0B26 /* SettingsViewController.swift */,
 				CC22A02A1C5EE5C500D74310 /* ProfileViewController.swift */,
 				CCE64BEF1C53003C00C8A637 /* MapViewController.swift */,
 				CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */,
@@ -443,6 +452,7 @@
 				CCE64BF01C53003C00C8A637 /* MapViewController.swift in Sources */,
 				2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */,
 				2BB9613E1C592E6F00114D33 /* LockerHub.swift in Sources */,
+				2BE981031C7CC053000E0B26 /* ReportViewController.swift in Sources */,
 				2BB9613C1C59283700114D33 /* WebUtils.swift in Sources */,
 				CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */,
 				141C03341C71081400E51E9B /* CommonManager.swift in Sources */,
@@ -451,8 +461,10 @@
 				2BB961331C57DB2600114D33 /* MapManager.swift in Sources */,
 				CC22A02B1C5EE5C500D74310 /* ProfileViewController.swift in Sources */,
 				2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */,
+				2BE981041C7CC053000E0B26 /* SettingsViewController.swift in Sources */,
 				CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */,
 				2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */,
+				2BE981021C7CC053000E0B26 /* AboutViewController.swift in Sources */,
 				2BB9612E1C56F92800114D33 /* WebClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
