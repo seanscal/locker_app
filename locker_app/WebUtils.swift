@@ -10,7 +10,7 @@ import Foundation
 
 enum ApiVersions : String {
     case Local = "http://localhost:3000/api/"
-    case Remote = "http://nulockerhub.com/api/"
+    case Remote = "http://www.nulockerhub.com/api/"
 }
 
 /**
@@ -27,6 +27,6 @@ class WebUtils {
     static let webApi = ApiVersions.Remote.rawValue
     
     static let kApiMethodHubs           = "hubs"
-    static let kApiMethodReserve        = "reserve/"
+    static let kApiMethodReserve        = "reserve"
     
 }
