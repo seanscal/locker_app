@@ -42,6 +42,17 @@ class SignInManager{
       {
         print("fetched user: \(result)")
         let id : NSString = result.valueForKey("id") as! String
+        let gender : NSString = result.valueForKey("gender") as! String
+        let birthday : NSString = result.valueForKey("birthday") as! String
+        let email : NSString = result.valueForKey("email") as! String
+        let name : NSString = result.valueForKey("name") as! String
+//        let picture : NSString = result.valueForKey("picture") as! String
+        
+        let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name]
+        
+        WebClient.sendUserData(dict)
+        
+        
         print("User ID is: \(id)")
       }
     })

@@ -56,7 +56,12 @@ class WebClient {
                 }
         }
     }
-    
+  
+    private static func post(method: String, parameters: Dictionary<String, AnyObject>)
+    {
+      Alamofire.request(.POST, kLockrAPI + method, parameters: parameters)
+    }
+  
     static func getAllHubs(completion: (response: Array<AnyObject>) -> Void)
     {
         get(WebUtils.kApiMethodHubs) { (json) -> Void in
@@ -79,5 +84,9 @@ class WebClient {
                 failure(error: error)
         }
     }
-    
+  
+  static func sendUserData(params: Dictionary<String, AnyObject>)
+  {
+    post(WebUtils.kApiMethodUsers, parameters: params)
+  }
 }
