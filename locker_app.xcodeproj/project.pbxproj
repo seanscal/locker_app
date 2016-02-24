@@ -18,6 +18,8 @@
 		2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84DC071C763F3600E52F3E /* UserSettings.swift */; settings = {ASSET_TAGS = (); }; };
 		2B8C31421C650D72009AF6F9 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */; };
 		2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */; };
+		2BB0DB891C7E42140079A044 /* RentalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB881C7E42140079A044 /* RentalManager.swift */; settings = {ASSET_TAGS = (); }; };
+		2BB0DB8B1C7E42830079A044 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB8A1C7E42830079A044 /* Rental.swift */; settings = {ASSET_TAGS = (); }; };
 		2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961231C56C7C500114D33 /* ScreenUtils.swift */; };
 		2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */; };
 		2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961281C56D1A400114D33 /* SlideRightSegue.swift */; };
@@ -68,6 +70,8 @@
 		2B84DC071C763F3600E52F3E /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		2BB0DB881C7E42140079A044 /* RentalManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentalManager.swift; sourceTree = "<group>"; };
+		2BB0DB8A1C7E42830079A044 /* Rental.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rental.swift; sourceTree = "<group>"; };
 		2BB961231C56C7C500114D33 /* ScreenUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenUtils.swift; sourceTree = "<group>"; };
 		2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideLeftSegue.swift; sourceTree = "<group>"; };
 		2BB961281C56D1A400114D33 /* SlideRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideRightSegue.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				141C032F1C6E581300E51E9B /* SignInManager.swift */,
 				141C03331C71081400E51E9B /* CommonManager.swift */,
 				141C03351C71088000E51E9B /* RegisterManager.swift */,
+				2BB0DB881C7E42140079A044 /* RentalManager.swift */,
 			);
 			name = managers;
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				2BB9613D1C592E6F00114D33 /* LockerHub.swift */,
+				2BB0DB8A1C7E42830079A044 /* Rental.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -443,6 +449,7 @@
 				2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */,
 				141C03301C6E581300E51E9B /* SignInManager.swift in Sources */,
 				CC1907481C67EFB100589A5C /* PaymentViewController.swift in Sources */,
+				2BB0DB8B1C7E42830079A044 /* Rental.swift in Sources */,
 				2BB961371C57ECA500114D33 /* Colors.swift in Sources */,
 				2BB961351C57DB4A00114D33 /* Constants.swift in Sources */,
 				2BB961301C57041500114D33 /* Extensions.swift in Sources */,
@@ -462,6 +469,7 @@
 				CC22A02B1C5EE5C500D74310 /* ProfileViewController.swift in Sources */,
 				2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */,
 				2BE981041C7CC053000E0B26 /* SettingsViewController.swift in Sources */,
+				2BB0DB891C7E42140079A044 /* RentalManager.swift in Sources */,
 				CCC9E32A1C5413C300FE8406 /* MenuViewController.swift in Sources */,
 				2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */,
 				2BE981021C7CC053000E0B26 /* AboutViewController.swift in Sources */,

@@ -24,7 +24,7 @@ debug configuration could slip into a production context.
 
 class WebUtils {
     
-    static let webApi = ApiVersions.Remote.rawValue
+    static let webApi = ApiVersions.Local.rawValue
     
     static let kApiMethodHubs           = "hubs"
     static let kApiMethodReserve        = "reserve"
