@@ -20,6 +20,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 
     @IBOutlet weak var inUseCountLabel: UILabel!
     @IBOutlet weak var openUnitsCountLabel: UILabel!
+    @IBOutlet weak var ctaButton: UIButton!
     @IBOutlet weak var checkInTime: UILabel!
     @IBOutlet weak var runningTotal: UILabel!
     @IBOutlet weak var activeRentalView: UIView!
@@ -75,7 +76,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         
         formatMapViewHeight()
         
-        let mapInsets = UIEdgeInsets(top: ScreenUtils.screenWidth/2 + detailsBarHeightConstraint.constant, left: 0, bottom: 0, right: 0) as UIEdgeInsets
+        let mapInsets = UIEdgeInsets(top: ScreenUtils.screenWidth/2 + detailsBarHeightConstraint.constant + 50, left: 0, bottom: 0, right: 0) as UIEdgeInsets
         mapView.padding = mapInsets
         
         let camera = GMSCameraPosition.cameraWithLatitude(hub!.lat!, longitude: hub!.long!, zoom: kMapStandardZoom)
@@ -123,6 +124,10 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         openUnitsView.hidden = active
         inUseView.hidden = active
         activeRentalView.hidden = !active
+        
+        ctaButton.setTitle(active ? "Unlock" : "Reserve", forState: .Normal)
+        
+        navigationItem.setRightBarButtonItem(UIBarButtonItem(title: "Check Out", style: .Done, target: self, action: "checkOut"), animated: false)
 
     }
     
@@ -198,12 +203,29 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         }
     }
     
-    @IBAction func reservePressed(sender: AnyObject) {
-        let confirmReservationAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
-            self.makeReservation()
+    func checkOut() {
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    @IBAction func ctaPressed(sender: AnyObject) {
+        if self.displayMode == .PreRental {
+            
+            // RESERVE
+            
+            let confirmReservationAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
+                self.makeReservation()
+            }
+            let alert = UIAlertController(title: "Confirm Reservation", message: "Reserve a locker in " + hub!.name! + "? Your unit will be held for 20 minutes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alert.addAction(confirmReservationAction)
+            self.presentViewController(alert, animated: true, completion: nil)
         }
-        let alert = UIAlertController(title: "Confirm Reservation", message: "Reserve a locker in " + hub!.name! + "? Your unit will be held for 20 minutes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        alert.addAction(confirmReservationAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        else {
+            
+            // UNLOCK
+            
+            //TODO: implement
+            
+        }
+
     }
 }

@@ -16,7 +16,7 @@ class RentalManager {
                                      "userId" : 1,
                                      "hubId" : 1,
                                      "lockerId" : 6,
-                                     "checkInTime" : "1456348520"])
+                                     "checkInTime" : NSDate().dateByAddingTimeInterval(-2000).timeIntervalSince1970])
         }
         return nil
     }

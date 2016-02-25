@@ -93,7 +93,7 @@
 		CC22A02A1C5EE5C500D74310 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		CCC9E3291C5413C300FE8406 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		CCE64BEA1C53003C00C8A637 /* locker_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locker_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCE64BEA1C53003C00C8A637 /* Lockr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lockr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCE64BED1C53003C00C8A637 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCE64BEF1C53003C00C8A637 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CCE64BF21C53003C00C8A637 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 		CCE64BEB1C53003C00C8A637 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CCE64BEA1C53003C00C8A637 /* locker_app.app */,
+				CCE64BEA1C53003C00C8A637 /* Lockr.app */,
 				CCE64BFE1C53003C00C8A637 /* locker_appTests.xctest */,
 			);
 			name = Products;
@@ -308,7 +308,7 @@
 			);
 			name = locker_app;
 			productName = locker_app;
-			productReference = CCE64BEA1C53003C00C8A637 /* locker_app.app */;
+			productReference = CCE64BEA1C53003C00C8A637 /* Lockr.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CCE64BFD1C53003C00C8A637 /* locker_appTests */ = {
@@ -602,8 +602,9 @@
 				INFOPLIST_FILE = locker_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Test.locker-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Lockr;
 				SWIFT_OBJC_BRIDGING_HEADER = "locker_app/locker_app-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -619,8 +620,9 @@
 				INFOPLIST_FILE = locker_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Test.locker-app";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Lockr;
 				SWIFT_OBJC_BRIDGING_HEADER = "locker_app/locker_app-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
