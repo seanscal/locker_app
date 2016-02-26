@@ -11,7 +11,7 @@ import Foundation
 class RentalManager {
     
     static func activeRentalAtHub(hubId : Int) -> Rental? {
-        if(true){
+        if(false){
             return Rental.fromJSON([ "uid" : 1,
                                      "userId" : 1,
                                      "hubId" : 1,

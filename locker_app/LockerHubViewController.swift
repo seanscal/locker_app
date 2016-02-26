@@ -90,13 +90,13 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         getHubInfo()
         _ = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "getHubInfo", userInfo: nil, repeats: true)
         checkForActiveRental()
-        _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
     }
     
     func checkForActiveRental() {
         if let activeRental = RentalManager.activeRentalAtHub(hub!.uid!) {
             rental = activeRental
             calculateRate()
+            _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
         }
     }
     
