@@ -27,6 +27,6 @@ class WebUtils {
     static let webApi = ApiVersions.Remote.rawValue
     
     static let kApiMethodHubs           = "hubs"
-    static let kApiMethodReserve        = "reserve"
+    static let kApiMethodReserve        = "allocate"
     
 }
