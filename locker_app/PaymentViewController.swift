@@ -23,12 +23,7 @@ class PaymentViewController: AbstractTableViewController {
         tableViewType = .Both
         
         // set header & cell titles for menu
-        initTableViewWithTitles(header("Cards"), "Visa Debit", "Visa Credit", "MasterCard", header("Edit"), "Add/Remove Card")
-        
-        // register any outlier cell types
-        registerCellTypeForTitles(.Plain, titles: "Add/Remove Card")
-        
-        
+        initTableViewWithCards()
     }
     
     func pop() {

@@ -10,6 +10,9 @@ import Foundation
 
 class UserSettings {
     static let userId = 1 // TODO: implement this class
+    static let userName = "Test Guy"
+    static let userCards = ["Debit", "Credit"]
+    
     
     static func checkAuth(completion: (needsAuth: Bool) -> Void) {
         

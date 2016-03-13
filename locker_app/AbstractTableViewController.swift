@@ -45,6 +45,20 @@ class AbstractTableViewController : UIViewController, UITableViewDelegate, UITab
         }
     }
     
+    func initTableViewWithCards(){
+        cellHeaders.append("Cards")
+        cellTitles.append(header("Cards"))
+        for card in UserSettings.userCards {
+            cellTitles.append(card)
+        }
+        
+        cellSections++
+        cellHeaders.append("Edit")
+        cellTitles.append(header("Edit"))
+        cellTitles.append("Add/Remove Card")
+        registerCellTypeForTitles(.Plain, titles: "Add/Remove Card")
+    }
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if cellHeaders.count > section {
             return cellHeaders[section]
