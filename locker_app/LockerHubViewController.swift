@@ -18,6 +18,8 @@ enum DisplayMode {
 
 class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 
+    @IBOutlet var hourlyRateLabel: UILabel!
+    @IBOutlet var baseRateLabel: UILabel!
     @IBOutlet weak var inUseCountLabel: UILabel!
     @IBOutlet weak var openUnitsCountLabel: UILabel!
     @IBOutlet weak var ctaButton: UIButton!
@@ -87,16 +89,25 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        displayRates()
         getHubInfo()
         _ = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "getHubInfo", userInfo: nil, repeats: true)
         checkForActiveRental()
     }
     
+    func displayRates() {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        
+        baseRateLabel.text = formatter.stringFromNumber(hub!.baseRate!)
+        hourlyRateLabel.text = formatter.stringFromNumber(hub!.hourlyRate!)
+    }
+    
     func checkForActiveRental() {
-        if let activeRental = RentalManager.activeRentalAtHub(hub!.uid!) {
-            rental = activeRental
-            calculateRate()
-            _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
+        RentalManager.checkForActiveRental(hub!.uid!) { (rental) -> Void in
+            self.rental = rental
+            self.calculateRate()
+            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
         }
     }
     
@@ -223,7 +234,12 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             
             // UNLOCK
             
-            //TODO: implement
+            let confirmUnlockAction = UIAlertAction(title: "Unlock", style: UIAlertActionStyle.Destructive) { (action) -> Void in
+                //TODO: implement
+            }
+            let alert = UIAlertController(title: "Confirm Unlock", message: "Are you sure you wish to unlock the unit? You will have 10 seconds to open the locker.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alert.addAction(confirmUnlockAction)
+            self.presentViewController(alert, animated: true, completion: nil)
             
         }
 

@@ -28,5 +28,6 @@ class WebUtils {
     
     static let kApiMethodHubs           = "hubs"
     static let kApiMethodReserve        = "allocate"
+    static let kApiMethodRentals        = "rentals"
     
 }

@@ -10,14 +10,14 @@ import Foundation
 
 class RentalManager {
     
-    static func activeRentalAtHub(hubId : Int) -> Rental? {
-        if(false){
-            return Rental.fromJSON([ "uid" : 1,
-                                     "userId" : 1,
-                                     "hubId" : 1,
-                                     "lockerId" : 6,
-                                     "checkInTime" : NSDate().dateByAddingTimeInterval(-2000).timeIntervalSince1970])
+    static func checkForActiveRental(hubId : Int, completion: (rental: Rental) -> Void) {
+        WebClient.getRentalsForUser(true) { (response) -> Void in
+            for jsonRental in response {
+                let rental = Rental.fromJSON(jsonRental)
+                if rental!.hubId == hubId {
+                    completion(rental: rental!)
+                }
+            }
         }
-        return nil
     }
 }

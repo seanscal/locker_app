@@ -80,4 +80,10 @@ class WebClient {
         }
     }
     
+    static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void) {
+        get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.userId)) { (json) -> Void in
+            completion(response: json.object as! Array<AnyObject>)
+        }
+    }
+    
 }
