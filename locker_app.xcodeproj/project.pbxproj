@@ -341,7 +341,7 @@
 				TargetAttributes = {
 					CCE64BE91C53003C00C8A637 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = U56KTVS3XM;
+						DevelopmentTeam = BHA6KZC7RW;
 					};
 					CCE64BFD1C53003C00C8A637 = {
 						CreatedOnToolsVersion = 7.2;
@@ -595,11 +595,14 @@
 			baseConfigurationReference = 54D0622FC5E4BB07C6C6874C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = locker_app/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Test.locker-app";
 				PRODUCT_NAME = Lockr;
@@ -613,11 +616,14 @@
 			baseConfigurationReference = E22DAB05B0C3F614F9CB0471 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = locker_app/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Test.locker-app";
 				PRODUCT_NAME = Lockr;
