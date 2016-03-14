@@ -132,13 +132,15 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     func updateDisplay() {
         let active = displayMode == .ActiveRental
 
-        openUnitsView.hidden = active
-        inUseView.hidden = active
-        activeRentalView.hidden = !active
-        
-        ctaButton.setTitle(active ? "Unlock" : "Reserve", forState: .Normal)
-        
-        navigationItem.setRightBarButtonItem(UIBarButtonItem(title: "Check Out", style: .Done, target: self, action: "checkOut"), animated: false)
+        UIView.animateWithDuration(kDefaultAnimationDuration) { () -> Void in
+            self.openUnitsView.alpha = active ? 0.0 : 1.0
+            self.inUseView.alpha = active ? 0.0 : 1.0
+            self.activeRentalView.alpha = active ? 1.0 : 0.0
+            
+            self.ctaButton.setTitle(active ? "Unlock" : "Reserve", forState: .Normal)
+            
+            self.navigationItem.setRightBarButtonItem(UIBarButtonItem(title: "Check Out", style: .Done, target: self, action: "checkOut"), animated: false)
+        }
 
     }
     
