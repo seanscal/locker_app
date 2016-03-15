@@ -66,9 +66,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         
         WebClient.getAllHubs { (response) -> Void in
             for jsonHub in response {
-                let hub = Mapper<LockerHub>().map(jsonHub)!
+                let hub = LockerHub.fromJSON(jsonHub)!
                 let marker = MapManager.customMarkerWithLatitude(hub.lat!, longitude: hub.long!, title: hub.name!, snippet: hub.availabilityString())
-                marker.userData = hub.uid
+                marker.userData = hub
                 marker.map = mapView
             }
         }

@@ -30,7 +30,10 @@ let kStringMassachusetts = "Massachusetts"
 
 // default segue animation duration is 0.3 seconds
 let kDefaultSegueDuration = 0.3
+let kDefaultAnimationDuration = 0.5
 
 let kDefaultCellHeight = CGFloat.init(72)
 
 let kHeaderPrefix = "@header:"
+
+let kSecondsPerHour = 3600.0

@@ -28,6 +28,9 @@ class WebUtils {
     static let locApi = ApiVersions.Local.rawValue
     
     static let kApiMethodHubs           = "hubs"
-    static let kApiMethodReserve        = "reserve"
-    static let kApiMethodUsers          = "users"
+
+    static let kApiMethodReserve        = "allocate"
+    static let kApiMethodRentals        = "rentals"
+    
+>>>>>>> master
 }
