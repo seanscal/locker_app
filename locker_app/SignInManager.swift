@@ -42,6 +42,8 @@ class SignInManager{
       {
         print("fetched user: \(result)")
         let id : NSString = result.valueForKey("id") as! String
+//        UserSettings.userName = result.valueForKey("name") as! String
+        
         print("User ID is: \(id)")
       }
     })

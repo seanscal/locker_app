@@ -48,7 +48,7 @@ class AbstractTableViewController : UIViewController, UITableViewDelegate, UITab
     func initTableViewWithCards(){
         cellHeaders.append("Cards")
         cellTitles.append(header("Cards"))
-        for card in UserSettings.userCards {
+        for card in UserSettings.currentUser.cards {
             cellTitles.append(card)
         }
         

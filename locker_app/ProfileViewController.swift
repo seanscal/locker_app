@@ -23,10 +23,10 @@ class ProfileViewController: AbstractTableViewController {
         tableViewType = .Both
         
         // set header & cell titles for menu
-        initTableViewWithTitles(UserSettings.userName, "Bio", header(""), "Edit")
+        initTableViewWithTitles(UserSettings.currentUser.name, UserSettings.currentUser.email, "Bio", header(""), "Edit")
 
         // configure images for cells
-        registerImageNameForTitles("profilePicture", titles: UserSettings.userName)
+        registerImageNameForTitles("profilePicture", titles: UserSettings.currentUser.name)
         
     
     }

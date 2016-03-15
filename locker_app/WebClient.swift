@@ -73,7 +73,7 @@ class WebClient {
     
     static func makeReservation(hubId: Int, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
-        post(WebUtils.kApiMethodReserve, parameters: ["locker_id" : hubId, "customer_id" : UserSettings.userId], completion: { (json) -> Void in
+        post(WebUtils.kApiMethodReserve, parameters: ["locker_id" : hubId, "customer_id" : UserSettings.currentUser.id], completion: { (json) -> Void in
                 completion(response: json.object as! Dictionary<String, AnyObject>)
             }) { (error) -> Void in
                 failure(error: error)
