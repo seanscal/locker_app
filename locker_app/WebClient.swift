@@ -85,11 +85,15 @@ class WebClient {
         }
     }
   
-  static func sendUserData(params: Dictionary<String, AnyObject>)
+  static func sendUserData(params: Dictionary<String, AnyObject>, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
   {
-    post(WebUtils.kApiMethodUsers, parameters: params)
+    post(WebUtils.kApiMethodUsers, parameters: params, completion: { (json) -> Void in
+      completion(response: json.object as! Dictionary<String, AnyObject>)
+      }) { (error) -> Void in
+        failure(error: error)
+    }
   }
-    
+  
   static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void) {
       get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.userId)) { (json) -> Void in
           completion(response: json.object as! Array<AnyObject>)

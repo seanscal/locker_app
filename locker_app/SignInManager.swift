@@ -46,14 +46,15 @@ class SignInManager{
         let birthday : NSString = result.valueForKey("birthday") as! String
         let email : NSString = result.valueForKey("email") as! String
         let name : NSString = result.valueForKey("name") as! String
-//        let picture : NSString = result.valueForKey("picture") as! String
+        let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name, "pin": 1234]
         
-        let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name]
-        
-        WebClient.sendUserData(dict)
-        
-        
-        print("User ID is: \(id)")
+        WebClient.sendUserData(dict, completion: { (response) -> Void in
+          if(response.pin){
+            //Need to get this working to
+          }
+          }) { (error) -> Void in
+            //TODO: handle error
+        }
       }
     })
   }
