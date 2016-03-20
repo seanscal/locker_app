@@ -85,6 +85,10 @@ class WebClient {
                 failure(error: error)
         }
     }
+  
+    static func sendUserData(params: Dictionary<String, AnyObject>)
+    {
+      post(WebUtils.kApiMethodUsers, parameters: params);
     
     static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void) {
         get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.userId),
