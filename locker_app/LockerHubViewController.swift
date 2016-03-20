@@ -72,7 +72,6 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func initWithRental(rental: Rental) {
-        self._displayMode = .ActiveRental
         self.hub = LockerHub(rental: rental)
         navigationItem.title = hub!.name
     }

@@ -13,6 +13,24 @@ import ObjectMapper
 class MapViewController: UIViewController, GMSMapViewDelegate {
     
     @IBOutlet var loadingView: UIView!
+    
+    var tintedView: UIView!
+    var activityIndicator: UIActivityIndicatorView!
+    var loadingLabel : UILabel!
+    
+    private var _loading: Bool = true
+    var loading: Bool {
+        get{
+            return _loading && mapRendered
+        }
+        set {
+            _loading = newValue
+            updateLoadingView()
+        }
+    }
+    
+    var mapRendered: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,17 +83,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let mapView = MapManager.BOSTON_MAP
         mapView.delegate = self
         
-        WebClient.getAllHubs( { (response) -> Void in
-            for jsonHub in response {
-                let hub = LockerHub.fromJSON(jsonHub)!
-                let marker = MapManager.customMarkerWithLatitude(hub.lat!, longitude: hub.long!, title: hub.name!, snippet: hub.availabilityString())
-                marker.userData = hub
-                marker.map = mapView
-            }
-            }) { (error) -> Void in
-                self.displayError("Could not fetch locker data from the server. Please try again soon.")
-        }
-        
         // setup buttons
         let buttonWidth = 80 as CGFloat
         let buttonHeight = 35 as CGFloat
@@ -95,34 +102,89 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         historyButton.addTarget(self, action: "performHistorySegue", forControlEvents: UIControlEvents.TouchUpInside)
         mapView.addSubview(historyButton)
         
-//        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
-//        activityIndicator.frame = CGRectMake(ScreenUtils.screenWidth/2 - 75, ScreenUtils.screenHeight/2 - 75, 150, 150)
-//        activityIndicator.transform = CGAffineTransformMakeScale(4.054, 4.054);
-//        activityIndicator.hidden = false
-//        activityIndicator.startAnimating()
-//        activityIndicator.color = UIColor.grayColor()
-//        mapView.addSubview(activityIndicator)
-//        
-//        let loadingLabel = UILabel()
-//        loadingLabel.text = "LOADING HUBS"
-//        loadingLabel.textAlignment = .Center
-//        loadingLabel.textColor = UIColor.grayColor()
-//        loadingLabel.alpha = 1.0
-//        loadingLabel.font = UIFont.boldSystemFontOfSize(35)
-//        loadingLabel.sizeToFit()
-//        loadingLabel.frame = CGRectMake(0, ScreenUtils.screenHeight/2 + 80, ScreenUtils.screenWidth, loadingLabel.frame.size.height)
-//        mapView.addSubview(loadingLabel)
-        
-
-        
         // add insets to preserve Google logo
         let mapInsets = UIEdgeInsets(top: 0, left: ScreenUtils.screenWidth/2 - 34, bottom: 20, right: ScreenUtils.screenWidth/2 - 34) as UIEdgeInsets
         mapView.padding = mapInsets
         
         self.view = mapView
-
+        
+        setupLoadingView()
+        
+        NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("fetchHubs"), userInfo: nil, repeats: false)
 
     }
+    
+    func fetchHubs() {
+        WebClient.getAllHubs( { (response) -> Void in
+            self.loading = false
+            for jsonHub in response {
+                let hub = LockerHub.fromJSON(jsonHub)!
+                let marker = MapManager.customMarkerWithLatitude(hub.lat!, longitude: hub.long!, title: hub.name!, snippet: hub.availabilityString())
+                marker.userData = hub
+                marker.map = self.view as? GMSMapView
+            }
+            }) { (error) -> Void in
+                self.loading = false
+                self.displayError("Could not fetch locker data from the server. Please try again soon.")
+        }
+    }
+    
+    func mapViewDidFinishTileRendering(mapView: GMSMapView!) {
+        // suppress loading overlay until map renders
+        mapRendered = true
+        updateLoadingView()
+    }
+    
+    func updateLoadingView() {
+        if loading {
+            activateLoadingView()
+        } else {
+            dismissLoadingView()
+        }
+    }
+    
+    func activateLoadingView() {
+        tintedView.hidden = false
+        activityIndicator.startAnimating()
+        activityIndicator.hidden = false
+        loadingLabel.hidden = false
+    }
+    
+    func dismissLoadingView() {
+        tintedView.hidden = true
+        activityIndicator.stopAnimating()
+        activityIndicator.hidden = true
+        loadingLabel.hidden = true
+    }
+    
+    func setupLoadingView() {
+        // loading indicator
+        tintedView = UIView(frame: CGRectMake(0, 0, ScreenUtils.screenWidth, ScreenUtils.screenHeight))
+        tintedView.backgroundColor = UIColor.grayColor()
+        tintedView.alpha = 0.5
+        tintedView.hidden = true
+        view.addSubview(tintedView)
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        activityIndicator.frame = CGRectMake(ScreenUtils.screenWidth/2 - 18, ScreenUtils.screenHeight/2 - 18, activityIndicator.frame.size.height, activityIndicator.frame.size.height)
+        activityIndicator.hidden = true
+        view.addSubview(activityIndicator)
+        
+        loadingLabel = UILabel()
+        loadingLabel.text = "Fetching locker data..."
+        loadingLabel.textAlignment = .Center
+        loadingLabel.textColor = UIColor.whiteColor()
+        loadingLabel.alpha = 1.0
+        loadingLabel.font = UIFont.boldSystemFontOfSize(17)
+        loadingLabel.sizeToFit()
+        loadingLabel.frame = CGRectMake(0, ScreenUtils.screenHeight/2 + 25, ScreenUtils.screenWidth, loadingLabel.frame.size.height)
+        loadingLabel.hidden = true
+        view.addSubview(loadingLabel)
+        
+        updateLoadingView()
+    }
+    
+    
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
         performSegueWithIdentifier("lockerHubSegue", sender: marker)
