@@ -18,6 +18,7 @@ enum DisplayMode {
 
 class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 
+    @IBOutlet var activeAlertLabel: UILabel!
     @IBOutlet var hourlyRateLabel: UILabel!
     @IBOutlet var baseRateLabel: UILabel!
     @IBOutlet weak var inUseCountLabel: UILabel!
@@ -139,6 +140,10 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func updateDisplay() {
         let active = displayMode == .ActiveRental
+        
+        if active {
+            activeAlertLabel.text = "LOCKER #" + String(rental!.lockerId!)
+        }
 
         UIView.animateWithDuration(kDefaultAnimationDuration) { () -> Void in
             self.openUnitsView.alpha = active ? 0.0 : 1.0

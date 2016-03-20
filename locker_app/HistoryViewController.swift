@@ -137,17 +137,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.reloadData()
     }
     
-    func displayError(error: String) {
-        
-        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .Alert)
-        
-        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alert.addAction(action)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == kActiveRentalSegueId) {
             let hubVc = segue.destinationViewController as! LockerHubViewController

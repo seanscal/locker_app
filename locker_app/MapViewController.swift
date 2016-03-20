@@ -12,6 +12,7 @@ import ObjectMapper
 
 class MapViewController: UIViewController, GMSMapViewDelegate {
     
+    @IBOutlet var loadingView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,13 +65,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         let mapView = MapManager.BOSTON_MAP
         mapView.delegate = self
         
-        WebClient.getAllHubs { (response) -> Void in
+        WebClient.getAllHubs( { (response) -> Void in
             for jsonHub in response {
                 let hub = LockerHub.fromJSON(jsonHub)!
                 let marker = MapManager.customMarkerWithLatitude(hub.lat!, longitude: hub.long!, title: hub.name!, snippet: hub.availabilityString())
                 marker.userData = hub
                 marker.map = mapView
             }
+            }) { (error) -> Void in
+                self.displayError("Could not fetch locker data from the server. Please try again soon.")
         }
         
         // setup buttons
@@ -91,6 +94,26 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         historyButton.frame = CGRectMake(buttonPadding, self.view.frame.size.height - buttonHeight - buttonPadding, buttonWidth, buttonHeight)
         historyButton.addTarget(self, action: "performHistorySegue", forControlEvents: UIControlEvents.TouchUpInside)
         mapView.addSubview(historyButton)
+        
+//        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+//        activityIndicator.frame = CGRectMake(ScreenUtils.screenWidth/2 - 75, ScreenUtils.screenHeight/2 - 75, 150, 150)
+//        activityIndicator.transform = CGAffineTransformMakeScale(4.054, 4.054);
+//        activityIndicator.hidden = false
+//        activityIndicator.startAnimating()
+//        activityIndicator.color = UIColor.grayColor()
+//        mapView.addSubview(activityIndicator)
+//        
+//        let loadingLabel = UILabel()
+//        loadingLabel.text = "LOADING HUBS"
+//        loadingLabel.textAlignment = .Center
+//        loadingLabel.textColor = UIColor.grayColor()
+//        loadingLabel.alpha = 1.0
+//        loadingLabel.font = UIFont.boldSystemFontOfSize(35)
+//        loadingLabel.sizeToFit()
+//        loadingLabel.frame = CGRectMake(0, ScreenUtils.screenHeight/2 + 80, ScreenUtils.screenWidth, loadingLabel.frame.size.height)
+//        mapView.addSubview(loadingLabel)
+        
+
         
         // add insets to preserve Google logo
         let mapInsets = UIEdgeInsets(top: 0, left: ScreenUtils.screenWidth/2 - 34, bottom: 20, right: ScreenUtils.screenWidth/2 - 34) as UIEdgeInsets

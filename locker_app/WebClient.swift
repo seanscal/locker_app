@@ -59,12 +59,12 @@ class WebClient {
         }
     }
     
-    static func getAllHubs(completion: (response: Array<AnyObject>) -> Void)
+    static func getAllHubs(completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
         get(WebUtils.kApiMethodHubs, completion: { (json) -> Void in
             completion(response: json.object as! Array<AnyObject>)
             }) { (error) -> Void in
-                //TODO: handle error
+                failure(error: error)
             }
     }
     
