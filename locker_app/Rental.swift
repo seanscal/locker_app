@@ -17,9 +17,12 @@ class Rental : Mappable {
     
     var uid : Int?
     var userId : Int?
+    
     var hubId : Int?
     var hubName : String?
     var lockerId : Int?
+    var lat : Double?
+    var long : Double?
     
     var checkInTime : NSDate?
     var checkOutTime : NSDate?
@@ -33,6 +36,8 @@ class Rental : Mappable {
         hubId           <- map["hubId"]
         hubName         <- map["hubName"]
         lockerId        <- map["lockerId"]
+        lat             <- map["lat"]
+        long            <- map["long"]
         checkInTime     <- (map["checkInTime"], DateTransform())
         checkOutTime    <- (map["checkOutTime"], DateTransform())
         isActive        <- map["isActive"]

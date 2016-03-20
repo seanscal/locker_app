@@ -112,6 +112,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             
             hubVc.initWithMarker(marker)
 
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "Map", style: .Plain, target: nil, action: nil)
         }
     }
 
