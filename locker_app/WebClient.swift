@@ -56,7 +56,12 @@ class WebClient {
                 }
         }
     }
-    
+  
+    private static func post(method: String, parameters: Dictionary<String, AnyObject>)
+    {
+      Alamofire.request(.POST, kLockrAPI + method, parameters: parameters)
+    }
+  
     static func getAllHubs(completion: (response: Array<AnyObject>) -> Void)
     {
         get(WebUtils.kApiMethodHubs) { (json) -> Void in
@@ -79,11 +84,20 @@ class WebClient {
                 failure(error: error)
         }
     }
-    
-    static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void) {
-        get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.userId)) { (json) -> Void in
-            completion(response: json.object as! Array<AnyObject>)
-        }
+  
+  static func sendUserData(params: Dictionary<String, AnyObject>, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
+  {
+    post(WebUtils.kApiMethodUsers, parameters: params, completion: { (json) -> Void in
+      completion(response: json.object as! Dictionary<String, AnyObject>)
+      }) { (error) -> Void in
+        failure(error: error)
     }
+  }
+  
+  static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void) {
+      get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.userId)) { (json) -> Void in
+          completion(response: json.object as! Array<AnyObject>)
+      }
+  }
     
 }

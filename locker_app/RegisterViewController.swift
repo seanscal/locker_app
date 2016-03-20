@@ -30,6 +30,8 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
   }
   
   func mapsegue(){
+    let dict : Dictionary = [ "id" : random(), "firstName" : firstName, "lastName" : lastName, "email" : email]
+    WebClient.sendUserData(dict)
     performSegueWithIdentifier("mapSegue", sender: self);
   }
   
