@@ -6,6 +6,8 @@
 //  Copyright © 2016 Ali Hyder. All rights reserved.
 //
 
+import Foundation
+
 let kUserID = "userID"
 let kUserName = "userName"
 let kUserEmail = "userEmail"
@@ -69,7 +71,7 @@ class UserSettings: NSObject {
         
         // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
         
-        completion(needsAuth: true)
+        completion(needsAuth: false)
         
         
     }
