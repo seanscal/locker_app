@@ -53,6 +53,10 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     performSegueWithIdentifier("registerSegue", sender: self);
   }
   
+  func pinsegue(){
+    performSegueWithIdentifier("pinSegue", sender: self);
+  }
+  
   func mapsegue(){
     self.dismissViewControllerAnimated(true) { () -> Void in
         //handle dismiss
@@ -76,7 +80,17 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     
     let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
     
-    WebClient.sendUserData(dict)
+    WebClient.sendUserData(dict, completion: { (response) -> Void in
+      if ((response["pin"]) != nil){
+        self.mapsegue();
+      }
+      else{
+        self.pinsegue();
+      }
+      }) { (error) -> Void in
+        //TODO: handle error
+    }
+
     
     self.mapsegue();
   }
@@ -87,8 +101,38 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     {
     }
     else {
-      SignInManager.returnUserData()
-      self.mapsegue();
+      let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,interested_in,gender,birthday,email,age_range,name,picture.width(480).height(480)"])
+      graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+        
+        if ((error) != nil)
+        {
+          print("Error: \(error)")
+        }
+        else
+        {
+          let id : NSString = result.valueForKey("id") as! String
+          let gender : NSString = result.valueForKey("gender") as! String
+          let birthday : NSString = result.valueForKey("birthday") as! String
+          let email : NSString = result.valueForKey("email") as! String
+          let name : NSString = result.valueForKey("name") as! String
+          let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name, "pin": "1234"]
+          
+          WebClient.sendUserData(dict, completion: { (response) -> Void in
+            
+            print(response);
+            if ((response["pin"]) != nil){
+              self.mapsegue();
+            }
+            else{
+              self.pinsegue();
+            }
+            }) { (error) -> Void in
+              //TODO: handle error
+          }
+        }
+      })
+
+      
     }
   }
   

@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "locker_app/RegisterManager.swift"
-            timestampString = "477170194.758967"
+            timestampString = "480200438.016419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "RegisterManager"
             landmarkType = "3">
          </BreakpointContent>
@@ -90,11 +90,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "locker_app/SignInViewController.swift"
-            timestampString = "477944519.96991"
+            timestampString = "480200438.016419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "loginButton(_:didCompleteWithResult:error:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "locker_app/SignInViewController.swift"
+            timestampString = "480200438.016419"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "signIn(_:didSignInForUser:withError:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,29 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "locker_app/SignInViewController.swift"
-            timestampString = "477944531.640001"
+            timestampString = "480200438.016419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "signIn(_:didSignInForUser:withError:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "locker_app/SignInViewController.swift"
-            timestampString = "477944546.226404"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "signIn(_:didSignInForUser:withError:)"
-            landmarkType = "5">
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "SignInViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -15,7 +15,7 @@ class UserSettings {
         
         // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
         
-        completion(needsAuth: false)
+        completion(needsAuth: true)
         
     }
 }
