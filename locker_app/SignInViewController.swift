@@ -17,14 +17,15 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
   
   var mapViewController: MapViewController!
   var registerViewController: RegisterViewController!
+  var pinViewController: PinViewController!
   
   var fbLoginButton = SignInManager.FBBUTTON;
   var emailField = SignInManager.EMAILFIELD;
   var passwordField = SignInManager.PASSWORDFIELD;
   var registerButton = SignInManager.REGISTERBUTTON;
   var registerLabel = SignInManager.REGISTERLABEL;
-    
-    var pushToPin = false
+  var pushToPin = false
+  var user: [String: String!]?;
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -78,6 +79,10 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     if segue.identifier == "registerSegue" {
       registerViewController = segue.destinationViewController as! RegisterViewController
     }
+    if segue.identifier == "pinSegue"{
+      pinViewController = segue.destinationViewController as! PinViewController;
+      pinViewController.user = self.user;
+    }
   }
   
   //required Google Function
@@ -93,12 +98,12 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
         self.mapsegue();
       }
       else{
+        self.user = dict;
         self.pinsegue();
       }
       }) { (error) -> Void in
         //TODO: handle error
     }
-
   }
   
   //Required FB functions
@@ -116,21 +121,21 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
         }
         else
         {
-          let id : NSString = result.valueForKey("id") as! String
-          let gender : NSString = result.valueForKey("gender") as! String
-          let birthday : NSString = result.valueForKey("birthday") as! String
-          let email : NSString = result.valueForKey("email") as! String
-          let name : NSString = result.valueForKey("name") as! String
-          let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name, "pin": "1234"]
+          let id = result.valueForKey("id") as! String
+          let gender  = result.valueForKey("gender") as! String
+          let birthday  = result.valueForKey("birthday") as! String
+          let email = result.valueForKey("email") as! String
+          let name = result.valueForKey("name") as! String
+          let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name]
           
           WebClient.sendUserData(dict, completion: { (response) -> Void in
-            
-            print(response);
             if ((response["pin"]) != nil){
               self.mapsegue();
             }
             else{
+              self.user = dict;
               self.pushToPin = true
+              
             }
             }) { (error) -> Void in
               //TODO: handle error
