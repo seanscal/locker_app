@@ -14,14 +14,16 @@ class WebClient {
     static let kLockrAPI = WebUtils.webApi
     
     private static func get(method: String,
-                    completion: (json: JSON) -> Void)
+                            completion: (json: JSON) -> Void,
+                            failure: (error: NSError) -> Void)
     {
-        WebClient.get(method, parameters:[:], completion: completion)
+        WebClient.get(method, parameters:[:], completion: completion, failure: failure)
     }
     
     private static func get(method: String,
                     parameters: Dictionary<String, AnyObject>,
-                    completion: (json: JSON) -> Void)
+                    completion: (json: JSON) -> Void,
+                    failure: (error: NSError) -> Void)
     {
     
         Alamofire.request(.GET, kLockrAPI + method, parameters: parameters)
@@ -33,7 +35,7 @@ class WebClient {
                             completion(json: json)
                         }
                     case .Failure(let error):
-                        print(error)
+                        failure(error: error)
                 }
         }
     }
@@ -57,33 +59,49 @@ class WebClient {
         }
     }
     
-    static func getAllHubs(completion: (response: Array<AnyObject>) -> Void)
+    static func getAllHubs(completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
-        get(WebUtils.kApiMethodHubs) { (json) -> Void in
+        get(WebUtils.kApiMethodHubs, completion: { (json) -> Void in
             completion(response: json.object as! Array<AnyObject>)
-        }
+            }) { (error) -> Void in
+                failure(error: error)
+            }
     }
     
     static func getHubInfo(hubId: Int, completion: (response: Dictionary<String, AnyObject>) -> Void)
     {
-        get(WebUtils.kApiMethodHubs + "/" + String(hubId)) { (json) -> Void in
+        get(WebUtils.kApiMethodHubs + "/" + String(hubId), completion: { (json) -> Void in
             completion(response: json.object as! Dictionary<String, AnyObject>)
+        }) { (error) -> Void in
+            //TODO: handle error
         }
     }
     
     static func makeReservation(hubId: Int, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
-        post(WebUtils.kApiMethodReserve, parameters: ["locker_id" : hubId, "customer_id" : UserSettings.userId], completion: { (json) -> Void in
+        post(WebUtils.kApiMethodReserve, parameters: ["locker_id" : hubId, "customer_id" : UserSettings.currentUser.id], completion: { (json) -> Void in
                 completion(response: json.object as! Dictionary<String, AnyObject>)
             }) { (error) -> Void in
                 failure(error: error)
         }
     }
-    
-    static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void) {
-        get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.userId)) { (json) -> Void in
-            completion(response: json.object as! Array<AnyObject>)
+  
+    static func sendUserData(params: Dictionary<String, AnyObject>)
+    {
+        post(WebUtils.kApiMethodUsers, parameters: params, completion: { (json) -> Void in
+            //nada
+            }) { (error) -> Void in
+                //nada
         }
+    }
+        
+    static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void) {
+        get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.currentUser.id),
+            completion: { (json) -> Void in
+                completion(response: json.object as! Array<AnyObject>)
+            }) { (error) -> Void in
+                failure(error: error)
+            }
     }
     
 }

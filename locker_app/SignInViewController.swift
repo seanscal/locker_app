@@ -70,6 +70,14 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
   
   //required Google Function
   func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+    let idToken = user.authentication.idToken // Safe to send to the server
+    let name = user.profile.name
+    let email = user.profile.email
+    
+    let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
+    
+    WebClient.sendUserData(dict)
+    
     self.mapsegue();
   }
   

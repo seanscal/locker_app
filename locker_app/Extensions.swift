@@ -56,3 +56,17 @@ extension UIColor
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
     }
 }
+
+extension UIViewController
+{
+    func displayError(error: String) {
+        
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .Alert)
+        
+        let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(action)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+}
