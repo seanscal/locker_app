@@ -23,6 +23,8 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
   var passwordField = SignInManager.PASSWORDFIELD;
   var registerButton = SignInManager.REGISTERBUTTON;
   var registerLabel = SignInManager.REGISTERLABEL;
+    
+    var pushToPin = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,12 +50,18 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     self.view.addSubview(registerButton);
     self.view.addSubview(registerLabel);
   }
+    
+    override func viewDidAppear(animated: Bool) {
+        if pushToPin {
+            pinsegue()
+        }
+    }
   
   func regsegue(){
     performSegueWithIdentifier("registerSegue", sender: self);
   }
   
-  func pinsegue(){
+  func pinsegue() {
     performSegueWithIdentifier("pinSegue", sender: self);
   }
   
@@ -91,8 +99,6 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
         //TODO: handle error
     }
 
-    
-    self.mapsegue();
   }
   
   //Required FB functions
@@ -124,7 +130,7 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
               self.mapsegue();
             }
             else{
-              self.pinsegue();
+              self.pushToPin = true
             }
             }) { (error) -> Void in
               //TODO: handle error
