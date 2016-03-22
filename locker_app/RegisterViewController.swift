@@ -49,8 +49,12 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
       mapViewController = segue.destinationViewController as! MapViewController
     }
   }
+    
+    @IBAction func cancelPressed(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            //nada
+        }
+    }
    
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
+
 }

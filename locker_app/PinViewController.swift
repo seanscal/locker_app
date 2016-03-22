@@ -14,10 +14,8 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   var user: [String: String!]?;
 
   @IBOutlet weak var enterPIN: UITextField!
-  @IBOutlet weak var errorText: UILabel!
   @IBOutlet weak var PINcheck: UITextField!
   @IBOutlet weak var DOBfield: UITextField!
-  @IBOutlet weak var DOBerror: UILabel!
   @IBOutlet weak var DOBlabel: UILabel!
   @IBOutlet weak var SubmitPinButton: UIButton!
   
@@ -26,16 +24,18 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     enterPIN.delegate = PINcheck.delegate
     PINcheck.delegate = self
     PINcheck.keyboardType = UIKeyboardType.NumberPad
-    errorText.hidden = true;
-    DOBerror.hidden = true;
-    DOBerror.text = "DD/MM/YYYY format please";
-    print(self.user!["birthday"]);
-    if (self.user!["birthday"] != nil){
-      DOBfield.hidden = true;
-      DOBlabel.hidden = true;
-    }
+
+    //print(self.user!["birthday"]);
+//    if (self.user!["birthday"] != nil){
+//      DOBfield.hidden = true;
+//      DOBlabel.hidden = true;
+//    }
     
   }
+    
+    override func viewWillAppear(animated: Bool) {
+        SubmitPinButton.layer.cornerRadius = 20
+    }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "mapSegue" {
@@ -44,28 +44,28 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   }
   
   @IBAction func submitPin(sender: UIButton) {
-    if (self.user!["birthday"] == nil){
-      errors();
-      if (DOBfield.text == ""){
-        DOBerror.hidden = false;
-      }
-      else{
-        DOBerror.hidden = true;
-      }
-      if (errorText.hidden == true && DOBerror.hidden == true){
-        DOBerror.hidden = true;
-        self.user!["pin"] = PINcheck.text;
-        self.user!["birthday"] = DOBfield.text;
-        putInfo();
-      }
-    }
-    else{
-      errors();
-      if (errorText.hidden == true){
-        self.user!["pin"] = PINcheck.text;
-        putInfo();
-      }
-    }
+//    if (self.user!["birthday"] == nil){
+//      errors();
+//      if (DOBfield.text == ""){
+//        DOBerror.hidden = false;
+//      }
+//      else{
+//        DOBerror.hidden = true;
+//      }
+//      if (errorText.hidden == true && DOBerror.hidden == true){
+//        DOBerror.hidden = true;
+//        self.user!["pin"] = PINcheck.text;
+//        self.user!["birthday"] = DOBfield.text;
+//        putInfo();
+//      }
+//    }
+//    else{
+//      errors();
+//      if (errorText.hidden == true){
+//        self.user!["pin"] = PINcheck.text;
+//        putInfo();
+//      }
+//    }
   }
   
   func PINcheck(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
@@ -86,21 +86,22 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     }
   }
   
-  func errors(){
-    if (enterPIN.text != PINcheck.text)
-    {
-      errorText.text = "PINs do not match";
-      errorText.hidden = false;
-    }
-    else if (enterPIN.text!.characters.count != 4)
-    {
-      errorText.text = "PIN must be 4 digits";
-      errorText.hidden = false;
-    }
-    else{
-      errorText.hidden = true;
-    }
-  }
+//  func errors() {
+//    
+//    if (enterPIN.text != PINcheck.text)
+//    {
+//      errorText.text = "PINs do not match";
+//      errorText.hidden = false;
+//    }
+//    else if (enterPIN.text!.characters.count != 4)
+//    {
+//      errorText.text = "PIN must be 4 digits";
+//      errorText.hidden = false;
+//    }
+//    else{
+//      errorText.hidden = true;
+//    }
+//  }
   
   func putInfo(){
     WebClient.updatePIN(self.user!, completion: { (response) -> Void in

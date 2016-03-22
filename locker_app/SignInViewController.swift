@@ -123,20 +123,20 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
         {
           let id = result.valueForKey("id") as! String
           let gender  = result.valueForKey("gender") as! String
-          let birthday  = result.valueForKey("birthday") as! String
+          let birthday  = ""
           let email = result.valueForKey("email") as! String
           let name = result.valueForKey("name") as! String
           let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name]
           
           WebClient.sendUserData(dict, completion: { (response) -> Void in
-            if ((response["pin"]) != nil){
-              self.mapsegue();
-            }
-            else{
-              self.user = dict;
+//            if ((response["pin"]) != nil){
+//              self.mapsegue();
+//            }
+//            else{
+              //self.user = dict;
               self.pushToPin = true
               
-            }
+//            }
             }) { (error) -> Void in
               //TODO: handle error
           }
