@@ -14,6 +14,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   var user: [String: String!]?;
 
   @IBOutlet weak var enterPIN: UITextField!
+  @IBOutlet weak var errorText: UILabel!
   @IBOutlet weak var PINcheck: UITextField!
   
   @IBOutlet weak var SubmitPinButton: UIButton!
@@ -23,8 +24,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     enterPIN.delegate = PINcheck.delegate
     PINcheck.delegate = self
     PINcheck.keyboardType = UIKeyboardType.NumberPad
-    print(self.user);
-    
+    errorText.hidden = true;
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -35,20 +35,27 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   
   @IBAction func submitPin(sender: UIButton) {
     
-    if (enterPIN.text == PINcheck.text && enterPIN.text!.characters.count == 4)
+    print(enterPIN.text);
+    print(PINcheck.text);
+    
+    if (enterPIN.text != PINcheck.text)
     {
+      errorText.text = "PINs do not match";
+      errorText.hidden = false;
+    }
+    else if (enterPIN.text!.characters.count != 4)
+    {
+      errorText.text = "PIN must be 4 digits";
+      errorText.hidden = false;
+    }
+    else{
       self.user!["pin"] = PINcheck.text;
       
       WebClient.updatePIN(self.user!, completion: { (response) -> Void in
-        print(response);
         }) { (error) -> Void in
           //TODO: handle error
       }
-      self.mapsegue();
-    }
-    else
-    {
-      print("shiii")
+      performSegueWithIdentifier("mapSegue", sender: self);
     }
   }
   
@@ -57,8 +64,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   {
     let maxLength = 4
     let currentString: NSString = textField.text!
-    let newString: NSString =
-    currentString.stringByReplacingCharactersInRange(range, withString: string)
+    let newString: NSString = currentString.stringByReplacingCharactersInRange(range, withString: string)
     return newString.length <= maxLength
   }
   
@@ -67,9 +73,6 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   }
   
   func mapsegue(){
-    
-    print(user!["pin"]);
-
     self.dismissViewControllerAnimated(true) { () -> Void in
     }
   }
