@@ -138,5 +138,4 @@ static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObje
             }
     }
   }
-    
-}
+

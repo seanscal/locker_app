@@ -181,7 +181,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KAb-OE-7oh" firstAttribute="leading" secondItem="Zf7-BB-1kK" secondAttribute="leadingMargin" constant="50" id="4dD-cX-mOJ"/>
                             <constraint firstItem="KAb-OE-7oh" firstAttribute="centerY" secondItem="Zf7-BB-1kK" secondAttribute="centerY" id="80U-Q9-fvZ"/>
@@ -241,7 +241,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="eKX-Gb-bi4" firstAttribute="leading" secondItem="bha-Hs-oqq" secondAttribute="leading" id="2Xb-7Q-IVm"/>
                             <constraint firstItem="Ejs-AJ-vdf" firstAttribute="leading" secondItem="bha-Hs-oqq" secondAttribute="leading" id="CwM-7z-Knl"/>

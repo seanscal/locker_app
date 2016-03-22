@@ -44,6 +44,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   }
   
   @IBAction func submitPin(sender: UIButton) {
+    errors()
 //    if (self.user!["birthday"] == nil){
 //      errors();
 //      if (DOBfield.text == ""){
@@ -86,22 +87,17 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     }
   }
   
-//  func errors() {
-//    
-//    if (enterPIN.text != PINcheck.text)
-//    {
-//      errorText.text = "PINs do not match";
-//      errorText.hidden = false;
-//    }
-//    else if (enterPIN.text!.characters.count != 4)
-//    {
-//      errorText.text = "PIN must be 4 digits";
-//      errorText.hidden = false;
-//    }
-//    else{
-//      errorText.hidden = true;
-//    }
-//  }
+  func errors() {
+    
+    if (enterPIN.text != PINcheck.text)
+    {
+      displayError("Please enter matching PINs")
+    }
+    else if (enterPIN.text!.characters.count != 4)
+    {
+      displayError("Please enter 4-digit PINs")
+    }
+  }
   
   func putInfo(){
     WebClient.updatePIN(self.user!, completion: { (response) -> Void in
