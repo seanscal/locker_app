@@ -16,7 +16,9 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   @IBOutlet weak var enterPIN: UITextField!
   @IBOutlet weak var errorText: UILabel!
   @IBOutlet weak var PINcheck: UITextField!
-  
+  @IBOutlet weak var DOBfield: UITextField!
+  @IBOutlet weak var DOBerror: UILabel!
+  @IBOutlet weak var DOBlabel: UILabel!
   @IBOutlet weak var SubmitPinButton: UIButton!
   
   override func viewDidLoad() {
@@ -25,6 +27,14 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     PINcheck.delegate = self
     PINcheck.keyboardType = UIKeyboardType.NumberPad
     errorText.hidden = true;
+    DOBerror.hidden = true;
+    DOBerror.text = "DD/MM/YYYY format please";
+    print(self.user!["birthday"]);
+    if (self.user!["birthday"] != nil){
+      DOBfield.hidden = true;
+      DOBlabel.hidden = true;
+    }
+    
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -34,28 +44,27 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   }
   
   @IBAction func submitPin(sender: UIButton) {
-    
-    print(enterPIN.text);
-    print(PINcheck.text);
-    
-    if (enterPIN.text != PINcheck.text)
-    {
-      errorText.text = "PINs do not match";
-      errorText.hidden = false;
-    }
-    else if (enterPIN.text!.characters.count != 4)
-    {
-      errorText.text = "PIN must be 4 digits";
-      errorText.hidden = false;
+    if (self.user!["birthday"] == nil){
+      errors();
+      if (DOBfield.text == ""){
+        DOBerror.hidden = false;
+      }
+      else{
+        DOBerror.hidden = true;
+      }
+      if (errorText.hidden == true && DOBerror.hidden == true){
+        DOBerror.hidden = true;
+        self.user!["pin"] = PINcheck.text;
+        self.user!["birthday"] = DOBfield.text;
+        putInfo();
+      }
     }
     else{
-      self.user!["pin"] = PINcheck.text;
-      
-      WebClient.updatePIN(self.user!, completion: { (response) -> Void in
-        }) { (error) -> Void in
-          //TODO: handle error
+      errors();
+      if (errorText.hidden == true){
+        self.user!["pin"] = PINcheck.text;
+        putInfo();
       }
-      performSegueWithIdentifier("mapSegue", sender: self);
     }
   }
   
@@ -75,6 +84,30 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   func mapsegue(){
     self.dismissViewControllerAnimated(true) { () -> Void in
     }
+  }
+  
+  func errors(){
+    if (enterPIN.text != PINcheck.text)
+    {
+      errorText.text = "PINs do not match";
+      errorText.hidden = false;
+    }
+    else if (enterPIN.text!.characters.count != 4)
+    {
+      errorText.text = "PIN must be 4 digits";
+      errorText.hidden = false;
+    }
+    else{
+      errorText.hidden = true;
+    }
+  }
+  
+  func putInfo(){
+    WebClient.updatePIN(self.user!, completion: { (response) -> Void in
+      }) { (error) -> Void in
+        //TODO: handle error
+    }
+    mapsegue();
   }
 
 }

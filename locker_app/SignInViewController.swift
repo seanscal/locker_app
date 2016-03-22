@@ -94,14 +94,13 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
     
     WebClient.sendUserData(dict, completion: { (response) -> Void in
-//      if ((response["pin"]) != nil){
-//        self.mapsegue();
-//      }
-//      else{
+      if ((response["pin"]) != nil){
+        self.mapsegue();
+      }
+      else{
         self.user = dict;
         self.pinsegue();
-      
-//      }
+      }
       }) { (error) -> Void in
         //TODO: handle error
     }
