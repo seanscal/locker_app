@@ -10,6 +10,8 @@ import UIKit
 
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    let kActiveRentalSegueId = "activeRentalSegue"
+    
     @IBOutlet weak var tableView: UITableView!
     var activeRentals : Array<Rental> = []
     var pastRentals : Array<Rental> = []
@@ -21,30 +23,35 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.dataSource = self
         self.navigationItem.hidesBackButton = true
         
+        //tableView.allowsSelection = false
+        
         let backButton = UIBarButtonItem(title: "Map", style: UIBarButtonItemStyle.Plain, target: self, action: "pop")
         self.navigationItem.rightBarButtonItem = backButton
         
         self.navigationItem.title = "Rentals"
         
-        tableView.registerNib(UINib(nibName: "HistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "HistoryTableViewCell")
-        
-        WebClient.getRentalsForUser(true) { (response) -> Void in
-            for jsonRental in response {
-                let rental = Rental.fromJSON(jsonRental)!
-                self.activeRentals.append(rental)
-            }
-            self.tableView.reloadData()
-        }
-        
-        WebClient.getRentalsForUser(false) { (response) -> Void in
-            for jsonRental in response {
-                let rental = Rental.fromJSON(jsonRental)!
-                self.pastRentals.append(rental)
-            }
-            self.tableView.reloadData()
-        }
+        getRentals()
         
         NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "refresh", userInfo: nil, repeats: true)
+    }
+    
+    func getRentals() {
+        
+        RentalManager.getRentalsForUser(true,
+            completion: { (rentals) -> Void in
+                self.activeRentals = rentals
+                self.refresh()
+            }) { (error) -> Void in
+                self.displayError("An error occurred loading active rentals. Try again in a few moments.")
+            }
+        
+        RentalManager.getRentalsForUser(false,
+            completion: { (rentals) -> Void in
+                self.pastRentals = rentals
+                self.refresh()
+            }) { (error) -> Void in
+                self.displayError("An error occurred loading past rentals. Try again in a few moments.")
+            }
     }
 
     func pop() {
@@ -58,23 +65,19 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        let active = self.activeRentals.count > 0 ? 1 : 0
-        let past = self.pastRentals.count > 0 ? 1 : 0
-        return active + past
+        return self.pastRentals.count > 0 ? 2 : 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
         case 0:
-            return activeRentals.count
+            return max(activeRentals.count, 1)
         default:
             return pastRentals.count
         }
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //return "Section \(section)"
-        
         switch(section) {
         case 0:
             return "Active"
@@ -84,31 +87,63 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("HistoryTableViewCell", forIndexPath: indexPath) as! HistoryTableViewCell
+        
+        //NOTE: ran into a really strange issue where having dequeueReusableCellWithIdentifier calls nested in if blocks was causing them all to use the same prototype, even when others were specified. Had to refactor into less sleek blocks to remedy this.
         
         if indexPath.section == 0 {
-            let rental = activeRentals[indexPath.row]
-            
-            cell.fareLabel.text = rental.runningTotalString()
-            cell.hubNameLabel.text = rental.hubName!
-            cell.elapsedTimeLabel.text = rental.elapsedTimeString()
+            if activeRentals.count > 0 {
+                let rental = activeRentals[indexPath.row]
+                let cell = tableView.dequeueReusableCellWithIdentifier("HistoryTableViewCell", forIndexPath: indexPath) as! HistoryTableViewCell
+                
+                cell.fareLabel.text = rental.runningTotalString()
+                cell.hubNameLabel.text = rental.hubName!
+                cell.elapsedTimeLabel.text = rental.elapsedTimeString()
+                
+                return cell
+            } else {
+                let blankCell = tableView.dequeueReusableCellWithIdentifier("NoRentals", forIndexPath: indexPath) 
+                blankCell.textLabel?.text = "No active rental"
+                
+                return blankCell
+            }
+
         } else {
             let rental = pastRentals[indexPath.row]
+            let cell = tableView.dequeueReusableCellWithIdentifier("HistoryTableViewCell", forIndexPath: indexPath) as! HistoryTableViewCell
             
             cell.fareLabel.text = rental.runningTotalString()
             cell.hubNameLabel.text = rental.hubName!
             cell.elapsedTimeLabel.text = rental.elapsedTimeString()
+            
+            return cell
         }
         
-        return cell
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return kDefaultCellHeight
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            let rental = activeRentals[indexPath.row]
+            performSegueWithIdentifier(kActiveRentalSegueId, sender: rental)
+        }
+    }
+    
     func refresh() {
         tableView.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == kActiveRentalSegueId) {
+            let hubVc = segue.destinationViewController as! LockerHubViewController
+            let rental = sender as! Rental
+            
+            hubVc.initWithRental(rental)
+        }
     }
     
 }

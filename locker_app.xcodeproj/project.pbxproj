@@ -16,8 +16,7 @@
 		141C03361C71088000E51E9B /* RegisterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03351C71088000E51E9B /* RegisterManager.swift */; };
 		141D579D1C9F435600D99B98 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D579C1C9F435600D99B98 /* PinViewController.swift */; };
 		2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */; };
-		2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84DC071C763F3600E52F3E /* UserSettings.swift */; };
-		2B8C31421C650D72009AF6F9 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */; };
+		2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84DC071C763F3600E52F3E /* UserSettings.swift */; settings = {ASSET_TAGS = (); }; };
 		2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */; };
 		2BB0DB891C7E42140079A044 /* RentalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB881C7E42140079A044 /* RentalManager.swift */; };
 		2BB0DB8B1C7E42830079A044 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB8A1C7E42830079A044 /* Rental.swift */; };
@@ -70,7 +69,6 @@
 		141D579C1C9F435600D99B98 /* PinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewController.swift; sourceTree = "<group>"; };
 		2B84DC071C763F3600E52F3E /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
-		2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
 		2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		2BB0DB881C7E42140079A044 /* RentalManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentalManager.swift; sourceTree = "<group>"; };
 		2BB0DB8A1C7E42830079A044 /* Rental.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rental.swift; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 			children = (
 				2B8C31441C650F0C009AF6F9 /* views */,
 				2B8C31431C650EFF009AF6F9 /* view controllers */,
-				2BC3CD411C6279C700C8C40B /* xibs */,
 			);
 			name = "UI elements";
 			sourceTree = "<group>";
@@ -216,14 +213,6 @@
 				2BB0DB8A1C7E42830079A044 /* Rental.swift */,
 			);
 			name = models;
-			sourceTree = "<group>";
-		};
-		2BC3CD411C6279C700C8C40B /* xibs */ = {
-			isa = PBXGroup;
-			children = (
-				2B8C31411C650D72009AF6F9 /* HistoryTableViewCell.xib */,
-			);
-			name = xibs;
 			sourceTree = "<group>";
 		};
 		9DDCB00712987602E3AEE0D8 /* Frameworks */ = {
@@ -378,7 +367,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BB961401C59804D00114D33 /* LaunchScreen.storyboard in Resources */,
-				2B8C31421C650D72009AF6F9 /* HistoryTableViewCell.xib in Resources */,
 				CCE64BF51C53003C00C8A637 /* Assets.xcassets in Resources */,
 				CCE64BF31C53003C00C8A637 /* Main.storyboard in Resources */,
 				141C03131C6BD94800E51E9B /* GoogleService-Info.plist in Resources */,

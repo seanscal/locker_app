@@ -18,6 +18,7 @@ enum DisplayMode {
 
 class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 
+    @IBOutlet var activeAlertLabel: UILabel!
     @IBOutlet var hourlyRateLabel: UILabel!
     @IBOutlet var baseRateLabel: UILabel!
     @IBOutlet weak var inUseCountLabel: UILabel!
@@ -67,7 +68,11 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func initWithMarker(marker: GMSMarker) {
         self.hub = marker.userData as! LockerHub?
-        
+        navigationItem.title = hub!.name
+    }
+    
+    func initWithRental(rental: Rental) {
+        self.hub = LockerHub(rental: rental)
         navigationItem.title = hub!.name
     }
     
@@ -75,9 +80,11 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         super.viewDidLoad()
         
         self.edgesForExtendedLayout = .None
-        
+
         formatMapViewHeight()
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         let mapInsets = UIEdgeInsets(top: ScreenUtils.screenWidth/2 + detailsBarHeightConstraint.constant + 50, left: 0, bottom: 0, right: 0) as UIEdgeInsets
         mapView.padding = mapInsets
         
@@ -86,13 +93,12 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         mapView.delegate = self
         mapView.settings.setAllGesturesEnabled(false) // disable scrolling, zooming, rotating, etc...
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
         displayRates()
         getHubInfo()
         _ = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "getHubInfo", userInfo: nil, repeats: true)
         checkForActiveRental()
+        
+        updateDisplay()
     }
     
     func displayRates() {
@@ -104,10 +110,12 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func checkForActiveRental() {
-        RentalManager.checkForActiveRental(hub!.uid!) { (rental) -> Void in
+        RentalManager.checkForActiveRental(hub!.uid!, completion: { (rental) -> Void in
             self.rental = rental
             self.calculateRate()
             NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
+        }) { (error) -> Void in
+            //TODO: handle error
         }
     }
     
@@ -131,6 +139,10 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func updateDisplay() {
         let active = displayMode == .ActiveRental
+        
+        if active {
+            activeAlertLabel.text = "LOCKER #" + String(rental!.lockerId!)
+        }
 
         UIView.animateWithDuration(kDefaultAnimationDuration) { () -> Void in
             self.openUnitsView.alpha = active ? 0.0 : 1.0

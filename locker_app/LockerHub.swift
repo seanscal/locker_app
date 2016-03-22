@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class LockerHub : Mappable {
+class LockerHub : NSObject, Mappable {
     
     var uid: Int?
     var name: String?
@@ -19,6 +19,22 @@ class LockerHub : Mappable {
     
     var baseRate: Double?
     var hourlyRate: Double?
+    
+    override init() {
+        super.init()
+    }
+    
+    convenience init(rental: Rental) {
+        self.init()
+        
+        uid = rental.hubId
+        name = rental.hubName
+        lat = rental.lat
+        long = rental.long
+        baseRate = rental.baseRate
+        hourlyRate = rental.hourlyRate
+
+    }
     
     required init?(_ map: Map) {
         
