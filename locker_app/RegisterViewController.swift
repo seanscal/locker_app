@@ -16,6 +16,7 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
   var firstName = RegisterManager.FIRSTNAME;
   var lastName = RegisterManager.LASTNAME;
   var registerButton = RegisterManager.REGISTER;
+  var pin = RegisterManager.PIN;
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,11 +28,19 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
     self.view.addSubview(firstName);
     self.view.addSubview(lastName);
     self.view.addSubview(registerButton);
+    self.view.addSubview(pin);
   }
   
   func mapsegue(){
     let dict : Dictionary = [ "id" : random(), "firstName" : firstName, "lastName" : lastName, "email" : email]
-    WebClient.sendUserData(dict)
+    WebClient.sendUserData(dict, completion: { (response) -> Void in
+      if ((response["pin"]) != nil){
+        print(response);
+      }
+      }) { (error) -> Void in
+        //TODO: handle error
+    }
+
     performSegueWithIdentifier("mapSegue", sender: self);
   }
   
@@ -40,8 +49,12 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
       mapViewController = segue.destinationViewController as! MapViewController
     }
   }
+    
+    @IBAction func cancelPressed(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true) { () -> Void in
+            //nada
+        }
+    }
    
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
+
 }

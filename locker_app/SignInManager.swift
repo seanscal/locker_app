@@ -48,7 +48,7 @@ class SignInManager{
         let name : NSString = result.valueForKey("name") as! String
         let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name, "pin": 1234]
         
-        WebClient.sendUserData(dict);
+        //WebClient.sendUserData(dict);
       }
     })
   }

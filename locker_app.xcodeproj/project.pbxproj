@@ -14,11 +14,12 @@
 		141C03321C7106D900E51E9B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03311C7106D900E51E9B /* RegisterViewController.swift */; };
 		141C03341C71081400E51E9B /* CommonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03331C71081400E51E9B /* CommonManager.swift */; };
 		141C03361C71088000E51E9B /* RegisterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03351C71088000E51E9B /* RegisterManager.swift */; };
+		141D579D1C9F435600D99B98 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D579C1C9F435600D99B98 /* PinViewController.swift */; };
 		2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */; };
 		2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84DC071C763F3600E52F3E /* UserSettings.swift */; settings = {ASSET_TAGS = (); }; };
 		2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */; };
-		2BB0DB891C7E42140079A044 /* RentalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB881C7E42140079A044 /* RentalManager.swift */; settings = {ASSET_TAGS = (); }; };
-		2BB0DB8B1C7E42830079A044 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB8A1C7E42830079A044 /* Rental.swift */; settings = {ASSET_TAGS = (); }; };
+		2BB0DB891C7E42140079A044 /* RentalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB881C7E42140079A044 /* RentalManager.swift */; };
+		2BB0DB8B1C7E42830079A044 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB8A1C7E42830079A044 /* Rental.swift */; };
 		2BB961241C56C7C500114D33 /* ScreenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961231C56C7C500114D33 /* ScreenUtils.swift */; };
 		2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961261C56CD6E00114D33 /* SlideLeftSegue.swift */; };
 		2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB961281C56D1A400114D33 /* SlideRightSegue.swift */; };
@@ -31,9 +32,9 @@
 		2BB9613E1C592E6F00114D33 /* LockerHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9613D1C592E6F00114D33 /* LockerHub.swift */; };
 		2BB961401C59804D00114D33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB9613F1C59804D00114D33 /* LaunchScreen.storyboard */; };
 		2BC3CD401C6279A000C8C40B /* LockerHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */; };
-		2BE981021C7CC053000E0B26 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE980FF1C7CC053000E0B26 /* AboutViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		2BE981031C7CC053000E0B26 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981001C7CC053000E0B26 /* ReportViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		2BE981041C7CC053000E0B26 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981011C7CC053000E0B26 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2BE981021C7CC053000E0B26 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE980FF1C7CC053000E0B26 /* AboutViewController.swift */; };
+		2BE981031C7CC053000E0B26 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981001C7CC053000E0B26 /* ReportViewController.swift */; };
+		2BE981041C7CC053000E0B26 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981011C7CC053000E0B26 /* SettingsViewController.swift */; };
 		CC1907481C67EFB100589A5C /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1907471C67EFB100589A5C /* PaymentViewController.swift */; };
 		CC22A02B1C5EE5C500D74310 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22A02A1C5EE5C500D74310 /* ProfileViewController.swift */; };
 		CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */; };
@@ -65,6 +66,7 @@
 		141C03311C7106D900E51E9B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		141C03331C71081400E51E9B /* CommonManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonManager.swift; sourceTree = "<group>"; };
 		141C03351C71088000E51E9B /* RegisterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterManager.swift; sourceTree = "<group>"; };
+		141D579C1C9F435600D99B98 /* PinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewController.swift; sourceTree = "<group>"; };
 		2B84DC071C763F3600E52F3E /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */,
 				CC1907471C67EFB100589A5C /* PaymentViewController.swift */,
 				141C03311C7106D900E51E9B /* RegisterViewController.swift */,
+				141D579C1C9F435600D99B98 /* PinViewController.swift */,
 			);
 			name = "view controllers";
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				2BE981031C7CC053000E0B26 /* ReportViewController.swift in Sources */,
 				2BB9613C1C59283700114D33 /* WebUtils.swift in Sources */,
 				CCE64BEE1C53003C00C8A637 /* AppDelegate.swift in Sources */,
+				141D579D1C9F435600D99B98 /* PinViewController.swift in Sources */,
 				141C03341C71081400E51E9B /* CommonManager.swift in Sources */,
 				CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */,
 				2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */,
