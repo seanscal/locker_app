@@ -109,11 +109,12 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         } else {
             let rental = pastRentals[indexPath.row]
-            let cell = tableView.dequeueReusableCellWithIdentifier("HistoryTableViewCell", forIndexPath: indexPath) as! HistoryTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("HistoricTableViewCell", forIndexPath: indexPath) as! HistoryTableViewCell
             
             cell.fareLabel.text = rental.runningTotalString()
             cell.hubNameLabel.text = rental.hubName!
             cell.elapsedTimeLabel.text = rental.elapsedTimeString()
+            cell.userInteractionEnabled = false
             
             return cell
         }

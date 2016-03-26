@@ -381,8 +381,49 @@
                                             <outlet property="hubNameLabel" destination="qNw-Xp-jdB" id="JFX-C8-v0R"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoRentals" textLabel="uPe-2m-YTV" style="IBUITableViewCellStyleDefault" id="cgZ-ct-wry">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HistoricTableViewCell" id="PEq-VN-orH" userLabel="HistoricTableViewCell" customClass="HistoryTableViewCell" customModule="Lockr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="125.5" width="600" height="76"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEq-VN-orH" id="OCe-75-WxR">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="75.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hub name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86I-7U-ihu" userLabel="Hub Name Label">
+                                                    <rect key="frame" x="15" y="17" width="78.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elapsed time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-MS-7t0" userLabel="Elapsed Time Label">
+                                                    <rect key="frame" x="15" y="40" width="88" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Klm-Px-Reh" userLabel="Fare Label">
+                                                    <rect key="frame" x="577" y="27.5" width="8" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="86I-7U-ihu" firstAttribute="leading" secondItem="OCe-75-WxR" secondAttribute="leading" constant="15" id="4Ya-wp-xtQ"/>
+                                                <constraint firstItem="R7m-MS-7t0" firstAttribute="leading" secondItem="86I-7U-ihu" secondAttribute="leading" id="QPj-ir-BLZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="Klm-Px-Reh" secondAttribute="trailing" constant="15" id="XF9-L4-hZD"/>
+                                                <constraint firstItem="86I-7U-ihu" firstAttribute="bottom" secondItem="OCe-75-WxR" secondAttribute="centerY" id="cUA-QE-mZU"/>
+                                                <constraint firstItem="R7m-MS-7t0" firstAttribute="top" secondItem="86I-7U-ihu" secondAttribute="bottom" constant="2" id="ie5-02-kKS"/>
+                                                <constraint firstItem="Klm-Px-Reh" firstAttribute="centerY" secondItem="OCe-75-WxR" secondAttribute="centerY" id="uhE-hR-eXc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="elapsedTimeLabel" destination="R7m-MS-7t0" id="VCt-UP-4gp"/>
+                                            <outlet property="fareLabel" destination="Klm-Px-Reh" id="r3h-Ly-IT8"/>
+                                            <outlet property="hubNameLabel" destination="86I-7U-ihu" id="tq5-in-5a2"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NoRentals" textLabel="uPe-2m-YTV" style="IBUITableViewCellStyleDefault" id="cgZ-ct-wry">
+                                        <rect key="frame" x="0.0" y="201.5" width="600" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cgZ-ct-wry" id="Ufj-eX-GSO">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="75.5"/>
@@ -608,7 +649,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YvY-i1-Fvs">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YvY-i1-Fvs">
                                 <rect key="frame" x="0.0" y="20" width="320" height="498"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apR-lj-qe9" userLabel="ContentView">
@@ -936,7 +977,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="k0y-z0-Sfi"/>
+        <segue reference="ICH-aN-nfq"/>
         <segue reference="l4b-Oe-tZf"/>
     </inferredMetricsTieBreakers>
 </document>
