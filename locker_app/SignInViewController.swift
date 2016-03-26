@@ -13,26 +13,25 @@ import FBSDKShareKit
 import FBSDKLoginKit
 import TTTAttributedLabel
 
-class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDelegate, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
+class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
   
-  var mapViewController: MapViewController!
-  var registerViewController: RegisterViewController!
   var pinViewController: PinViewController!
   
-  var fbLoginButton = SignInManager.FBBUTTON;
-  var emailField = SignInManager.EMAILFIELD;
-  var passwordField = SignInManager.PASSWORDFIELD;
-  var registerButton = SignInManager.REGISTERBUTTON;
-  var registerLabel = SignInManager.REGISTERLABEL;
+    @IBOutlet var signInButton: UIButton!
+    @IBOutlet var passwordField: UITextField!
+    @IBOutlet var emailField: UITextField!
+    @IBOutlet var facebookButton: FBSDKLoginButton!
+    @IBOutlet var googleButton: GIDSignInButton!
   var pushToPin = false
   var user: [String: String!]?;
   
+    @IBAction func registerPressed(sender: AnyObject) {
+        regsegue()
+    }
+    @IBAction func signInPressed(sender: AnyObject) {
+    }
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    //fb
-    fbLoginButton.delegate = self
-    self.view.addSubview(fbLoginButton)
     
     //google
     GIDSignIn.sharedInstance().delegate = self
@@ -40,17 +39,24 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     GIDSignIn.sharedInstance().clientID = "863174537857-o18s4kvm4122dudujc1rbffdes43qu6l.apps.googleusercontent.com"
     //GIDSignIn.sharedInstance().signInSilently()
     
-    //Lockr
-    emailField.delegate = self;
-    self.view.addSubview(emailField);
-    passwordField.delegate = self;
-    self.view.addSubview(passwordField);
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
     
-    
-    registerButton.addTarget(self, action: "regsegue", forControlEvents: UIControlEvents.TouchUpInside)
-    self.view.addSubview(registerButton);
-    self.view.addSubview(registerLabel);
   }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        // facebook button setup
+        facebookButton.readPermissions = ["public_profile", "email", "user_friends","user_birthday"]
+        facebookButton.delegate = self
+        
+        // native button setup
+        signInButton.layer.cornerRadius = 24.0
+        
+    }
     
     override func viewDidAppear(animated: Bool) {
         if pushToPin {
@@ -73,12 +79,6 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "mapSegue" {
-      mapViewController = segue.destinationViewController as! MapViewController
-    }
-    if segue.identifier == "registerSegue" {
-      registerViewController = segue.destinationViewController as! RegisterViewController
-    }
     if segue.identifier == "pinSegue"{
       pinViewController = segue.destinationViewController as! PinViewController;
       pinViewController.user = self.user;
