@@ -46,6 +46,7 @@ class SignInManager{
 //        let birthday : NSString = result.valueForKey("birthday") as! String
         let email : NSString = result.valueForKey("email") as! String
         let name : NSString = result.valueForKey("name") as! String
+        let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
 //        let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name, "pin": 1234]
         let dict : Dictionary = [ "id" : id, "gender" : gender, "email" : email, "name" : name, "pin": 1234]
         WebClient.sendUserData(dict);
@@ -54,6 +55,7 @@ class SignInManager{
         UserSettings.currentUser.name = name as String
         UserSettings.currentUser.email = email as String
         UserSettings.currentUser.signedIn = true as Bool
+        UserSettings.currentUser.picture = picture as String
         
         
       }
