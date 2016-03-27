@@ -80,7 +80,7 @@ class WebClient {
     {
       Alamofire.request(.POST, kLockrAPI + method, parameters: parameters)
     }
-    
+  
     static func getAllHubs(completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
         get(WebUtils.kApiMethodHubs, completion: { (json) -> Void in
@@ -128,7 +128,7 @@ class WebClient {
     }
   }
   
-    static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void) {
+static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void) {
         get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.currentUser.id),
             completion: { (json) -> Void in
                 completion(response: json.object as! Array<AnyObject>)
@@ -136,5 +136,5 @@ class WebClient {
                 failure(error: error)
             }
     }
-    
-}
+  }
+
