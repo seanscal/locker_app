@@ -32,7 +32,7 @@ class ProfileViewController: AbstractTableViewController {
         tableView.tableHeaderView = headerImageView
         
         // set header & cell titles for menu
-        initTableViewWithTitles(header("User Info"),UserSettings.currentUser.name, UserSettings.currentUser.email)
+        initTableViewWithTitles(header("Username"),UserSettings.currentUser.name, header("Email"), UserSettings.currentUser.email)
         
     
     }
