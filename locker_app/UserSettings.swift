@@ -6,20 +6,24 @@
 //  Copyright © 2016 Ali Hyder. All rights reserved.
 //
 
+let kUser = "user"
 let kUserID = "userID"
 let kUserName = "userName"
 let kUserEmail = "userEmail"
 let kUserCards = "userCards"
+let kUserPicture = "userPcture"
 //userId = 1 // TODO: implement this class
 //static let userName = "Test Guy"
 //static let userCards = ["Debit", "Credit"]
 //static let userEmail = "test.guy@lockr.com"
 
 class UserSettings: NSObject {
-    var id: Int!
+    var id: String!
     var name: String!
     var email: String!
+    var picture: String!
     var cards: [String]!
+    var signedIn: Bool!
     
     class var currentUser: UserSettings
     {
@@ -47,21 +51,22 @@ class UserSettings: NSObject {
     {
         super.init()
         
-        id = data[kUserID] as! Int
+        id = data[kUserID] as! String
         name = data[kUserName] as! String
         email = data[kUserEmail] as! String
+        picture = data[kUserPicture] as! String
         cards = data[kUserCards] as! [String]
+        signedIn = data[kUser] as! Bool
     }
     
     override init()
     {
         super.init()
         
-        id = 1
+        id = "1"
         name = "Test Guy"
         email = "test.guy@lockr.com"
         cards = ["Debit", "Credit"]
-        
         
     }
     

@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
             endingLineNumber = "25"
-            landmarkName = "makeFBLoginButton()"
+            landmarkName = "createRegLabel()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

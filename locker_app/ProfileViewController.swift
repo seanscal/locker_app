@@ -22,11 +22,17 @@ class ProfileViewController: AbstractTableViewController {
         tableView.delegate = self
         tableViewType = .Both
         
+        let frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width)
+        let headerImageView = UIImageView(frame: frame)
+        if let url = NSURL(string: UserSettings.currentUser.picture) {
+            if let data = NSData(contentsOfURL: url) {
+                headerImageView.image = UIImage(data: data)
+            }        
+        }
+        tableView.tableHeaderView = headerImageView
+        
         // set header & cell titles for menu
-        initTableViewWithTitles(UserSettings.currentUser.name, UserSettings.currentUser.email, "Bio", header(""), "Edit")
-
-        // configure images for cells
-        registerImageNameForTitles("profilePicture", titles: UserSettings.currentUser.name)
+        initTableViewWithTitles(header("Username"),UserSettings.currentUser.name, header("Email"), UserSettings.currentUser.email)
         
     
     }
