@@ -15,21 +15,25 @@ import TTTAttributedLabel
 
 class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
   
+  var mapViewController: MapViewController!
+  var registerViewController: RegisterViewController!
   var pinViewController: PinViewController!
   
-    @IBOutlet var signInButton: UIButton!
-    @IBOutlet var passwordField: UITextField!
-    @IBOutlet var emailField: UITextField!
-    @IBOutlet var facebookButton: FBSDKLoginButton!
-    @IBOutlet var googleButton: GIDSignInButton!
+  @IBOutlet var signInButton: UIButton!
+  @IBOutlet var passwordField: UITextField!
+  @IBOutlet var emailField: UITextField!
+  @IBOutlet var facebookButton: FBSDKLoginButton!
+  @IBOutlet var googleButton: GIDSignInButton!
+  
   var pushToPin = false
   var user: [String: String!]?;
   
-    @IBAction func registerPressed(sender: AnyObject) {
-        regsegue()
-    }
-    @IBAction func signInPressed(sender: AnyObject) {
-    }
+  @IBAction func registerPressed(sender: AnyObject) {
+      regsegue()
+  }
+  @IBAction func signInPressed(sender: AnyObject) {
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -43,26 +47,27 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
     
   }
     
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        // facebook button setup
-        facebookButton.readPermissions = ["public_profile", "email", "user_friends","user_birthday"]
-        facebookButton.delegate = self
-        
-        // native button setup
-        signInButton.layer.cornerRadius = 24.0
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        if pushToPin {
-            pinsegue()
-        }
-    }
+  func dismissKeyboard() {
+      view.endEditing(true)
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+      
+      // facebook button setup
+      facebookButton.readPermissions = ["public_profile", "email", "user_friends","user_birthday"]
+      facebookButton.delegate = self
+      
+      // native button setup
+      signInButton.layer.cornerRadius = 24.0
+      
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+      if pushToPin {
+          pinsegue()
+          self.pushToPin = false
+      }
+  }
   
   func regsegue(){
     performSegueWithIdentifier("registerSegue", sender: self);
@@ -79,6 +84,12 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "mapSegue" {
+      mapViewController = segue.destinationViewController as! MapViewController
+    }
+    if segue.identifier == "registerSegue" {
+      registerViewController = segue.destinationViewController as! RegisterViewController
+    }
     if segue.identifier == "pinSegue"{
       pinViewController = segue.destinationViewController as! PinViewController;
       pinViewController.user = self.user;
@@ -123,27 +134,23 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         {
           let id = result.valueForKey("id") as! String
           let gender  = result.valueForKey("gender") as! String
-          let birthday  = ""
+          let birthday  = result.valueForKey("birthday") as! String
           let email = result.valueForKey("email") as! String
           let name = result.valueForKey("name") as! String
-          let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name]
+          self.user = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name]
           
-          WebClient.sendUserData(dict, completion: { (response) -> Void in
-//            if ((response["pin"]) != nil){
-//              self.mapsegue();
-//            }
-//            else{
-              //self.user = dict;
+          WebClient.sendUserData(self.user!, completion: { (response) -> Void in
+            if ((response["pin"]) != nil){
+              self.mapsegue();
+            }
+            else{
               self.pushToPin = true
-              
-//            }
+            }
             }) { (error) -> Void in
               //TODO: handle error
           }
         }
       })
-
-      
     }
   }
   
