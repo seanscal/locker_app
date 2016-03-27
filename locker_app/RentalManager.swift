@@ -10,14 +10,37 @@ import Foundation
 
 class RentalManager {
     
-    static func checkForActiveRental(hubId : Int, completion: (rental: Rental) -> Void) {
-        WebClient.getRentalsForUser(true) { (response) -> Void in
-            for jsonRental in response {
-                let rental = Rental.fromJSON(jsonRental)
-                if rental!.hubId == hubId {
-                    completion(rental: rental!)
+    static func checkForActiveRental(hubId : Int, completion: (rental: Rental) -> Void, failure: (error: NSError) -> Void) {
+
+        WebClient.getRentalsForUser(true,
+            completion: { (response) -> Void in
+                for jsonRental in response {
+                    let rental = Rental.fromJSON(jsonRental)
+                    if rental!.hubId == hubId {
+                        completion(rental: rental!)
+                    }
                 }
+            }) { (error) -> Void in
+                failure(error: error)
             }
-        }
+    }
+    
+    static func getRentalsForUser(active: Bool, completion: (rentals: Array<Rental>) -> Void, failure: (error: NSError) -> Void) {
+        
+        WebClient.getRentalsForUser(active,
+            completion: { (response) -> Void in
+            
+                var rentals: Array<Rental> = []
+            
+                for jsonRental in response {
+                    let rental = Rental.fromJSON(jsonRental)!
+                    rentals.append(rental)
+                }
+            
+                completion(rentals: rentals)
+                
+            }) { (error) -> Void in
+                failure(error: error)
+            }
     }
 }
