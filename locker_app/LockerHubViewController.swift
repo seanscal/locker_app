@@ -11,6 +11,8 @@ import UIKit
 import GoogleMaps
 import MapKit
 
+let kCountdownTime = 10
+
 enum DisplayMode {
     case ActiveRental
     case PreRental
@@ -39,6 +41,8 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var detailsBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
+    
+    var timer: NSTimer!
     
     var hub: LockerHub?
     
@@ -114,6 +118,40 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         
         baseRateLabel.text = formatter.stringFromNumber(hub!.baseRate!)
         hourlyRateLabel.text = formatter.stringFromNumber(hub!.hourlyRate!)
+    }
+    
+    func initiateOpenLockerView() {
+        openLockerView.alpha = 0
+        openLockerView.hidden = false
+        
+        UIView.animateWithDuration(kDefaultAnimationDuration) { () -> Void in
+            self.openLockerView.alpha = 1
+        }
+        
+        countdownLabel.text = String(kCountdownTime)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+    }
+    
+    func dismissOpenLockerView() {
+        UIView.animateWithDuration(kDefaultAnimationDuration, animations: { () -> Void in
+            self.openLockerView.alpha = 0
+            }) { (completed) -> Void in
+                self.openLockerView.hidden = true
+                self.displayMessage("Time expired", message: "Your unit automatically re-locked after " + String(kCountdownTime) + " seconds.")
+        }
+        
+        timer.invalidate()
+        timer = nil
+    }
+    
+    func updateTimer() {
+        var currentTime = Int(countdownLabel.text!)!
+        if currentTime == 0 {
+            dismissOpenLockerView()
+        } else {
+            currentTime--
+            countdownLabel.text = String(currentTime)
+        }
     }
     
     func checkForActiveRental() {
@@ -256,13 +294,30 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             // UNLOCK
             
             let confirmUnlockAction = UIAlertAction(title: "Unlock", style: UIAlertActionStyle.Destructive) { (action) -> Void in
-                //TODO: implement
+                self.unlock()
             }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                //cancel
+            })
+            
             let alert = UIAlertController(title: "Confirm Unlock", message: "Are you sure you wish to unlock the unit? You will have 10 seconds to open the locker.", preferredStyle: UIAlertControllerStyle.ActionSheet)
             alert.addAction(confirmUnlockAction)
+            alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)
             
         }
 
+    }
+    
+    func unlock() {
+        WebClient.unlockLocker(hub!.uid!, lockerId: rental!.lockerId!, completion: { (response) -> Void in
+            // completion
+            self.initiateOpenLockerView()
+            
+            }) { (error) -> Void in
+                // error
+                self.displayError("Could not open locker. Please try again soon.")
+        }
     }
 }
