@@ -134,10 +134,16 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         {
           let id = result.valueForKey("id") as! String
           let gender  = result.valueForKey("gender") as! String
-          let birthday  = result.valueForKey("birthday") as! String
           let email = result.valueForKey("email") as! String
           let name = result.valueForKey("name") as! String
-          self.user = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name]
+          let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
+          self.user = [ "id" : id, "gender" : gender, "email" : email, "name" : name]
+          
+            UserSettings.currentUser.id = id as String
+            UserSettings.currentUser.name = name as String
+            UserSettings.currentUser.email = email as String
+            UserSettings.currentUser.signedIn = true as Bool
+            UserSettings.currentUser.picture = picture as String
           
           WebClient.sendUserData(self.user!, completion: { (response) -> Void in
             if ((response["pin"]) != nil){
