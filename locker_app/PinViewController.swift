@@ -67,6 +67,9 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
 //        putInfo();
 //      }
 //    }
+    
+
+    dismissModalStack()
   }
   
   func PINcheck(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
@@ -105,6 +108,16 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
         //TODO: handle error
     }
     mapsegue();
+  }
+    
+  func dismissModalStack() {
+    var signInVc = presentingViewController
+    signInVc?.dismissViewControllerAnimated(false) { () -> Void in
+        signInVc?.dismissViewControllerAnimated(false, completion: { () -> Void in
+            //whatever
+        })
+    }
+    
   }
 
 }
