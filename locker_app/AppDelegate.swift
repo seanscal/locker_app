@@ -11,14 +11,19 @@ import GoogleMaps
 import FBSDKCoreKit
 import FBSDKShareKit
 import FBSDKLoginKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
   
   var window: UIWindow?
-  
+    
+  var locationManager : LocationManager?
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    // initilaize location services
+    locationManager = LocationManager()
     
     // provide google maps api key
     GMSServices.provideAPIKey(kGMSApiKey)
