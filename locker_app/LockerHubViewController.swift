@@ -30,6 +30,11 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var inUseView: UIView!
     @IBOutlet weak var openUnitsView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
+    
+    // open locker view
+    @IBOutlet var openLockerView: UIView!
+    @IBOutlet var countdownContainer: UIView!
+    @IBOutlet var countdownLabel: UILabel!
 
     @IBOutlet weak var detailsBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonHeightConstraint: NSLayoutConstraint!
@@ -99,6 +104,8 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         checkForActiveRental()
         
         updateDisplay()
+        
+        countdownContainer.layer.cornerRadius = countdownContainer.frame.size.height / 4
     }
     
     func displayRates() {
