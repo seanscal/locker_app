@@ -39,10 +39,29 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let lastLocation = locations.last
         
-        let distanceFromRental = lastLocation?.distanceFromLocation(sampleLocation)
+        for rental in RentalManager.rentals {
+            let rentalLocation = CLLocation(latitude: rental.lat!, longitude: rental.long!)
+         
+            let distanceFromRental = lastLocation?.distanceFromLocation(rentalLocation)
+            
+            if distanceFromRental > sampleThreshold {
+                triggerProximityNotification(rental, distance: distanceFromRental!)
+            }
+            
+        }
         
-        if distanceFromRental > sampleThreshold {
-            UIApplication.sharedApplication().keyWindow?.rootViewController?.displayMessage("Location Update", message: "You are "+String(distanceFromRental!/1600)+" miles from the marker.")
+    }
+    
+    func triggerProximityNotification(rental: Rental, distance: Double) {
+        //ScreenUtils.rootViewController().displayMessage("Reminder!", message: "Don't forget about your rental at "+rental.hubName!+"! You're about "+String(format: "%.2f", distance/1600)+" miles away.")
+        
+        if true && !rental.firedProximityNotif { //TODO: check if user has proximity notifications enabled
+            let notif = UILocalNotification()
+            notif.alertTitle = "Lockr rental alert";
+            notif.alertBody = "You're now "+String(format: "%.2f", distance/1600)+" miles from your locker hub. Don't forget to check out and claim your belongings!"
+            
+            NotificationManager.fireNotification(notif)
+            rental.firedProximityNotif = true
         }
         
     }
