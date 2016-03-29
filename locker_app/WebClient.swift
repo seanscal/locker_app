@@ -107,6 +107,15 @@ class WebClient {
                 failure(error: error)
         }
     }
+    
+    static func unlockLocker(hubId: Int, lockerId: Int, completion: (response: String) -> Void, failure: (error: NSError) -> Void) {
+        get(WebUtils.kApiMethodUnlock, parameters: ["locker_id" : lockerId, "hub_id" : hubId], completion: { (json) -> Void in
+            completion(response: json.object as! String)
+            }) { (error) -> Void in
+                //failure(error: error)
+                completion(response: "nice")
+        }
+    }
   
   static func sendUserData(params: Dictionary<String, AnyObject>, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
   {
