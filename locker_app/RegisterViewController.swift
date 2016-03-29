@@ -11,10 +11,11 @@ import Foundation
 class RegisterViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate {
   
   var mapViewController: MapViewController!
-  var email = RegisterManager.EMAIL;
-  var password = RegisterManager.PASSWORD;
-  var firstName = RegisterManager.FIRSTNAME;
-  var lastName = RegisterManager.LASTNAME;
+  
+  var emailField = RegisterManager.EMAIL;
+  var passwordField = RegisterManager.PASSWORD;
+  var firstNameField = RegisterManager.FIRSTNAME;
+  var lastNameField = RegisterManager.LASTNAME;
   var registerButton = RegisterManager.REGISTER;
   var pin = RegisterManager.PIN;
 
@@ -23,16 +24,16 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
 
     registerButton.addTarget(self, action: "mapsegue", forControlEvents: UIControlEvents.TouchUpInside)
     
-    self.view.addSubview(email);
-    self.view.addSubview(password);
-    self.view.addSubview(firstName);
-    self.view.addSubview(lastName);
+    self.view.addSubview(emailField);
+    self.view.addSubview(passwordField);
+    self.view.addSubview(firstNameField);
+    self.view.addSubview(lastNameField);
     self.view.addSubview(registerButton);
     self.view.addSubview(pin);
   }
   
   func mapsegue(){
-    let dict : Dictionary = [ "id" : NSUUID().UUIDString, "firstName" : firstName, "lastName" : lastName, "email" : email, "updateTimeStamp" : NSDate.init()]
+    let dict : Dictionary = [ "id" : NSUUID().UUIDString, "firstName" : firstNameField.text!, "lastName" : lastNameField.text!, "email" : emailField.text!, "updateTimeStamp" : NSDate.init()]
     WebClient.sendUserData(dict, completion: { (response) -> Void in
       if ((response["pin"]) != nil){
         print(response);
@@ -45,6 +46,8 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
 
     performSegueWithIdentifier("mapSegue", sender: self);
   }
+    
+  // TODO: add validation for text fields
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "mapSegue" {
