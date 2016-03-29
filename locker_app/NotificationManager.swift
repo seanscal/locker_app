@@ -8,7 +8,7 @@
 
 import Foundation
 
-let kMinuteThreshold : Double = 0.01
+let kMinuteThreshold : Double = 1
 
 class NotificationManager: NSObject {
     
