@@ -6,12 +6,18 @@
 //  Copyright © 2016 Ali Hyder. All rights reserved.
 //
 
-let kUser = "user"
 let kUserID = "userID"
+let kUserPIN = "userPIN"
 let kUserName = "userName"
 let kUserEmail = "userEmail"
+let kUserBirthday = "userBirthday"
+let kUserGender = "userGender"
 let kUserCards = "userCards"
-let kUserPicture = "userPcture"
+let kUserPicture = "userPicture"
+let kUserProximity = "userProximity"
+let kUserDurationNotif = "userDurationNotif"
+let kUserUpdateTimeStamp = "userUpdateTimeStamp"
+
 //userId = 1 // TODO: implement this class
 //static let userName = "Test Guy"
 //static let userCards = ["Debit", "Credit"]
@@ -19,11 +25,16 @@ let kUserPicture = "userPcture"
 
 class UserSettings: NSObject {
     var id: String!
+    var pin: Int!
     var name: String!
+    var birthday: String!
+    var gender: String!
     var email: String!
     var picture: String!
     var cards: [String]!
-    var signedIn: Bool!
+    var proximity: Int!
+    var durationNotif: Int!
+    var updateTimeStamp: NSDate!
     
     class var currentUser: UserSettings
     {
@@ -56,7 +67,12 @@ class UserSettings: NSObject {
         email = data[kUserEmail] as! String
         picture = data[kUserPicture] as! String
         cards = data[kUserCards] as! [String]
-        signedIn = data[kUser] as! Bool
+        pin = data[kUserPIN] as! Int
+        birthday = data[kUserBirthday] as! String!
+        gender = data[kUserGender] as! String!
+        proximity = data[kUserProximity] as! Int!
+        durationNotif = data[kUserDurationNotif] as! Int!
+        updateTimeStamp = data[kUserUpdateTimeStamp] as! NSDate!
     }
     
     override init()
