@@ -30,6 +30,9 @@ class Rental : Mappable {
     var baseRate : Double?
     var hourlyRate : Double?
     
+    var firedProximityNotif = false
+    var firedDurationNotif = false
+    
     func mapping(map: Map) {
         uid             <- map["uid"]
         userId          <- map["userId"]

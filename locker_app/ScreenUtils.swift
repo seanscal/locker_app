@@ -44,6 +44,10 @@ class ScreenUtils {
         button.tintColor = tint
         return button
     }
+    
+    static func rootViewController() -> UIViewController {
+        return UIApplication.sharedApplication().keyWindow!.rootViewController!
+    }
 
     
 }

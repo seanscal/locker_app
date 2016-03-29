@@ -58,7 +58,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
       facebookButton.delegate = self
       
       // native button setup
-      signInButton.layer.cornerRadius = 24.0
+      signInButton.layer.cornerRadius = 3.0
       
   }
   
@@ -98,22 +98,24 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   
   //required Google Function
   func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
-    let idToken = user.authentication.idToken // Safe to send to the server
-    let name = user.profile.name
-    let email = user.profile.email
+    if error != nil {
+        // error
+        // for now, just send to map
+        // TODO: handle error
+        self.mapsegue()
+    }
     
-    let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
-    
-    WebClient.sendUserData(dict, completion: { (response) -> Void in
-      if ((response["pin"]) != nil){
+    else {
+        // success
+        let idToken = user.authentication.idToken // Safe to send to the server
+        let name = user.profile.name
+        let email = user.profile.email
+        
+        let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
+        
+        WebClient.sendUserData(dict)
+        
         self.mapsegue();
-      }
-      else{
-        self.user = dict;
-        self.pinsegue();
-      }
-      }) { (error) -> Void in
-        //TODO: handle error
     }
   }
   
