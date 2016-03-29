@@ -58,7 +58,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
       facebookButton.delegate = self
       
       // native button setup
-      signInButton.layer.cornerRadius = 24.0
+      signInButton.layer.cornerRadius = 3.0
       
   }
   
