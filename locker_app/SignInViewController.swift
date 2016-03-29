@@ -140,9 +140,8 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
           self.user = [ "id" : id, "gender" : gender, "email" : email, "name" : name]
           
             UserSettings.currentUser.id = id as String
-            UserSettings.currentUser.name = name as String
+            UserSettings.currentUser.firstName = name as String
             UserSettings.currentUser.email = email as String
-            UserSettings.currentUser.signedIn = true as Bool
             UserSettings.currentUser.picture = picture as String
           
           WebClient.sendUserData(self.user!, completion: { (response) -> Void in

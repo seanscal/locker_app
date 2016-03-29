@@ -32,7 +32,7 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
   }
   
   func mapsegue(){
-    let dict : Dictionary = [ "id" : random(), "firstName" : firstName, "lastName" : lastName, "email" : email]
+    let dict : Dictionary = [ "id" : NSUUID().UUIDString, "firstName" : firstName, "lastName" : lastName, "email" : email, "updateTimeStamp" : NSDate.init()]
     WebClient.sendUserData(dict, completion: { (response) -> Void in
       if ((response["pin"]) != nil){
         print(response);
@@ -40,6 +40,8 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
       }) { (error) -> Void in
         //TODO: handle error
     }
+    
+    UserSettings.init(data: dict)
 
     performSegueWithIdentifier("mapSegue", sender: self);
   }

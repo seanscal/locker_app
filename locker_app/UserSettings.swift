@@ -6,17 +6,18 @@
 //  Copyright © 2016 Ali Hyder. All rights reserved.
 //
 
-let kUserID = "userID"
-let kUserPIN = "userPIN"
-let kUserName = "userName"
-let kUserEmail = "userEmail"
-let kUserBirthday = "userBirthday"
-let kUserGender = "userGender"
-let kUserCards = "userCards"
-let kUserPicture = "userPicture"
-let kUserProximity = "userProximity"
-let kUserDurationNotif = "userDurationNotif"
-let kUserUpdateTimeStamp = "userUpdateTimeStamp"
+let kUserID = "id"
+let kUserPIN = "pin"
+let kUserFirstName = "firstName"
+let kUserLastName = "lastName"
+let kUserEmail = "email"
+let kUserBirthday = "birthday"
+let kUserGender = "gender"
+let kUserCards = "cards"
+let kUserPicture = "picture"
+let kUserProximity = "proximity"
+let kUserDurationNotif = "durationNotif"
+let kUserUpdateTimeStamp = "updateTimeStamp"
 
 //userId = 1 // TODO: implement this class
 //static let userName = "Test Guy"
@@ -26,7 +27,8 @@ let kUserUpdateTimeStamp = "userUpdateTimeStamp"
 class UserSettings: NSObject {
     var id: String!
     var pin: Int!
-    var name: String!
+    var firstName: String!
+    var lastName: String!
     var birthday: String!
     var gender: String!
     var email: String!
@@ -63,7 +65,8 @@ class UserSettings: NSObject {
         super.init()
         
         id = data[kUserID] as! String
-        name = data[kUserName] as! String
+        firstName = data[kUserFirstName] as! String
+        lastName = data[kUserLastName] as! String
         email = data[kUserEmail] as! String
         picture = data[kUserPicture] as! String
         cards = data[kUserCards] as! [String]
@@ -80,7 +83,8 @@ class UserSettings: NSObject {
         super.init()
         
         id = "1"
-        name = "Test Guy"
+        firstName = "Test"
+        lastName = "Guy"
         email = "test.guy@lockr.com"
         cards = ["Debit", "Credit"]
         
@@ -91,6 +95,13 @@ class UserSettings: NSObject {
         // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
         
         completion(needsAuth: true)
+        
+    }
+    
+    static func syncSettings() -> Void {
+        // TODO: sync current user settings with server user and see which is more recent. update respected model
+        // serverUser = WebClient.getUserByID(UserID)
+        // if serverUser.time more recent than currentUser.time ...etc.
         
     }
     
