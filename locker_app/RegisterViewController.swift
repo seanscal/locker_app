@@ -33,7 +33,8 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
   }
   
   func mapsegue(){
-    let dict : Dictionary = [ "id" : NSUUID().UUIDString, "firstName" : firstNameField.text!, "lastName" : lastNameField.text!, "email" : emailField.text!, "updateTimeStamp" : NSDate.init()]
+    let name:String = firstNameField.text!+lastNameField.text!
+    let dict : Dictionary = [ "id" : NSUUID().UUIDString, "name" : name, "email" : emailField.text!, "updateTimeStamp" : NSDate.init()]
     WebClient.sendUserData(dict, completion: { (response) -> Void in
       if ((response["pin"]) != nil){
         print(response);
@@ -42,7 +43,8 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
         //TODO: handle error
     }
     
-    UserSettings.init(data: dict)
+    UserSettings(data: dict)
+    print(UserSettings.currentUser.name)
 
     performSegueWithIdentifier("mapSegue", sender: self);
   }

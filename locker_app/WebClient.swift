@@ -137,7 +137,16 @@ class WebClient {
           failure(error: error)
       }
   }
-  
+    
+  static func getUserByID(id: String, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void) {
+      get(WebUtils.kApiMethodUsers + "/" + id,
+          completion: { (json) -> Void in
+              completion(response: json.object as! Dictionary<String, AnyObject>)
+      }) { (error) -> Void in
+          failure(error: error)
+      }
+  }
+
 static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void) {
         get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.currentUser.id),
             completion: { (json) -> Void in

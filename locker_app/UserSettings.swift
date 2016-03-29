@@ -8,8 +8,7 @@
 
 let kUserID = "id"
 let kUserPIN = "pin"
-let kUserFirstName = "firstName"
-let kUserLastName = "lastName"
+let kUserName = "name"
 let kUserEmail = "email"
 let kUserBirthday = "birthday"
 let kUserGender = "gender"
@@ -27,8 +26,7 @@ let kUserUpdateTimeStamp = "updateTimeStamp"
 class UserSettings: NSObject {
     var id: String!
     var pin: Int!
-    var firstName: String!
-    var lastName: String!
+    var name: String!
     var birthday: String!
     var gender: String!
     var email: String!
@@ -65,29 +63,23 @@ class UserSettings: NSObject {
         super.init()
         
         id = data[kUserID] as! String
-        firstName = data[kUserFirstName] as! String
-        lastName = data[kUserLastName] as! String
+        name = data[kUserName] as! String
         email = data[kUserEmail] as! String
         picture = data[kUserPicture] as! String
-        cards = data[kUserCards] as! [String]
-        pin = data[kUserPIN] as! Int
-        birthday = data[kUserBirthday] as! String!
-        gender = data[kUserGender] as! String!
-        proximity = data[kUserProximity] as! Int!
-        durationNotif = data[kUserDurationNotif] as! Int!
+//        cards = data[kUserCards] as! [String]
+//        pin = data[kUserPIN] as! Int
+//        birthday = data[kUserBirthday] as! String!
+//        gender = data[kUserGender] as! String!
+//        proximity = data[kUserProximity] as! Int!
+//        durationNotif = data[kUserDurationNotif] as! Int!
         updateTimeStamp = data[kUserUpdateTimeStamp] as! NSDate!
+        
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
     }
     
     override init()
     {
         super.init()
-        
-        id = "1"
-        firstName = "Test"
-        lastName = "Guy"
-        email = "test.guy@lockr.com"
-        cards = ["Debit", "Credit"]
-        
     }
     
     static func checkAuth(completion: (needsAuth: Bool) -> Void) {

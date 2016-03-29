@@ -138,11 +138,9 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
           self.user = [ "id" : id, "gender" : gender, "email" : email, "name" : name]
+          let userInfo : Dictionary = [ "id" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init(), "picture": picture]
           
-            UserSettings.currentUser.id = id as String
-            UserSettings.currentUser.firstName = name as String
-            UserSettings.currentUser.email = email as String
-            UserSettings.currentUser.picture = picture as String
+          UserSettings(data: userInfo)
           
           WebClient.sendUserData(self.user!, completion: { (response) -> Void in
             if ((response["pin"]) != nil){
