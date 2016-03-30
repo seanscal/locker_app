@@ -136,24 +136,34 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         {
           let id = result.valueForKey("id") as! String
           let gender  = result.valueForKey("gender") as! String
-          let email = result.valueForKey("email") as! String
+//          let email = result.valueForKey("email") as! String
+            let email = "jj@test.com"
+//          let birthday = result.valueForKey("birthday") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
-          self.user = [ "id" : id, "gender" : gender, "email" : email, "name" : name]
-          let userInfo : Dictionary = [ "id" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init(), "picture": picture]
-          UserSettings.currentUser.populateUser(userInfo)
-          print (UserSettings.currentUser.picture)
-          
-          WebClient.sendUserData(userInfo, completion: { (response) -> Void in
-            if ((response["pin"]) != nil){
-              self.mapsegue();
-            }
-            else{
-              self.pushToPin = true
-            }
+          self.user = [ "userId" : id, "gender" : gender, "email" : email, "name" : name]
+            let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init(), "picture": picture, "pin" : 1234]
+            
+            WebClient.updateUser(userInfo, completion: { (response) -> Void in
+                if ((response["pin"]) != nil){
+                    UserSettings.currentUser.populateUser(response)
+                    self.mapsegue();
+                }
+                else{
+                    self.pushToPin = true
+                }
             }) { (error) -> Void in
-              //TODO: handle error
-          }
+                //TODO: handle error
+            }
+//            WebClient.updateUser(userInfo, completion: { (response) -> Void in
+//                print(response)
+//                UserSettings.currentUser.populateUser(response)
+//                self.mapsegue();
+//                
+//            }) { (error) -> Void in
+//                //TODO: handle error
+//            }
+            
         }
       })
     }

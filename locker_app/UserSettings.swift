@@ -6,7 +6,7 @@
 //  Copyright © 2016 Ali Hyder. All rights reserved.
 //
 
-let kUserID = "id"
+let kUserID = "_id"
 let kUserPIN = "pin"
 let kUserName = "name"
 let kUserEmail = "email"
@@ -24,7 +24,7 @@ let kUserUpdateTimeStamp = "updateTimeStamp"
 //static let userEmail = "test.guy@lockr.com"
 
 class UserSettings: NSObject {
-    var id: String!
+    var userId: String!
     var pin: Int!
     var name: String!
     var birthday: String!
@@ -64,18 +64,16 @@ class UserSettings: NSObject {
     
     init(data: [String: AnyObject]) {
         super.init()
-        
-        id = data[kUserID] as! String
+        userId = data[kUserID] as! String
         name = data[kUserName] as! String
         email = data[kUserEmail] as! String
         picture = data[kUserPicture] as! String
-//        cards = data[kUserCards] as! [String]
-//        pin = data[kUserPIN] as! Int
-//        birthday = data[kUserBirthday] as! String!
-//        gender = data[kUserGender] as! String!
+        pin = data[kUserPIN] as! Int
+        birthday = data[kUserBirthday] as! String!
+        gender = data[kUserGender] as! String!
 //        proximity = data[kUserProximity] as! Int!
 //        durationNotif = data[kUserDurationNotif] as! Int!
-        updateTimeStamp = data[kUserUpdateTimeStamp] as! NSDate!
+//        updateTimeStamp = data[kUserUpdateTimeStamp] as! NSDate!
         
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
         
@@ -95,7 +93,7 @@ class UserSettings: NSObject {
     static func checkAuth(completion: (needsAuth: Bool) -> Void) {
         
         // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
-        if ((UserSettings.currentUser.id) != nil) {
+        if ((UserSettings.currentUser.userId) != nil) {
             completion(needsAuth: false)
         }
         else{
