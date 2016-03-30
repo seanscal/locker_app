@@ -34,7 +34,10 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
   
   func mapsegue(){
     let name:String = firstNameField.text!+lastNameField.text!
-    let dict : Dictionary = [ "id" : NSUUID().UUIDString, "name" : name, "email" : emailField.text!, "updateTimeStamp" : NSDate.init()]
+    let picture : String = "http://orig13.deviantart.net/10e3/f/2013/114/8/4/facebook_default_profile_picture___clone_trooper_by_captaintom-d62v2dr.jpg"
+    
+    
+    let dict : Dictionary = [ "id" : NSUUID().UUIDString, "name" : name, "email" : emailField.text!, "picture" : picture, "updateTimeStamp" : NSDate.init()]
     WebClient.sendUserData(dict, completion: { (response) -> Void in
       if ((response["pin"]) != nil){
         print(response);
@@ -44,7 +47,6 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
     }
     
     UserSettings(data: dict)
-    print(UserSettings.currentUser.name)
 
     performSegueWithIdentifier("mapSegue", sender: self);
   }

@@ -94,6 +94,7 @@ class UserSettings: NSObject {
         // TODO: sync current user settings with server user and see which is more recent. update respected model
         // serverUser = WebClient.getUserByID(UserID)
         // if serverUser.time more recent than currentUser.time ...etc.
+        //      set UserSettings();
         
     }
     

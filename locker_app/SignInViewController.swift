@@ -113,7 +113,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         
         let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
         
-        WebClient.sendUserData(dict)
+//        WebClient.sendUserData(dict)
         
         self.mapsegue();
     }
@@ -144,7 +144,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
           
           UserSettings(data: userInfo)
           
-          WebClient.sendUserData(self.user!, completion: { (response) -> Void in
+          WebClient.sendUserData(userInfo, completion: { (response) -> Void in
             if ((response["pin"]) != nil){
               self.mapsegue();
             }
