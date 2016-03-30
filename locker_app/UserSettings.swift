@@ -36,15 +36,19 @@ class UserSettings: NSObject {
     var durationNotif: Int!
     var updateTimeStamp: NSDate!
     
+    struct Static
+    {
+        static var instance: UserSettings?
+    }
+    
     class var currentUser: UserSettings
     {
-        struct Static
-        {
-            static var instance: UserSettings?
-        }
         
         if Static.instance == nil
         {
+            // DELETE THIS LINE!!!
+            // Using to remove NSUserDefaults before app load to force login screen
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
             if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserID)
             {
                 Static.instance = UserSettings(data: load as! [String: AnyObject])
@@ -58,8 +62,7 @@ class UserSettings: NSObject {
         return Static.instance!
     }
     
-    init(data: [String: AnyObject])
-    {
+    init(data: [String: AnyObject]) {
         super.init()
         
         id = data[kUserID] as! String
@@ -75,6 +78,13 @@ class UserSettings: NSObject {
         updateTimeStamp = data[kUserUpdateTimeStamp] as! NSDate!
         
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
+        
+    }
+    
+    func populateUser(data: [String: AnyObject]) {
+        
+        Static.instance = UserSettings(data: data)
+        
     }
     
     override init()
@@ -85,8 +95,12 @@ class UserSettings: NSObject {
     static func checkAuth(completion: (needsAuth: Bool) -> Void) {
         
         // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
-        
-        completion(needsAuth: true)
+        if ((UserSettings.currentUser.id) != nil) {
+            completion(needsAuth: false)
+        }
+        else{
+            completion(needsAuth: true)
+        }
         
     }
     
