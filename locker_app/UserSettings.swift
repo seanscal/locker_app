@@ -34,7 +34,7 @@ class UserSettings: NSObject {
     var cards: [String]!
     var proximity: Int!
     var durationNotif: Int!
-    var updateTimeStamp: NSDate!
+    var updateTimeStamp: Int!
     
     struct Static
     {
@@ -73,7 +73,7 @@ class UserSettings: NSObject {
         gender = data[kUserGender] as! String!
 //        proximity = data[kUserProximity] as! Int!
 //        durationNotif = data[kUserDurationNotif] as! Int!
-//        updateTimeStamp = data[kUserUpdateTimeStamp] as! NSDate!
+        updateTimeStamp = data[kUserUpdateTimeStamp] as! Int!
         
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
         

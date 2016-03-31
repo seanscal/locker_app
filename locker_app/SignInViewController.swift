@@ -136,14 +136,13 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         {
           let id = result.valueForKey("id") as! String
           let gender  = result.valueForKey("gender") as! String
-//          let email = result.valueForKey("email") as! String
-            let email = "jj@test.com"
+          let email = result.valueForKey("email") as! String
 //          let birthday = result.valueForKey("birthday") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
           self.user = [ "userId" : id, "gender" : gender, "email" : email, "name" : name]
-            let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init(), "picture": picture, "pin" : 1234]
-            
+            let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture, "pin" : 1234]
+            print(userInfo)
             WebClient.updateUser(userInfo, completion: { (response) -> Void in
                 if ((response["pin"]) != nil){
                     UserSettings.currentUser.populateUser(response)
