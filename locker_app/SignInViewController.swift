@@ -141,27 +141,23 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
           self.user = [ "userId" : id, "gender" : gender, "email" : email, "name" : name]
-            let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture, "pin" : 1234]
-            print(userInfo)
-            WebClient.updateUser(userInfo, completion: { (response) -> Void in
-                if ((response["pin"]) != nil){
-                    UserSettings.currentUser.populateUser(response)
-                    self.mapsegue();
-                }
-                else{
-                    self.pushToPin = true
+            let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
+            
+            WebClient.sendUserData(userInfo, completion: { (response) -> Void in
+                WebClient.updateUser(userInfo, completion: { (response) -> Void in
+                    if ((response["pin"]) != nil){
+                        UserSettings.currentUser.populateUser(response)
+                        self.mapsegue();
+                    }
+                    else{
+                        self.pushToPin = true
+                    }
+                }) { (error) -> Void in
+                    //TODO: handle error
                 }
             }) { (error) -> Void in
                 //TODO: handle error
             }
-//            WebClient.updateUser(userInfo, completion: { (response) -> Void in
-//                print(response)
-//                UserSettings.currentUser.populateUser(response)
-//                self.mapsegue();
-//                
-//            }) { (error) -> Void in
-//                //TODO: handle error
-//            }
             
         }
       })
