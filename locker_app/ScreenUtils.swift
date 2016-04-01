@@ -48,6 +48,10 @@ class ScreenUtils {
     static func rootViewController() -> UIViewController {
         return UIApplication.sharedApplication().keyWindow!.rootViewController!
     }
+    
+    static func visibleViewController() -> UIViewController {
+        return (ScreenUtils.rootViewController() as! UINavigationController).visibleViewController!
+    }
 
     
 }

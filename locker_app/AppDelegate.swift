@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         // if received while Lockr is active, use an alert
-        ScreenUtils.rootViewController().displayMessage(notification.alertTitle!, message: notification.alertBody!)
+        ScreenUtils.visibleViewController().displayMessage(notification.alertTitle!, message: notification.alertBody!)
         
     }
   

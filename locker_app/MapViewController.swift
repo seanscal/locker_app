@@ -119,9 +119,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             self.loading = false
             for jsonHub in response {
                 let hub = LockerHub.fromJSON(jsonHub)!
-                let marker = MapManager.customMarkerWithLatitude(hub.lat!, longitude: hub.long!, title: hub.name!, snippet: hub.availabilityString())
-                marker.userData = hub
-                marker.map = self.view as? GMSMapView
+                if let lat = hub.lat, let long = hub.long, let name = hub.name, let _ = hub.openUnits, let _ = hub.totalUnits {
+                    let marker = MapManager.customMarkerWithLatitude(lat, longitude: long, title: name, snippet: hub.availabilityString())
+                    marker.userData = hub
+                    marker.map = self.view as? GMSMapView
+                }
             }
             }) { (error) -> Void in
                 self.loading = false
