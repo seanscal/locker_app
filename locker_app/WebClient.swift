@@ -80,8 +80,7 @@ class WebClient {
     {
       Alamofire.request(.POST, kLockrAPI + method, parameters: parameters)
     }
-
-
+  
     static func getAllHubs(completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
         get(WebUtils.kApiMethodHubs, completion: { (json) -> Void in
@@ -102,7 +101,7 @@ class WebClient {
     
     static func makeReservation(hubId: Int, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
-        post(WebUtils.kApiMethodReserve, parameters: ["locker_id" : hubId, "customer_id" : UserSettings.currentUser.id], completion: { (json) -> Void in
+        post(WebUtils.kApiMethodReserve, parameters: ["locker_id" : hubId, "customer_id" : UserSettings.currentUser.userId], completion: { (json) -> Void in
                 completion(response: json.object as! Dictionary<String, AnyObject>)
             }) { (error) -> Void in
                 failure(error: error)
@@ -137,9 +136,28 @@ class WebClient {
         failure(error: error)
     }
   }
-  
+
+  static func updateUser(params: Dictionary<String, AnyObject>, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
+  {
+      put(WebUtils.kApiMethodUsers, parameters: params,
+          completion: { (json) -> Void in
+              completion(response: json.object as! Dictionary<String, AnyObject>)
+      }) { (error) -> Void in
+          failure(error: error)
+      }
+  }
+    
+  static func getUserByID(id: String, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void) {
+      get(WebUtils.kApiMethodUsers + "/" + id,
+          completion: { (json) -> Void in
+              completion(response: json.object as! Dictionary<String, AnyObject>)
+      }) { (error) -> Void in
+          failure(error: error)
+      }
+  }
+
 static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void) {
-        get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.currentUser.id),
+        get(WebUtils.kApiMethodRentals + "/" + (active ? "1" : "0") + "/" + String(UserSettings.currentUser.userId),
             completion: { (json) -> Void in
                 completion(response: json.object as! Array<AnyObject>)
             }) { (error) -> Void in

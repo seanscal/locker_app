@@ -11,14 +11,23 @@ import GoogleMaps
 import FBSDKCoreKit
 import FBSDKShareKit
 import FBSDKLoginKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
   
   var window: UIWindow?
-  
+    
+  var locationManager : LocationManager?
+  var notificationManager : NotificationManager?
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    RentalManager.pull()
+    
+    // initilaize location services
+    locationManager = LocationManager()
+    notificationManager = NotificationManager()
     
     // provide google maps api key
     GMSServices.provideAPIKey(kGMSApiKey)
@@ -86,6 +95,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
   func applicationWillTerminate(application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        // ensure they approve
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        // if received while Lockr is active, use an alert
+        ScreenUtils.visibleViewController().displayMessage(notification.alertTitle!, message: notification.alertBody!)
+        
+    }
   
   
 }

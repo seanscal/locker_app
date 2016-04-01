@@ -35,5 +35,4 @@ class CommonManager{
     button.setTitle(text, forState: UIControlState.Normal)
     return button
   }
-  
 }

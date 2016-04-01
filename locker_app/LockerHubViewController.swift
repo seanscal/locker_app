@@ -11,7 +11,7 @@ import UIKit
 import GoogleMaps
 import MapKit
 
-let kCountdownTime = 10
+let kCountdownTime = 15
 
 enum DisplayMode {
     case ActiveRental
@@ -301,7 +301,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
                 //cancel
             })
             
-            let alert = UIAlertController(title: "Confirm Unlock", message: "Are you sure you wish to unlock the unit? You will have 10 seconds to open the locker.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            let alert = UIAlertController(title: "Confirm Unlock", message: "Are you sure you wish to unlock the unit? You will have "+String(kCountdownTime)+" seconds to open the locker.", preferredStyle: UIAlertControllerStyle.ActionSheet)
             alert.addAction(confirmUnlockAction)
             alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)

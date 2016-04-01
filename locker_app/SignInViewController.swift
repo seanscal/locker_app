@@ -13,26 +13,29 @@ import FBSDKShareKit
 import FBSDKLoginKit
 import TTTAttributedLabel
 
-class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDelegate, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
+class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate, FBSDKLoginButtonDelegate, UITextFieldDelegate {
   
   var mapViewController: MapViewController!
   var registerViewController: RegisterViewController!
   var pinViewController: PinViewController!
   
-  var fbLoginButton = SignInManager.FBBUTTON;
-  var emailField = SignInManager.EMAILFIELD;
-  var passwordField = SignInManager.PASSWORDFIELD;
-  var registerButton = SignInManager.REGISTERBUTTON;
-  var registerLabel = SignInManager.REGISTERLABEL;
+  @IBOutlet var signInButton: UIButton!
+  @IBOutlet var passwordField: UITextField!
+  @IBOutlet var emailField: UITextField!
+  @IBOutlet var facebookButton: FBSDKLoginButton!
+  @IBOutlet var googleButton: GIDSignInButton!
+  
   var pushToPin = false
   var user: [String: String!]?;
   
+  @IBAction func registerPressed(sender: AnyObject) {
+      regsegue()
+  }
+  @IBAction func signInPressed(sender: AnyObject) {
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    //fb
-    fbLoginButton.delegate = self
-    self.view.addSubview(fbLoginButton)
     
     //google
     GIDSignIn.sharedInstance().delegate = self
@@ -40,23 +43,31 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
     GIDSignIn.sharedInstance().clientID = "863174537857-o18s4kvm4122dudujc1rbffdes43qu6l.apps.googleusercontent.com"
     //GIDSignIn.sharedInstance().signInSilently()
     
-    //Lockr
-    emailField.delegate = self;
-    self.view.addSubview(emailField);
-    passwordField.delegate = self;
-    self.view.addSubview(passwordField);
+    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
     
-    
-    registerButton.addTarget(self, action: "regsegue", forControlEvents: UIControlEvents.TouchUpInside)
-    self.view.addSubview(registerButton);
-    self.view.addSubview(registerLabel);
   }
     
-    override func viewDidAppear(animated: Bool) {
-        if pushToPin {
-            pinsegue()
-        }
-    }
+  func dismissKeyboard() {
+      view.endEditing(true)
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+      
+      // facebook button setup
+      facebookButton.readPermissions = ["public_profile", "email", "user_friends","user_birthday"]
+      facebookButton.delegate = self
+      
+      // native button setup
+      signInButton.layer.cornerRadius = 3.0
+      
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+      if pushToPin {
+          pinsegue()
+          self.pushToPin = false
+      }
+  }
   
   func regsegue(){
     performSegueWithIdentifier("registerSegue", sender: self);
@@ -87,22 +98,24 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
   
   //required Google Function
   func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
-    let idToken = user.authentication.idToken // Safe to send to the server
-    let name = user.profile.name
-    let email = user.profile.email
+    if error != nil {
+        // error
+        // for now, just send to map
+        // TODO: handle error
+        self.mapsegue()
+    }
     
-    let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
-    
-    WebClient.sendUserData(dict, completion: { (response) -> Void in
-      if ((response["pin"]) != nil){
+    else {
+        // success
+        let idToken = user.authentication.idToken // Safe to send to the server
+        let name = user.profile.name
+        let email = user.profile.email
+        
+        let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
+        
+//        WebClient.sendUserData(dict)
+        
         self.mapsegue();
-      }
-      else{
-        self.user = dict;
-        self.pinsegue();
-      }
-      }) { (error) -> Void in
-        //TODO: handle error
     }
   }
   
@@ -123,27 +136,30 @@ class SignInViewController: UIViewController, UITableViewDelegate, GIDSignInDele
         {
           let id = result.valueForKey("id") as! String
           let gender  = result.valueForKey("gender") as! String
-          let birthday  = ""
           let email = result.valueForKey("email") as! String
+//          let birthday = result.valueForKey("birthday") as! String
           let name = result.valueForKey("name") as! String
-          let dict : Dictionary = [ "id" : id, "birthday" : birthday, "gender" : gender, "email" : email, "name" : name]
-          
-          WebClient.sendUserData(dict, completion: { (response) -> Void in
-//            if ((response["pin"]) != nil){
-//              self.mapsegue();
-//            }
-//            else{
-              //self.user = dict;
-              self.pushToPin = true
-              
-//            }
+          let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
+            let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
+            
+            WebClient.sendUserData(userInfo, completion: { (response) -> Void in
+                WebClient.updateUser(userInfo, completion: { (response) -> Void in
+                    if ((response["pin"]) != nil){
+                        UserSettings.currentUser.populateUser(response)
+                        self.mapsegue();
+                    }
+                    else{
+                        self.pushToPin = true
+                    }
+                }) { (error) -> Void in
+                    //TODO: handle error
+                }
             }) { (error) -> Void in
-              //TODO: handle error
-          }
+                //TODO: handle error
+            }
+            
         }
       })
-
-      
     }
   }
   
