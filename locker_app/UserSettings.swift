@@ -91,13 +91,13 @@ class UserSettings: NSObject {
     
     static func checkAuth(completion: (needsAuth: Bool) -> Void) {
         
-        // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
-        if ((UserSettings.currentUser.userId) != nil) {
+//        // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
+//        if ((UserSettings.currentUser.userId) != nil) {
             completion(needsAuth: false)
-        }
-        else{
-            completion(needsAuth: true)
-        }
+//        }
+//        else{
+//            completion(needsAuth: true)
+//        }
         
     }
     
