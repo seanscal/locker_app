@@ -19,12 +19,15 @@ let kPrimaryTintColor       = UIColor.whiteColor()
 let kPrimaryBorderColor     = UIColor.whiteColor().CGColor
 let kPrimaryFont            = UIFont.boldSystemFontOfSize(16)
 let kPrimaryBackgroundColor = UIColor(red: 0, green: 215, blue: 0)
+let kLocationActiveColor    = UIColor(red: 150, green: 150, blue: 255)
+let kTransparentWhite       = UIColor(red: 255, green: 255, blue: 255, alpha: 0.75)
 
 class ScreenUtils {
     
     static let screenSize: CGRect = UIScreen.mainScreen().bounds
     static let screenHeight = screenSize.height
     static let screenWidth = screenSize.width
+    static let screenHeightMinusTopBars = screenSize.height - 64.0
     
     static func primaryButtonWithTitle(title: String) -> UIButton {
         let button = UIButton(type: UIButtonType.RoundedRect) as UIButton

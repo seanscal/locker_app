@@ -16,6 +16,10 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     
     var manager = CLLocationManager()
     
+    struct Static {
+        static var lastLocation: CLLocation?
+    }
+    
     override init() {
         
         super.init()
@@ -37,12 +41,12 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let lastLocation = locations.last
+        Static.lastLocation = locations.last
         
         for rental in RentalManager.rentals {
             let rentalLocation = CLLocation(latitude: rental.lat!, longitude: rental.long!)
          
-            let distanceFromRental = lastLocation?.distanceFromLocation(rentalLocation)
+            let distanceFromRental = Static.lastLocation?.distanceFromLocation(rentalLocation)
             
             if distanceFromRental > sampleThreshold {
                 triggerProximityNotification(rental, distance: distanceFromRental!)
@@ -64,5 +68,9 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
             rental.firedProximityNotif = true
         }
         
+    }
+    
+    static func userLocation() -> CLLocation? {
+        return Static.lastLocation
     }
 }

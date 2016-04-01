@@ -42,7 +42,7 @@ class LockerHub : NSObject, Mappable {
     }
     
     func mapping(map: Map) {
-        uid         <- map["uid"]
+        uid         <- map["_id"]
         name        <- map["name"]
         openUnits   <- map["openUnits"]
         totalUnits  <- map["totalUnits"]
