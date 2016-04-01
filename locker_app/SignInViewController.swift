@@ -140,7 +140,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
 //          let birthday = result.valueForKey("birthday") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
-          self.user = [ "userId" : id, "gender" : gender, "email" : email, "name" : name]
             let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
             
             WebClient.sendUserData(userInfo, completion: { (response) -> Void in

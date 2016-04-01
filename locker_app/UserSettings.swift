@@ -12,7 +12,6 @@ let kUserName = "name"
 let kUserEmail = "email"
 let kUserBirthday = "birthday"
 let kUserGender = "gender"
-let kUserCards = "cards"
 let kUserPicture = "picture"
 let kUserProximity = "proximity"
 let kUserDurationNotif = "durationNotif"
@@ -71,8 +70,8 @@ class UserSettings: NSObject {
         pin = data[kUserPIN] as! Int
         birthday = data[kUserBirthday] as! String!
         gender = data[kUserGender] as! String!
-//        proximity = data[kUserProximity] as! Int!
-//        durationNotif = data[kUserDurationNotif] as! Int!
+        proximity = data[kUserProximity] as! Int!
+        durationNotif = data[kUserDurationNotif] as! Int!
         updateTimeStamp = data[kUserUpdateTimeStamp] as! Int!
         
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
