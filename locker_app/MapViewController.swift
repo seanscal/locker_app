@@ -97,20 +97,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         historyButton.frame = CGRectMake(buttonPadding, ScreenUtils.screenHeightMinusTopBars - buttonHeight - buttonPadding, buttonWidth, buttonHeight)
         historyButton.addTarget(self, action: "performHistorySegue", forControlEvents: UIControlEvents.TouchUpInside)
         mapView.addSubview(historyButton)
-        
-        // create track location label
-        locationLabel = UILabel()
-        locationLabel.text = "Tracking location"
-        locationLabel.textAlignment = .Center
-        locationLabel.font = UIFont.boldSystemFontOfSize(14.0)
-        locationLabel.textColor = kLocationActiveColor
-        locationLabel.sizeToFit()
-        locationLabel.frame = CGRectMake(117, 24, locationLabel.frame.size.width + 10, locationLabel.frame.size.height + 10)
-        locationLabel.backgroundColor = kTransparentWhite
-        locationLabel.layer.masksToBounds = true
-        locationLabel.layer.cornerRadius = 12.0
-        mapView.addSubview(locationLabel)
-        
+      
         // create track location button overlay (top)
         locationButton = UIButton(type: .Custom) as UIButton
         locationButton.setImage(UIImage(named: "location")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
@@ -122,6 +109,19 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         locationButton.backgroundColor = kLocationActiveColor
         locationButton.addTarget(self, action: "locationPressed", forControlEvents: .TouchUpInside)
         mapView.addSubview(locationButton)
+        
+        // create track location label
+        locationLabel = UILabel()
+        locationLabel.text = "Tracking location"
+        locationLabel.textAlignment = .Center
+        locationLabel.font = UIFont.boldSystemFontOfSize(14.0)
+        locationLabel.textColor = kLocationActiveColor
+        locationLabel.sizeToFit()
+        locationLabel.frame = CGRectMake(locationButton.frame.origin.x + locationButton.frame.size.width + 10, 24, locationLabel.frame.size.width + 10, locationLabel.frame.size.height + 10)
+        locationLabel.backgroundColor = kTransparentWhite
+        locationLabel.layer.masksToBounds = true
+        locationLabel.layer.cornerRadius = 12.0
+        mapView.addSubview(locationLabel)
         
         // add insets to preserve Google logo
         let mapInsets = UIEdgeInsets(top: 0, left: ScreenUtils.screenWidth/2 - 34, bottom: 20, right: ScreenUtils.screenWidth/2 - 34) as UIEdgeInsets
@@ -147,7 +147,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 self.locationButton.backgroundColor = UIColor.grayColor()
                 self.locationLabel.textColor = UIColor.grayColor()
                 self.locationLabel.sizeToFit()
-                self.locationLabel.frame = CGRectMake(117, 24, self.locationLabel.frame.size.width + 10, self.locationLabel.frame.size.height + 10)
+                self.locationLabel.frame = CGRectMake(self.locationLabel.frame.origin.x, self.locationLabel.frame.origin.y, self.locationLabel.frame.size.width + 10, self.locationLabel.frame.size.height + 10)
             })
             
         } else {
@@ -158,7 +158,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 self.locationButton.backgroundColor = kLocationActiveColor
                 self.locationLabel.textColor = kLocationActiveColor
                 self.locationLabel.sizeToFit()
-                self.locationLabel.frame = CGRectMake(117, 24, self.locationLabel.frame.size.width + 10, self.locationLabel.frame.size.height + 10)
+                self.locationLabel.frame = CGRectMake(self.locationLabel.frame.origin.x, self.locationLabel.frame.origin.y, self.locationLabel.frame.size.width + 10, self.locationLabel.frame.size.height + 10)
             })
         }
     }
