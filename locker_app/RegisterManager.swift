@@ -19,5 +19,6 @@ class RegisterManager{
   static let PASSWORD = CommonManager.makeTextField(150, text: "Password");
   static let FIRSTNAME = CommonManager.makeTextField(200, text: "First Name");
   static let LASTNAME = CommonManager.makeTextField(250, text: "Last Name");
-  static let REGISTER = CommonManager.createButton("Register", posx: 120, posy: 300);
+  static let PIN = CommonManager.makeTextField(300, text: "PIN");
+  static let REGISTER = CommonManager.createButton("Register", posx: 120, posy: 350);
 }

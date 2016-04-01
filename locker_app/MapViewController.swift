@@ -114,6 +114,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
 
     }
     
+    override func viewWillAppear(animated: Bool) {
+        loading = true
+        fetchHubs()
+    }
+    
     func fetchHubs() {
         WebClient.getAllHubs( { (response) -> Void in
             self.loading = false
