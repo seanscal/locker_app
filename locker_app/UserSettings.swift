@@ -47,7 +47,10 @@ class UserSettings: NSObject {
         {
             // DELETE THIS LINE!!!
             // Using to remove NSUserDefaults before app load to force login screen
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
+            // NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
+            
+            
+            
             if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserID)
             {
                 Static.instance = UserSettings(data: load as! [String: AnyObject])
@@ -102,10 +105,37 @@ class UserSettings: NSObject {
     }
     
     static func syncSettings() -> Void {
-        // TODO: sync current user settings with server user and see which is more recent. update respected model
-        // serverUser = WebClient.getUserByID(UserID)
-        // if serverUser.time more recent than currentUser.time ...etc.
-        //      set UserSettings();
+        WebClient.getUserByID(Static.instance!.userId, completion: { (response) -> Void in
+            let serverTime = response["updateTimeStamp"] as! Int
+            if(serverTime < Static.instance!.updateTimeStamp) {
+                let userInfo: [String: AnyObject] = [
+                    "userId": Static.instance!.userId,
+                    "pin": Static.instance!.pin,
+                    "name": Static.instance!.name,
+                    "birthday": Static.instance!.birthday,
+                    "gender": Static.instance!.gender,
+                    "email": Static.instance!.email,
+                    "picture": Static.instance!.picture,
+                    "proximity": Static.instance!.proximity,
+                    "durationNotif": Static.instance!.durationNotif,
+                    "updateTimeStamp": Static.instance!.updateTimeStamp
+                ]
+                //update server
+                WebClient.updateUser(userInfo, completion: { (response) -> Void in
+                    //set current user
+                    UserSettings.currentUser.populateUser(response)
+                    
+                }) { (error) -> Void in
+                    //TODO: handle error
+                }
+            }
+            else {
+                //just set current user to the user on the server
+                UserSettings.currentUser.populateUser(response)
+            }
+        }) { (error) -> Void in
+            //TODO: handle error
+        }
         
     }
     
