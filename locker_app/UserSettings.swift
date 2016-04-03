@@ -6,7 +6,7 @@
 //  Copyright © 2016 Ali Hyder. All rights reserved.
 //
 
-let kUserID = "userId"
+let kUserID = "_id"
 let kUserPIN = "pin"
 let kUserName = "name"
 let kUserEmail = "email"
@@ -47,7 +47,7 @@ class UserSettings: NSObject {
         {
             // DELETE THIS LINE!!!
             // Using to remove NSUserDefaults before app load to force login screen
-            //             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
+//             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
             
             
             
@@ -84,7 +84,6 @@ class UserSettings: NSObject {
     }
     
     func populateUser(data: [String: AnyObject]) {
-        
         Static.instance = UserSettings(data: data)
         
     }
@@ -108,7 +107,6 @@ class UserSettings: NSObject {
     
     static func syncSettings() -> Void {
         WebClient.getUserByID(Static.instance!.userId, completion: { (response) -> Void in
-            print (response)
             
             let serverTime = response["updateTimeStamp"] as! Int
             if(serverTime < Static.instance!.updateTimeStamp) {
