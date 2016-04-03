@@ -43,12 +43,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
     GIDSignIn.sharedInstance().clientID = "863174537857-o18s4kvm4122dudujc1rbffdes43qu6l.apps.googleusercontent.com"
     //GIDSignIn.sharedInstance().signInSilently()
     
-    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
-    
-  }
-    
-  func dismissKeyboard() {
-      view.endEditing(true)
   }
   
   override func viewWillAppear(animated: Bool) {
