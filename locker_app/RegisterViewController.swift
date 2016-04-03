@@ -32,7 +32,7 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
   }
   
   func mapsegue(){
-    let dict : Dictionary = [ "id" : random(), "firstName" : firstName, "lastName" : lastName, "email" : email]
+    let dict : Dictionary = [ "id" : random(), "firstName" : firstName, "lastName" : lastName, "email" : email, "pin": pin]
     WebClient.sendUserData(dict, completion: { (response) -> Void in
       if ((response["pin"]) != nil){
         print(response);

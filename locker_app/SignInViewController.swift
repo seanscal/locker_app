@@ -41,7 +41,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
     GIDSignIn.sharedInstance().delegate = self
     GIDSignIn.sharedInstance().uiDelegate = self
     GIDSignIn.sharedInstance().clientID = "863174537857-o18s4kvm4122dudujc1rbffdes43qu6l.apps.googleusercontent.com"
-    //GIDSignIn.sharedInstance().signInSilently()
+//    GIDSignIn.sharedInstance().signInSilently()
     
     view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
     
@@ -98,7 +98,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   
   //required Google Function
   func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
-    let idToken = user.authentication.idToken // Safe to send to the server
+    let idToken = user.authentication.idToken
     let name = user.profile.name
     let email = user.profile.email
     
@@ -113,7 +113,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         self.pinsegue();
       }
       }) { (error) -> Void in
-        //TODO: handle error
     }
   }
   
