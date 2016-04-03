@@ -54,6 +54,8 @@ class UserSettings: NSObject {
             if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserID)
             {
                 Static.instance = UserSettings(data: load as! [String: AnyObject])
+//                print(Static.instance!.userId)
+                syncSettings()
             }
             else
             {
@@ -106,6 +108,8 @@ class UserSettings: NSObject {
     
     static func syncSettings() -> Void {
         WebClient.getUserByID(Static.instance!.userId, completion: { (response) -> Void in
+//            print (response)
+            
             let serverTime = response["updateTimeStamp"] as! Int
             if(serverTime < Static.instance!.updateTimeStamp) {
                 let userInfo: [String: AnyObject] = [
