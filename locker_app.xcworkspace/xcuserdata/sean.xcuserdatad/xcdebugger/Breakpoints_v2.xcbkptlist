@@ -473,11 +473,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "locker_app/SignInViewController.swift"
-            timestampString = "481402086.695592"
+            timestampString = "481407593.578128"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "signIn(_:didSignInForUser:withError:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -494,7 +494,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
             endingLineNumber = "46"
-            landmarkName = "signIn(_:didSignInForUser:withError:)"
+            landmarkName = "application(_:openURL:options:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -510,14 +510,14 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
             endingLineNumber = "49"
-            landmarkName = "signIn(_:didSignInForUser:withError:)"
+            landmarkName = "application(_:openURL:options:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "locker_app/AppDelegate.swift"
@@ -526,7 +526,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "signIn(_:didSignInForUser:withError:)"
+            landmarkName = "application(_:openURL:options:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

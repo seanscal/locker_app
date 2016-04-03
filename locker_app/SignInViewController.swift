@@ -99,6 +99,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         // TODO: handle error
         self.mapsegue()
     }
+
     else {
         // success
         let idToken = user.authentication.idToken // Safe to send to the server
@@ -106,18 +107,16 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         let email = user.profile.email
         
         let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
-        
-        WebClient.sendUserData(dict, completion: { (response) -> Void in
+
+      WebClient.sendUserData(dict, completion: { (response) -> Void in
           if ((response["pin"]) != nil){
             self.mapsegue();
           }
           else{
-            self.user = dict;
-            self.pinsegue();
+            self.pushToPin = true
           }
-        })
-          { (error) -> Void in
-              // ERROR
+          }) { (error) -> Void in
+            //TODO: handle error
           }
     }
   }
@@ -138,9 +137,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         else
         {
           let id = result.valueForKey("id") as! String
-          let gender  = result.valueForKey("gender") as! String
           let email = result.valueForKey("email") as! String
-//          let birthday = result.valueForKey("birthday") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
             let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
