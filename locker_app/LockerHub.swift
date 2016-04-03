@@ -14,6 +14,7 @@ class LockerHub : NSObject, Mappable {
     var uid: Int?
     var name: String?
     var openUnits: Int?
+    var totalUnits: Int?
     var lat: Double?
     var long: Double?
     
@@ -41,9 +42,10 @@ class LockerHub : NSObject, Mappable {
     }
     
     func mapping(map: Map) {
-        uid         <- map["uid"]
+        uid         <- map["_id"]
         name        <- map["name"]
         openUnits   <- map["openUnits"]
+        totalUnits  <- map["totalUnits"]
         lat         <- map["lat"]
         long        <- map["long"]
         baseRate    <- map["baseRate"]

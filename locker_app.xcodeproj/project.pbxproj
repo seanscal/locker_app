@@ -10,12 +10,14 @@
 		0CD997F401FF619B09302FB9 /* Pods_locker_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4614872C47042DFD3DC07017 /* Pods_locker_app.framework */; };
 		141C03131C6BD94800E51E9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 141C03121C6BD94800E51E9B /* GoogleService-Info.plist */; };
 		141C03151C6BD95400E51E9B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03141C6BD95400E51E9B /* SignInViewController.swift */; };
+		141C03301C6E581300E51E9B /* SignInManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C032F1C6E581300E51E9B /* SignInManager.swift */; };
 		141C03321C7106D900E51E9B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03311C7106D900E51E9B /* RegisterViewController.swift */; };
 		141C03341C71081400E51E9B /* CommonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03331C71081400E51E9B /* CommonManager.swift */; };
 		141C03361C71088000E51E9B /* RegisterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141C03351C71088000E51E9B /* RegisterManager.swift */; };
 		141D579D1C9F435600D99B98 /* PinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141D579C1C9F435600D99B98 /* PinViewController.swift */; };
 		2B23BC021C5FCB8200143E05 /* AbstractTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */; };
-		2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84DC071C763F3600E52F3E /* UserSettings.swift */; };
+		2B4E76731CAA18A2001C9CE2 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4E76721CAA18A2001C9CE2 /* NotificationManager.swift */; settings = {ASSET_TAGS = (); }; };
+		2B84DC081C763F3600E52F3E /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B84DC071C763F3600E52F3E /* UserSettings.swift */; settings = {ASSET_TAGS = (); }; };
 		2B8C31461C650F1E009AF6F9 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */; };
 		2BB0DB891C7E42140079A044 /* RentalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB881C7E42140079A044 /* RentalManager.swift */; };
 		2BB0DB8B1C7E42830079A044 /* Rental.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB0DB8A1C7E42830079A044 /* Rental.swift */; };
@@ -31,9 +33,10 @@
 		2BB9613E1C592E6F00114D33 /* LockerHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9613D1C592E6F00114D33 /* LockerHub.swift */; };
 		2BB961401C59804D00114D33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB9613F1C59804D00114D33 /* LaunchScreen.storyboard */; };
 		2BC3CD401C6279A000C8C40B /* LockerHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */; };
-		2BE981021C7CC053000E0B26 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE980FF1C7CC053000E0B26 /* AboutViewController.swift */; };
-		2BE981031C7CC053000E0B26 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981001C7CC053000E0B26 /* ReportViewController.swift */; };
-		2BE981041C7CC053000E0B26 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981011C7CC053000E0B26 /* SettingsViewController.swift */; };
+		2BE607961CA97CDF003D9C86 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE607951CA97CDF003D9C86 /* LocationManager.swift */; settings = {ASSET_TAGS = (); }; };
+		2BE981021C7CC053000E0B26 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE980FF1C7CC053000E0B26 /* AboutViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2BE981031C7CC053000E0B26 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981001C7CC053000E0B26 /* ReportViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2BE981041C7CC053000E0B26 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE981011C7CC053000E0B26 /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CC1907481C67EFB100589A5C /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1907471C67EFB100589A5C /* PaymentViewController.swift */; };
 		CC22A02B1C5EE5C500D74310 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC22A02A1C5EE5C500D74310 /* ProfileViewController.swift */; };
 		CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC9E3271C54103D00FE8406 /* HistoryViewController.swift */; };
@@ -66,6 +69,7 @@
 		141C03351C71088000E51E9B /* RegisterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterManager.swift; sourceTree = "<group>"; };
 		141D579C1C9F435600D99B98 /* PinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinViewController.swift; sourceTree = "<group>"; };
 		2B23BC011C5FCB8200143E05 /* AbstractTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractTableViewController.swift; sourceTree = "<group>"; };
+		2B4E76721CAA18A2001C9CE2 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2B84DC071C763F3600E52F3E /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		2B8C31451C650F1E009AF6F9 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		2BB0DB881C7E42140079A044 /* RentalManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RentalManager.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 		2BB9613D1C592E6F00114D33 /* LockerHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerHub.swift; sourceTree = "<group>"; };
 		2BB9613F1C59804D00114D33 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BC3CD3F1C6279A000C8C40B /* LockerHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockerHubViewController.swift; sourceTree = "<group>"; };
+		2BE607951CA97CDF003D9C86 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2BE980FF1C7CC053000E0B26 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		2BE981001C7CC053000E0B26 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		2BE981011C7CC053000E0B26 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +204,8 @@
 				141C03331C71081400E51E9B /* CommonManager.swift */,
 				141C03351C71088000E51E9B /* RegisterManager.swift */,
 				2BB0DB881C7E42140079A044 /* RentalManager.swift */,
+				2BE607951CA97CDF003D9C86 /* LocationManager.swift */,
+				2B4E76721CAA18A2001C9CE2 /* NotificationManager.swift */,
 			);
 			name = managers;
 			sourceTree = "<group>";
@@ -438,6 +445,7 @@
 				CC1907481C67EFB100589A5C /* PaymentViewController.swift in Sources */,
 				2BB0DB8B1C7E42830079A044 /* Rental.swift in Sources */,
 				2BB961371C57ECA500114D33 /* Colors.swift in Sources */,
+				2BE607961CA97CDF003D9C86 /* LocationManager.swift in Sources */,
 				2BB961351C57DB4A00114D33 /* Constants.swift in Sources */,
 				2BB961301C57041500114D33 /* Extensions.swift in Sources */,
 				141C03361C71088000E51E9B /* RegisterManager.swift in Sources */,
@@ -453,6 +461,7 @@
 				141C03341C71081400E51E9B /* CommonManager.swift in Sources */,
 				CCC9E3281C54103D00FE8406 /* HistoryViewController.swift in Sources */,
 				2BB961271C56CD6E00114D33 /* SlideLeftSegue.swift in Sources */,
+				2B4E76731CAA18A2001C9CE2 /* NotificationManager.swift in Sources */,
 				2BB961331C57DB2600114D33 /* MapManager.swift in Sources */,
 				CC22A02B1C5EE5C500D74310 /* ProfileViewController.swift in Sources */,
 				2BB961291C56D1A400114D33 /* SlideRightSegue.swift in Sources */,

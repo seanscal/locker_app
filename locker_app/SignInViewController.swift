@@ -43,12 +43,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
     GIDSignIn.sharedInstance().clientID = "863174537857-o18s4kvm4122dudujc1rbffdes43qu6l.apps.googleusercontent.com"
 //    GIDSignIn.sharedInstance().signInSilently()
     
-    view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "dismissKeyboard"))
-    
-  }
-    
-  func dismissKeyboard() {
-      view.endEditing(true)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -58,7 +52,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
       facebookButton.delegate = self
       
       // native button setup
-      signInButton.layer.cornerRadius = 24.0
+      signInButton.layer.cornerRadius = 3.0
       
   }
   
@@ -98,21 +92,33 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   
   //required Google Function
   func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
-    let idToken = user.authentication.idToken
-    let name = user.profile.name
-    let email = user.profile.email
-    
-    let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
-    
-    WebClient.sendUserData(dict, completion: { (response) -> Void in
-      if ((response["pin"]) != nil){
-        self.mapsegue();
-      }
-      else{
-        self.user = dict;
-        self.pinsegue();
-      }
-      }) { (error) -> Void in
+
+    if error != nil {
+        // error
+        // for now, just send to map
+        // TODO: handle error
+        self.mapsegue()
+    }
+    else {
+        // success
+        let idToken = user.authentication.idToken // Safe to send to the server
+        let name = user.profile.name
+        let email = user.profile.email
+        
+        let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
+        
+        WebClient.sendUserData(dict, completion: { (response) -> Void in
+          if ((response["pin"]) != nil){
+            self.mapsegue();
+          }
+          else{
+            self.user = dict;
+            self.pinsegue();
+          }
+        })
+          { (error) -> Void in
+              // ERROR
+          }
     }
   }
   
@@ -134,26 +140,27 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
           let id = result.valueForKey("id") as! String
           let gender  = result.valueForKey("gender") as! String
           let email = result.valueForKey("email") as! String
+//          let birthday = result.valueForKey("birthday") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
-          self.user = [ "id" : id, "gender" : gender, "email" : email, "name" : name]
-          
-            UserSettings.currentUser.id = id as String
-            UserSettings.currentUser.name = name as String
-            UserSettings.currentUser.email = email as String
-            UserSettings.currentUser.signedIn = true as Bool
-            UserSettings.currentUser.picture = picture as String
-          
-          WebClient.sendUserData(self.user!, completion: { (response) -> Void in
-            if ((response["pin"]) != nil){
-              self.mapsegue();
-            }
-            else{
-              self.pushToPin = true
-            }
+            let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
+            
+            WebClient.sendUserData(userInfo, completion: { (response) -> Void in
+                WebClient.updateUser(userInfo, completion: { (response) -> Void in
+                    if ((response["pin"]) != nil){
+                        UserSettings.currentUser.populateUser(response)
+                        self.mapsegue();
+                    }
+                    else{
+                        self.pushToPin = true
+                    }
+                }) { (error) -> Void in
+                    //TODO: handle error
+                }
             }) { (error) -> Void in
-              //TODO: handle error
-          }
+                //TODO: handle error
+            }
+            
         }
       })
     }
