@@ -41,7 +41,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
     GIDSignIn.sharedInstance().delegate = self
     GIDSignIn.sharedInstance().uiDelegate = self
     GIDSignIn.sharedInstance().clientID = "863174537857-o18s4kvm4122dudujc1rbffdes43qu6l.apps.googleusercontent.com"
-    //GIDSignIn.sharedInstance().signInSilently()
+//    GIDSignIn.sharedInstance().signInSilently()
     
   }
   
@@ -92,13 +92,14 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   
   //required Google Function
   func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+
     if error != nil {
         // error
         // for now, just send to map
         // TODO: handle error
         self.mapsegue()
     }
-    
+
     else {
         // success
         let idToken = user.authentication.idToken // Safe to send to the server
@@ -106,10 +107,17 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         let email = user.profile.email
         
         let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
-        
-//        WebClient.sendUserData(dict)
-        
-        self.mapsegue();
+
+      WebClient.sendUserData(dict, completion: { (response) -> Void in
+          if ((response["pin"]) != nil){
+            self.mapsegue();
+          }
+          else{
+            self.pushToPin = true
+          }
+          }) { (error) -> Void in
+            //TODO: handle error
+          }
     }
   }
   
@@ -129,9 +137,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         else
         {
           let id = result.valueForKey("id") as! String
-          let gender  = result.valueForKey("gender") as! String
           let email = result.valueForKey("email") as! String
-//          let birthday = result.valueForKey("birthday") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
             let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
