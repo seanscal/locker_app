@@ -26,7 +26,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   @IBOutlet var googleButton: GIDSignInButton!
   
   var pushToPin = false
-  var user: [String: String!]?;
+  var user: [String: AnyObject!]?;
   
   @IBAction func registerPressed(sender: AnyObject) {
       regsegue()
@@ -140,10 +140,10 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
           let email = result.valueForKey("email") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
-            let userInfo : Dictionary = [ "userId" : id, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
+            self.user = [, "name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
             
-            WebClient.sendUserData(userInfo, completion: { (response) -> Void in
-                WebClient.updateUser(userInfo, completion: { (response) -> Void in
+            WebClient.sendUserData(self.user, completion: { (response) -> Void in
+                WebClient.updateUser(self.user, completion: { (response) -> Void in
                     if ((response["pin"]) != nil){
                         UserSettings.currentUser.populateUser(response)
                         self.mapsegue();
