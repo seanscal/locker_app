@@ -267,9 +267,16 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func makeReservation() {
         WebClient.makeReservation(hub!.uid!, completion: { (response) -> Void in
-            self.performSegueWithIdentifier("reserveSegue", sender: response)
+            
+            if let rental = Rental.fromJSON(response) {
+                RentalManager.push(rental)
+                self.initWithRental(rental)
+            } else {
+                self.displayError("An error occurred processing your rental. Please contact support for assistance.")
+            }
+            
             }) { (error) -> Void in
-                //TODO: handle error
+                self.displayError("We were unable to complete your reservation request. Please try again soon.")
         }
     }
     
@@ -283,10 +290,34 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             // RESERVE
             
             let confirmReservationAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
-                self.makeReservation()
+                
+                let hubLocation = CLLocation(latitude: self.hub!.lat!, longitude: self.hub!.long!)
+                
+                // if the user is >20 mi from the hub, make them confirm before continuing
+                if LocationManager.userLocation()?.distanceFromLocation(hubLocation) > kRentalDistanceAlertThreshold {
+                    let confirmLocationAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default) { (action) -> Void in
+                        self.makeReservation()
+                    }
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                        //cancel
+                    })
+                    
+                    let alert = UIAlertController(title: "Location Discrepancy", message: "We've detected you're more than 20 miles away from this hub; it'll be difficult to make it in time for your reservation. Are you sure you want to continue? ", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(confirmLocationAction)
+                    alert.addAction(cancelAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    self.makeReservation()
+                }
+                
             }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                //cancel
+            })
+            
             let alert = UIAlertController(title: "Confirm Reservation", message: "Reserve a locker in " + hub!.name! + "? Your unit will be held for 20 minutes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
             alert.addAction(confirmReservationAction)
+            alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else {

@@ -15,8 +15,8 @@ class Rental : Mappable {
         
     }
     
-    var uid : Int?
-    var userId : Int?
+    var uid : String?
+    var userId : String?
     
     var hubId : Int?
     var hubName : String?
@@ -26,7 +26,7 @@ class Rental : Mappable {
     
     var checkInTime : NSDate?
     var checkOutTime : NSDate?
-    var isActive : Bool?
+    var status : String?
     var baseRate : Double?
     var hourlyRate : Double?
     
@@ -34,7 +34,7 @@ class Rental : Mappable {
     var firedDurationNotif = false
     
     func mapping(map: Map) {
-        uid             <- map["uid"]
+        uid             <- map["_id"]
         userId          <- map["userId"]
         hubId           <- map["hubId"]
         hubName         <- map["hubName"]
@@ -43,7 +43,7 @@ class Rental : Mappable {
         long            <- map["long"]
         checkInTime     <- (map["checkInTime"], DateTransform())
         checkOutTime    <- (map["checkOutTime"], DateTransform())
-        isActive        <- map["isActive"]
+        status          <- map["status"]
         baseRate        <- map["baseRate"]
         hourlyRate      <- map["hourlyRate"]
     }
@@ -54,12 +54,12 @@ class Rental : Mappable {
     
     func elapsedTimeString() -> String {
         let unitFlags: NSCalendarUnit = [.Hour, .Minute]
-        let components = NSCalendar.currentCalendar().components(unitFlags, fromDate: checkInTime!, toDate: isActive == true ? NSDate() : checkOutTime!, options: NSCalendarOptions())
+        let components = NSCalendar.currentCalendar().components(unitFlags, fromDate: checkInTime!, toDate: status == "ACTIVE" ? NSDate() : checkOutTime!, options: NSCalendarOptions())
         return String(components.hour) + " hr, " + String(components.minute) + " min"
     }
     
     func runningTotalString() -> String {
-        let endDate = isActive == true ? NSDate() : checkOutTime!
+        let endDate = status == "ACTIVE" ? NSDate() : checkOutTime!
         let elapsedHours = endDate.timeIntervalSinceDate(checkInTime!) / kSecondsPerHour
         let runningTotal = baseRate! + (hourlyRate! * elapsedHours)
         return String(format:"$%.2f", runningTotal)

@@ -9,10 +9,12 @@
 import Foundation
 import CoreLocation
 
+let kRentalDistanceAlertThreshold = 32186.9
+let kMetersPerMile = 1609.34
+
 class LocationManager : NSObject, CLLocationManagerDelegate {
 
-    let sampleLocation = CLLocation(latitude: 42.34, longitude: -71.09)
-    let sampleThreshold : Double = 1600 // notify user when 1600+ meters from rental (~1 mi)
+    let sampleThreshold : Double = kMetersPerMile // notify user when 1 mile from rental
     
     var manager = CLLocationManager()
     
@@ -62,7 +64,7 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
         if true && !rental.firedProximityNotif { //TODO: check if user has proximity notifications enabled
             let notif = UILocalNotification()
             notif.alertTitle = "Lockr rental alert";
-            notif.alertBody = "You're now "+String(format: "%.2f", distance/1600)+" miles from your locker hub. Don't forget to check out and claim your belongings!"
+            notif.alertBody = "You're now "+String(format: "%.2f", distance/kMetersPerMile)+" miles from your locker hub. Don't forget to check out and claim your belongings!"
             
             NotificationManager.fireNotification(notif)
             rental.firedProximityNotif = true

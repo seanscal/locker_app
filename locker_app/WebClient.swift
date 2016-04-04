@@ -21,11 +21,14 @@ class WebClient {
     }
     
     private static func get(method: String,
-                    parameters: Dictionary<String, AnyObject>,
+                    var parameters: Dictionary<String, AnyObject>,
                     completion: (json: JSON) -> Void,
                     failure: (error: NSError) -> Void)
     {
     
+        // send userId with all requests
+        parameters["userId"] = 0 //UserSettings.currentUser.userId!
+        
         Alamofire.request(.GET, kLockrAPI + method, parameters: parameters)
             .responseJSON { response in
                 switch response.result {
@@ -41,10 +44,14 @@ class WebClient {
     }
     
     private static func post(method: String,
-                             parameters: Dictionary<String, AnyObject>,
+                             var parameters: Dictionary<String, AnyObject>,
                              completion: (json: JSON) -> Void,
                              failure: (error: NSError) -> Void)
     {
+        
+        // send userId with all requests
+        parameters["userId"] = 0 //UserSettings.currentUser.userId!
+        
         Alamofire.request(.POST, kLockrAPI + method, parameters: parameters)
             .responseJSON { response in
                 switch response.result {
@@ -101,7 +108,7 @@ class WebClient {
     
     static func makeReservation(hubId: Int, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
-        post(WebUtils.kApiMethodReserve, parameters: ["locker_id" : hubId, "customer_id" : UserSettings.currentUser.userId], completion: { (json) -> Void in
+        post(WebUtils.kApiMethodReserve, parameters: ["hubId" : hubId], completion: { (json) -> Void in
                 completion(response: json.object as! Dictionary<String, AnyObject>)
             }) { (error) -> Void in
                 failure(error: error)

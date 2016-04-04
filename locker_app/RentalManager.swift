@@ -22,6 +22,10 @@ class RentalManager {
         }
     }
     
+    static func push(rental: Rental) {
+        rentals.append(rental)
+    }
+    
     static func checkForActiveRental(hubId : Int, completion: (rental: Rental) -> Void, failure: (error: NSError) -> Void) {
 
         WebClient.getRentalsForUser(true,
