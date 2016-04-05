@@ -68,6 +68,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   }
   
   func pinsegue() {
+    pushToPin = false
     performSegueWithIdentifier("pinSegue", sender: self);
   }
   
