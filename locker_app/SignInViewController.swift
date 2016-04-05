@@ -86,6 +86,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
     }
     if segue.identifier == "pinSegue"{
       pinViewController = segue.destinationViewController as! PinViewController;
+      print(self.user)
       pinViewController.user = self.user;
     }
   }

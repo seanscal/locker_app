@@ -24,12 +24,6 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     enterPIN.delegate = PINcheck.delegate
     PINcheck.delegate = self
     PINcheck.keyboardType = UIKeyboardType.NumberPad
-
-    print(self.user!["birthday"]);
-    if (self.user!["birthday"] != nil){
-//      DOBfield.hidden = true;
-//      DOBlabel.hidden = true;
-    }
     
   }
     
@@ -44,29 +38,19 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   }
   
   @IBAction func submitPin(sender: UIButton) {
-    errors()
-//    if (self.user!["birthday"] == nil){
-//      errors();
-//      if (DOBfield.text == ""){
-//        DOBerror.hidden = false;
-//      }
-//      else{
-//        DOBerror.hidden = true;
-//      }
-//      if (errorText.hidden == true && DOBerror.hidden == true){
-//        DOBerror.hidden = true;
-//        self.user!["pin"] = PINcheck.text;
-//        self.user!["birthday"] = DOBfield.text;
-//        putInfo();
-//      }
-//    }
-//    else{
-//      errors();
-//      if (errorText.hidden == true){
-//        self.user!["pin"] = PINcheck.text;
-//        putInfo();
-//      }
-//    }
+    if (enterPIN.text != PINcheck.text)
+    {
+      displayError("Please enter matching PINs")
+    }
+    else if (enterPIN.text!.characters.count != 4)
+    {
+      displayError("Please enter 4-digit PINs")
+    }
+    else{
+      self.user!["pin"] = PINcheck.text;
+      self.user!["birthday"] = DOBfield.text;
+      putInfo();
+    }
   }
   
   func PINcheck(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
@@ -84,23 +68,6 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   
   func mapsegue(){
     self.dismissViewControllerAnimated(true) { () -> Void in
-    }
-  }
-  
-  func errors() {
-    
-    if (enterPIN.text != PINcheck.text)
-    {
-      displayError("Please enter matching PINs")
-    }
-    else if (enterPIN.text!.characters.count != 4)
-    {
-      displayError("Please enter 4-digit PINs")
-    }
-    else{
-      self.user!["pin"] = nil;
-      self.user!["birthday"] = DOBfield.text;
-      putInfo();
     }
   }
   
