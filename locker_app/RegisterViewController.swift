@@ -20,8 +20,37 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var submitButton: UIButton!
     
     @IBOutlet var scrollView: UIScrollView!
+    
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         submitButton.layer.cornerRadius = 3
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardShown:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardHidden:", name: UIKeyboardDidHideNotification, object: nil)
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func keyboardShown(notification: NSNotification) {
+        let info  = notification.userInfo!
+        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
+        
+        let rawFrame = value.CGRectValue
+        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
+        
+        scrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardFrame.height, 0)
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+    
+    func keyboardHidden(notification: NSNotification) {
+        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
     
     
