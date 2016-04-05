@@ -103,6 +103,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else {
                 let blankCell = tableView.dequeueReusableCellWithIdentifier("NoRentals", forIndexPath: indexPath) 
                 blankCell.textLabel?.text = "No active rental"
+                blankCell.userInteractionEnabled = false
                 
                 return blankCell
             }

@@ -11,7 +11,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   
   var mapViewController: MapViewController!
   
-  var user: [String: String!]?;
+  var user: [String: AnyObject!]?;
 
   @IBOutlet weak var enterPIN: UITextField!
   @IBOutlet weak var PINcheck: UITextField!

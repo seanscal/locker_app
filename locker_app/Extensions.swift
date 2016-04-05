@@ -80,4 +80,17 @@ extension UIViewController
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
+    
+    func displayMessage(title: String, message: String, completion: () -> Void) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        let action = UIAlertAction(title: "OK", style: .Default) { (action) -> Void in
+            completion()
+        }
+        alert.addAction(action)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
 }
