@@ -25,11 +25,11 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     PINcheck.delegate = self
     PINcheck.keyboardType = UIKeyboardType.NumberPad
 
-    //print(self.user!["birthday"]);
-//    if (self.user!["birthday"] != nil){
+    print(self.user!["birthday"]);
+    if (self.user!["birthday"] != nil){
 //      DOBfield.hidden = true;
 //      DOBlabel.hidden = true;
-//    }
+    }
     
   }
     
@@ -99,6 +99,11 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     else if (enterPIN.text!.characters.count != 4)
     {
       displayError("Please enter 4-digit PINs")
+    }
+    else{
+      self.user!["pin"] = nil;
+      self.user!["birthday"] = DOBfield.text;
+      putInfo();
     }
   }
   
