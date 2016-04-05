@@ -9,32 +9,55 @@ import Foundation
 
 class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate {
   
+    @IBOutlet var scrollView: UIScrollView!
   var mapViewController: MapViewController!
   
-  var user: [String: AnyObject!]?;
+  var user: [String: AnyObject!]?
 
   @IBOutlet weak var enterPIN: UITextField!
   @IBOutlet weak var PINcheck: UITextField!
-  @IBOutlet weak var DOBfield: UITextField!
-  @IBOutlet weak var DOBlabel: UILabel!
   @IBOutlet weak var SubmitPinButton: UIButton!
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    enterPIN.delegate = PINcheck.delegate
-    PINcheck.delegate = self
-    PINcheck.keyboardType = UIKeyboardType.NumberPad
-
-    print(self.user!["birthday"]);
-    if (self.user!["birthday"] != nil){
-//      DOBfield.hidden = true;
-//      DOBlabel.hidden = true;
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        enterPIN.delegate = PINcheck.delegate
+        PINcheck.delegate = self
+        PINcheck.keyboardType = UIKeyboardType.NumberPad
+        
+        print(self.user!["birthday"]);
+        if (self.user!["birthday"] != nil){
+            //      DOBfield.hidden = true;
+            //      DOBlabel.hidden = true;
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardShown:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardHidden:", name: UIKeyboardDidHideNotification, object: nil)
+        
     }
     
-  }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func keyboardShown(notification: NSNotification) {
+        let info  = notification.userInfo!
+        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
+        
+        let rawFrame = value.CGRectValue
+        let keyboardFrame = view.convertRect(rawFrame, fromView: nil)
+        
+        scrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardFrame.height, 0)
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+    
+    func keyboardHidden(notification: NSNotification) {
+        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+    }
     
     override func viewWillAppear(animated: Bool) {
-        SubmitPinButton.layer.cornerRadius = 20
+        SubmitPinButton.layer.cornerRadius = 3
     }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -69,7 +92,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
 //    }
     
 
-    dismissModalStack()
+    //dismissModalStack()
   }
   
   func PINcheck(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
@@ -79,15 +102,6 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     let currentString: NSString = textField.text!
     let newString: NSString = currentString.stringByReplacingCharactersInRange(range, withString: string)
     return newString.length <= maxLength
-  }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
-  func mapsegue(){
-    self.dismissViewControllerAnimated(true) { () -> Void in
-    }
   }
   
   func errors() {
@@ -102,17 +116,16 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     }
     else{
       self.user!["pin"] = nil;
-      self.user!["birthday"] = DOBfield.text;
       putInfo();
     }
   }
   
   func putInfo(){
     WebClient.updatePIN(self.user!, completion: { (response) -> Void in
+        self.dismissModalStack()
       }) { (error) -> Void in
         //TODO: handle error
     }
-    mapsegue();
   }
     
   func dismissModalStack() {

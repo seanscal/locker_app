@@ -95,9 +95,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
 
     if error != nil {
-        // error
-        // for now, just send to map
-        // TODO: handle error
         displayError(error.description)
     }
 
@@ -150,7 +147,11 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
                         self.mapsegue();
                     }
                     else{
-                        self.pushToPin = true
+                        if (self.isViewLoaded() && self.view.window != nil) {
+                            self.pinsegue()
+                        } else {
+                            self.pushToPin = true
+                        }
                     }
                 }) { (error) -> Void in
                     //TODO: handle error
