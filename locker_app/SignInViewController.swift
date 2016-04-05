@@ -138,7 +138,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
           let email = result.valueForKey("email") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
-            self.user = ["name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
+            self.user = ["name" : name, "email" : email, "updateTimeStamp" : Int(NSDate.init().timeIntervalSince1970), "picture": picture]
             
             WebClient.sendUserData(self.user!, completion: { (response) -> Void in
                 WebClient.updateUser(self.user!, completion: { (response) -> Void in
