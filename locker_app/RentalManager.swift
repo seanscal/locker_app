@@ -10,21 +10,21 @@ import Foundation
 
 class RentalManager {
     
-    static var rentals : Array<Rental> = []
-    
-    static func pull() {
-        RentalManager.getRentalsForUser(true, completion: { (rentals) -> Void in
-            // completion
-            RentalManager.rentals = rentals
-            }) { (error) -> Void in
-                // failure
-                
-        }
-    }
-    
-    static func push(rental: Rental) {
-        rentals.append(rental)
-    }
+//    static var rentals : Array<Rental> = []
+//    
+//    static func pull() {
+//        RentalManager.getRentalsForUser(true, completion: { (rentals) -> Void in
+//            // completion
+//            RentalManager.rentals = rentals
+//            }) { (error) -> Void in
+//                // failure
+//                
+//        }
+//    }
+//    
+//    static func push(rental: Rental) {
+//        rentals.append(rental)
+//    }
     
     static func checkForActiveRental(hubId : Int, completion: (rental: Rental) -> Void, failure: (error: NSError) -> Void) {
 

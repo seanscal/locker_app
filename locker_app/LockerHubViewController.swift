@@ -295,7 +295,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         WebClient.makeReservation(hub!.uid!, completion: { (response) -> Void in
             
             if let rental = Rental.fromJSON(response) {
-                RentalManager.push(rental)
+                //RentalManager.push(rental)
                 self.initWithRental(rental)
                 self.initReservationTimer()
             } else {
@@ -333,7 +333,19 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func checkOut() {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        view.userInteractionEnabled = false
+        navigationController?.navigationBar.userInteractionEnabled = false
+        WebClient.endRental(rental!.uid!, completion: { (response) -> Void in
+            self.view.userInteractionEnabled = true
+            self.navigationController?.navigationBar.userInteractionEnabled = true
+            self.displayMessage("Success!", message: "Your rental was successfully ended.", completion: { () -> Void in
+                self.performSegueWithIdentifier("checkOutSegue", sender: nil)
+            })
+            }) { (error) -> Void in
+                self.view.userInteractionEnabled = true
+                navigationController?.navigationBar.userInteractionEnabled = true
+                self.displayError("An error occurred ending your rental. Please contact support for assistance.");
+        }
     }
     
     @IBAction func ctaPressed(sender: AnyObject) {

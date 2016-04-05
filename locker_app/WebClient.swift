@@ -124,12 +124,20 @@ class WebClient {
         }
     }
     
+    static func endRental(uid: String, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
+    {
+        post(WebUtils.kApiMethodCheckOut, parameters: ["uid" : uid], completion: { (json) -> Void in
+            completion(response: json.object as! Dictionary<String, AnyObject>)
+            }) { (error) -> Void in
+                failure(error: error)
+        }
+    }
+    
     static func unlockLocker(hubId: Int, lockerId: Int, completion: (response: String) -> Void, failure: (error: NSError) -> Void) {
         get(WebUtils.kApiMethodUnlock, parameters: ["locker_id" : lockerId, "hub_id" : hubId], completion: { (json) -> Void in
             completion(response: json.object as! String)
             }) { (error) -> Void in
-                //failure(error: error)
-                completion(response: "nice")
+                failure(error: error)
         }
     }
   

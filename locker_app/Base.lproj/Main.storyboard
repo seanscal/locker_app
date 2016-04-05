@@ -1140,7 +1140,7 @@
                         <outlet property="reservationView" destination="T5p-4W-cue" id="NUD-2S-qS6"/>
                         <outlet property="runningTotal" destination="jKj-D4-Nft" id="76c-cK-rSD"/>
                         <outlet property="translucentView" destination="ytc-0J-BeK" id="XE0-9Y-rif"/>
-                        <segue destination="4Uf-LA-tUR" kind="custom" identifier="reserveSegue" customClass="SlideRightSegue" customModule="Lockr" customModuleProvider="target" id="l4b-Oe-tZf"/>
+                        <segue destination="4Uf-LA-tUR" kind="custom" identifier="checkOutSegue" customClass="SlideRightSegue" customModule="Lockr" customModuleProvider="target" id="l4b-Oe-tZf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ln2-v2-cvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
