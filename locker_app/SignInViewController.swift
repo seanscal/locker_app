@@ -97,7 +97,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         // error
         // for now, just send to map
         // TODO: handle error
-        self.mapsegue()
+        displayError(error.description)
     }
 
     else {
