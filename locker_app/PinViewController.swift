@@ -38,7 +38,6 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   }
   
   @IBAction func submitPin(sender: UIButton) {
-<<<<<<< HEAD
     if (enterPIN.text != PINcheck.text)
     {
       displayError("Please enter matching PINs")
@@ -49,7 +48,6 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     }
     else{
       self.user!["pin"] = PINcheck.text;
-      self.user!["birthday"] = DOBfield.text;
       putInfo();
       dismissModalStack()
     }
@@ -82,7 +80,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   }
     
   func dismissModalStack() {
-    var signInVc = presentingViewController
+    let signInVc = presentingViewController
     signInVc?.dismissViewControllerAnimated(false) { () -> Void in
         signInVc?.dismissViewControllerAnimated(false, completion: { () -> Void in
             //whatever
