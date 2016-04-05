@@ -12,14 +12,20 @@ import GoogleMaps
 import MapKit
 
 let kCountdownTime = 15
+let kSecondsToExpiration = 20 * 60 //20 minutes
 
 enum DisplayMode {
     case ActiveRental
+    case Reservation
     case PreRental
 }
 
 class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 
+    @IBOutlet var translucentView: UIView!
+    @IBOutlet var reservationCountdown: UILabel!
+    @IBOutlet var reservationView: UIView!
+    
     @IBOutlet var activeAlertLabel: UILabel!
     @IBOutlet var hourlyRateLabel: UILabel!
     @IBOutlet var baseRateLabel: UILabel!
@@ -42,7 +48,8 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var buttonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapHeightConstraint: NSLayoutConstraint!
     
-    var timer: NSTimer!
+    var openLockerTimer: NSTimer!
+    var reservationTimer: NSTimer!
     
     var hub: LockerHub?
     
@@ -67,7 +74,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         set {
             self._rental = newValue
             if (newValue != nil) {
-                self.displayMode = .ActiveRental
+                self.displayMode = rental?.status == .Reserved ? .Reservation : .ActiveRental
             }
             else {
                 self.displayMode = .PreRental
@@ -81,6 +88,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func initWithRental(rental: Rental) {
+        self._rental = rental
         self.hub = LockerHub(rental: rental)
         navigationItem.title = hub!.name
     }
@@ -104,7 +112,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         
         displayRates()
         getHubInfo()
-        _ = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "getHubInfo", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "getHubInfo", userInfo: nil, repeats: true)
         checkForActiveRental()
         
         updateDisplay()
@@ -129,7 +137,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         }
         
         countdownLabel.text = String(kCountdownTime)
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+        openLockerTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
     }
     
     func dismissOpenLockerView() {
@@ -139,9 +147,11 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
                 self.openLockerView.hidden = true
                 self.displayMessage("Time expired", message: "Your unit automatically re-locked after " + String(kCountdownTime) + " seconds.")
         }
-        
-        timer.invalidate()
-        timer = nil
+        if openLockerTimer != nil {
+            openLockerTimer.invalidate()
+            openLockerTimer = nil
+        }
+
     }
     
     func updateTimer() {
@@ -183,7 +193,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func updateDisplay() {
-        let active = displayMode == .ActiveRental
+        let active = displayMode == .ActiveRental || displayMode == .Reservation
         
         if active {
             activeAlertLabel.text = "LOCKER #" + String(rental!.lockerId!)
@@ -194,9 +204,25 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             self.inUseView.alpha = active ? 0.0 : 1.0
             self.activeRentalView.alpha = active ? 1.0 : 0.0
             
-            self.ctaButton.setTitle(active ? "Unlock" : "Reserve", forState: .Normal)
+            self.reservationView.alpha = self.displayMode == .Reservation ? 0.85 : 0.0
+            self.translucentView.alpha = self.displayMode == .Reservation ? 0.0 : 0.85
             
-            self.navigationItem.setRightBarButtonItem(UIBarButtonItem(title: "Check Out", style: .Done, target: self, action: "checkOut"), animated: false)
+            var barButton: UIBarButtonItem! = nil
+            var ctaTitle: String! = nil
+            
+            switch self.displayMode {
+            case .ActiveRental:
+                barButton = UIBarButtonItem(title: "Check Out", style: .Done, target: self, action: "checkOut")
+                ctaTitle = "Unlock"
+            case .Reservation:
+                barButton = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: "cancelReservation")
+                ctaTitle = "Begin Rental"
+            default:
+                ctaTitle = "Rent"
+            }
+            
+            self.ctaButton.setTitle(ctaTitle, forState: .Normal)
+            self.navigationItem.setRightBarButtonItem(barButton, animated: false)
         }
 
     }
@@ -267,29 +293,65 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func makeReservation() {
         WebClient.makeReservation(hub!.uid!, completion: { (response) -> Void in
-            self.performSegueWithIdentifier("reserveSegue", sender: response)
+            
+            if let rental = Rental.fromJSON(response) {
+                //RentalManager.push(rental)
+                self.initWithRental(rental)
+                self.initReservationTimer()
+            } else {
+                self.displayError("An error occurred processing your rental. Please contact support for assistance.")
+            }
+            
             }) { (error) -> Void in
-                //TODO: handle error
+                self.displayError("We were unable to complete your reservation request. Please try again soon.")
         }
+    }
+    
+    func initReservationTimer() {
+        updateReservationTimer()
+        reservationTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateReservationTimer", userInfo: nil, repeats: true)
+    }
+    
+    func updateReservationTimer() {
+        let timeIn = rental!.reservationTime!
+        let elapsedSeconds = NSDate().timeIntervalSinceDate(timeIn)
+        let remainingSeconds = kSecondsToExpiration - Int(elapsedSeconds)
+        
+        if remainingSeconds <= 0 {
+            displayMessage("Reservation Expired", message: "Your reservation expired after 20 minutes.")
+            reservationTimer.invalidate()
+            reservationTimer = nil
+            rental = nil
+            return
+        }
+        
+        let minutesPlace = remainingSeconds / 60
+        let secondsPlace = remainingSeconds % 60
+        
+        let timeString = String(format: "%02d:%02d", minutesPlace, secondsPlace)
+        reservationCountdown.text = timeString
     }
     
     func checkOut() {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        view.userInteractionEnabled = false
+        navigationController?.navigationBar.userInteractionEnabled = false
+        WebClient.endRental(rental!.uid!, completion: { (response) -> Void in
+            self.view.userInteractionEnabled = true
+            self.navigationController?.navigationBar.userInteractionEnabled = true
+            self.displayMessage("Success!", message: "Your rental was successfully ended.", completion: { () -> Void in
+                self.performSegueWithIdentifier("checkOutSegue", sender: nil)
+            })
+            }) { (error) -> Void in
+                self.view.userInteractionEnabled = true
+                self.navigationController?.navigationBar.userInteractionEnabled = true
+                self.displayError("An error occurred ending your rental. Please contact support for assistance.");
+        }
     }
     
     @IBAction func ctaPressed(sender: AnyObject) {
-        if self.displayMode == .PreRental {
-            
-            // RESERVE
-            
-            let confirmReservationAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.Destructive) { (action) -> Void in
-                self.makeReservation()
-            }
-            let alert = UIAlertController(title: "Confirm Reservation", message: "Reserve a locker in " + hub!.name! + "? Your unit will be held for 20 minutes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
-            alert.addAction(confirmReservationAction)
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-        else {
+        
+        switch self.displayMode {
+        case .ActiveRental:
             
             // UNLOCK
             
@@ -306,8 +368,121 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             alert.addAction(cancelAction)
             self.presentViewController(alert, animated: true, completion: nil)
             
+            
+        case .Reservation:
+            
+            // CHECK IN
+            let beginRentalAction = UIAlertAction(title: "Begin Rental", style: UIAlertActionStyle.Destructive) { (action) -> Void in
+                
+                let hubLocation = CLLocation(latitude: self.hub!.lat!, longitude: self.hub!.long!)
+                
+                // if the user is >20 mi from the hub, make them confirm before continuing
+                if LocationManager.userLocation()?.distanceFromLocation(hubLocation) > kRentalDistanceAlertThreshold {
+                    let confirmLocationAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default) { (action) -> Void in
+                        self.beginRental()
+                    }
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                        //cancel
+                    })
+                    
+                    let alert = UIAlertController(title: "Location Discrepancy", message: "Looks like you're more than 20 miles from this locker. Unless your location is incorrect, you may be at the wrong hub. Are you sure you want to continue?", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(confirmLocationAction)
+                    alert.addAction(cancelAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    self.beginRental()
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                //cancel
+            })
+            
+            let alert = UIAlertController(title: "Begin rental", message: "Are you at your locker hub and ready to begin your rental?", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alert.addAction(beginRentalAction)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            
+        default:
+            
+            // RESERVE
+            
+            let reserveAction = UIAlertAction(title: "Reserve", style: UIAlertActionStyle.Default) { (action) -> Void in
+                
+                let hubLocation = CLLocation(latitude: self.hub!.lat!, longitude: self.hub!.long!)
+                
+                // if the user is >20 mi from the hub, make them confirm before continuing
+                if LocationManager.userLocation()?.distanceFromLocation(hubLocation) > kRentalDistanceAlertThreshold {
+                    let confirmLocationAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default) { (action) -> Void in
+                        self.makeReservation()
+                    }
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                        //cancel
+                    })
+                    
+                    let alert = UIAlertController(title: "Location Discrepancy", message: "We've detected you're more than 20 miles away from this hub; it'll be difficult to make it in time for your reservation. Are you sure you want to continue? ", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(confirmLocationAction)
+                    alert.addAction(cancelAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    self.makeReservation()
+                }
+                
+            }
+            
+            let rentAction = UIAlertAction(title: "Rent Now", style: .Destructive, handler: { (action) -> Void in
+                
+                let hubLocation = CLLocation(latitude: self.hub!.lat!, longitude: self.hub!.long!)
+                
+                // if the user is >20 mi from the hub, make them confirm before continuing
+                if LocationManager.userLocation()?.distanceFromLocation(hubLocation) > kRentalDistanceAlertThreshold {
+                    let confirmLocationAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default) { (action) -> Void in
+                        self.beginRental()
+                    }
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                        //cancel
+                    })
+                    
+                    let alert = UIAlertController(title: "Location Discrepancy", message: "Looks like you're more than 20 miles from this locker. Unless your location is incorrect, you may be at the wrong hub. Are you sure you want to continue?", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(confirmLocationAction)
+                    alert.addAction(cancelAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    self.beginRental()
+                }
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+                //cancel
+            })
+            
+            let alert = UIAlertController(title: "Choose Rental Option", message: "Rent a locker immediately at " + hub!.name! + "? Or make a reservation? Reserved lockers will be held for 20 minutes.", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            alert.addAction(rentAction)
+            alert.addAction(reserveAction)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
         }
 
+    }
+    
+    func cancelReservation() {
+        // deallocate
+    }
+    
+    func beginRental() {
+        WebClient.beginRental(rental?.uid, hubId: hub!.uid!, completion: { (response) -> Void in
+            if self.reservationTimer != nil {
+                self.reservationTimer.invalidate()
+                self.reservationTimer = nil
+            }
+            self.rental = Rental.fromJSON(response)
+            self.calculateRate()
+            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
+            }) { (error) -> Void in
+                self.displayError("An error occurred processing your rental request. Please contact support for assistance.")
+        }
     }
     
     func unlock() {

@@ -11,7 +11,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   
   var mapViewController: MapViewController!
   
-  var user: [String: String!]?;
+  var user: [String: AnyObject!]?;
 
   @IBOutlet weak var enterPIN: UITextField!
   @IBOutlet weak var PINcheck: UITextField!
@@ -38,6 +38,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
   }
   
   @IBAction func submitPin(sender: UIButton) {
+<<<<<<< HEAD
     if (enterPIN.text != PINcheck.text)
     {
       displayError("Please enter matching PINs")
@@ -50,6 +51,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
       self.user!["pin"] = PINcheck.text;
       self.user!["birthday"] = DOBfield.text;
       putInfo();
+      dismissModalStack()
     }
   }
   
@@ -77,6 +79,16 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
         //TODO: handle error
     }
     mapsegue();
+  }
+    
+  func dismissModalStack() {
+    var signInVc = presentingViewController
+    signInVc?.dismissViewControllerAnimated(false) { () -> Void in
+        signInVc?.dismissViewControllerAnimated(false, completion: { () -> Void in
+            //whatever
+        })
+    }
+    
   }
 
 }
