@@ -8,7 +8,7 @@
 import Foundation
 
 class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDelegate {
-    
+  
     @IBOutlet var scrollView: UIScrollView!
     var mapViewController: MapViewController!
     
@@ -25,17 +25,11 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
         PINcheck.delegate = self
         PINcheck.keyboardType = UIKeyboardType.NumberPad
         
-        print(self.user!["birthday"]);
-        if (self.user!["birthday"] != nil){
-            //      DOBfield.hidden = true;
-            //      DOBlabel.hidden = true;
-        }
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardShown:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardHidden:", name: UIKeyboardDidHideNotification, object: nil)
         
     }
-    
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -59,7 +53,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     override func viewWillAppear(animated: Bool) {
         SubmitPinButton.layer.cornerRadius = 3
     }
-    
+  
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "mapSegue" {
             mapViewController = segue.destinationViewController as! MapViewController
@@ -95,23 +89,22 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
         WebClient.sendUserData(self.user!, completion: { (response) -> Void in
             WebClient.updateUser(self.user!, completion: { (response) -> Void in
                 UserSettings.currentUser.populateUser(response)
-                self.dismissModalStack()
+//              self.dismissModalStack();
             }) { (error) -> Void in
                 //TODO: handle error
             }
         }) { (error) -> Void in
             //TODO: handle error
         }
-    }
-    
+  }
+  
     func dismissModalStack() {
-        var signInVc = presentingViewController
+        let signInVc = presentingViewController
         signInVc?.dismissViewControllerAnimated(false) { () -> Void in
             signInVc?.dismissViewControllerAnimated(false, completion: { () -> Void in
                 //whatever
             })
         }
-        
     }
     
 }

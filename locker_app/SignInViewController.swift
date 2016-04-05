@@ -87,6 +87,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
     }
     if segue.identifier == "pinSegue"{
       pinViewController = segue.destinationViewController as! PinViewController;
+      print(self.user)
       pinViewController.user = self.user;
     }
   }
@@ -134,7 +135,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         }
         else
         {
-          let id = result.valueForKey("id") as! String
           let email = result.valueForKey("email") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
