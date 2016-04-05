@@ -104,18 +104,27 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         let name = user.profile.name
         let email = user.profile.email
         
-        let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
-
-      WebClient.sendUserData(dict, completion: { (response) -> Void in
-          if ((response["pin"]) != nil){
-            self.mapsegue();
-          }
-          else{
-            self.pushToPin = true
-          }
-          }) { (error) -> Void in
+        self.user = ["name" : name, "email" : email, "updateTimeStamp" : Int(NSDate.init().timeIntervalSince1970)]
+        
+        WebClient.sendUserData(self.user!, completion: { (response) -> Void in
+            WebClient.updateUser(self.user!, completion: { (response) -> Void in
+                if ((response["pin"]) != nil){
+                    UserSettings.currentUser.populateUser(response)
+                    self.mapsegue();
+                }
+                else{
+                    if (self.isViewLoaded() && self.view.window != nil) {
+                        self.pinsegue()
+                    } else {
+                        self.pushToPin = true
+                    }
+                }
+            }) { (error) -> Void in
+                //TODO: handle error
+            }
+        }) { (error) -> Void in
             //TODO: handle error
-          }
+        }
     }
   }
   
