@@ -9,6 +9,14 @@
 import Foundation
 import ObjectMapper
 
+enum Status : String {
+    case Reserved = "RESERVED"
+    case Expired = "EXPIRED"
+    case Cancelled = "CANCELLED"
+    case Active = "ACTIVE"
+    case Past = "PAST"
+}
+
 class Rental : Mappable {
     
     required init?(_ map: Map) {
@@ -24,9 +32,10 @@ class Rental : Mappable {
     var lat : Double?
     var long : Double?
     
+    var reservationTime: NSDate?
     var checkInTime : NSDate?
     var checkOutTime : NSDate?
-    var status : String?
+    var status : Status?
     var baseRate : Double?
     var hourlyRate : Double?
     
@@ -41,6 +50,7 @@ class Rental : Mappable {
         lockerId        <- map["lockerId"]
         lat             <- map["lat"]
         long            <- map["long"]
+        reservationTime <- (map["reservationTime"], DateTransform())
         checkInTime     <- (map["checkInTime"], DateTransform())
         checkOutTime    <- (map["checkOutTime"], DateTransform())
         status          <- map["status"]
@@ -54,12 +64,12 @@ class Rental : Mappable {
     
     func elapsedTimeString() -> String {
         let unitFlags: NSCalendarUnit = [.Hour, .Minute]
-        let components = NSCalendar.currentCalendar().components(unitFlags, fromDate: checkInTime!, toDate: status == "ACTIVE" ? NSDate() : checkOutTime!, options: NSCalendarOptions())
+        let components = NSCalendar.currentCalendar().components(unitFlags, fromDate: checkInTime!, toDate: status == .Active ? NSDate() : checkOutTime!, options: NSCalendarOptions())
         return String(components.hour) + " hr, " + String(components.minute) + " min"
     }
     
     func runningTotalString() -> String {
-        let endDate = status == "ACTIVE" ? NSDate() : checkOutTime!
+        let endDate = status == .Active ? NSDate() : checkOutTime!
         let elapsedHours = endDate.timeIntervalSinceDate(checkInTime!) / kSecondsPerHour
         let runningTotal = baseRate! + (hourlyRate! * elapsedHours)
         return String(format:"$%.2f", runningTotal)

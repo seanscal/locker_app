@@ -31,6 +31,7 @@ class WebUtils {
     static let kApiMethodUsers           = "users"
 
     static let kApiMethodReserve        = "reserve"
+    static let kApiMethodRent           = "rent"
     static let kApiMethodUnlock         = "unlock"
     static let kApiMethodRentals        = "rentals"
     
