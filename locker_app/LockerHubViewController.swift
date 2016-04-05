@@ -343,7 +343,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             })
             }) { (error) -> Void in
                 self.view.userInteractionEnabled = true
-                navigationController?.navigationBar.userInteractionEnabled = true
+                self.navigationController?.navigationBar.userInteractionEnabled = true
                 self.displayError("An error occurred ending your rental. Please contact support for assistance.");
         }
     }
