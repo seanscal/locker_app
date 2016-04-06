@@ -111,6 +111,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
             WebClient.updateUser(self.user!, completion: { (response) -> Void in
                 if ((response["pin"]) != nil){
                     UserSettings.currentUser.populateUser(response)
+                    UserSettings.syncSettings()
                     self.mapsegue();
                 }
                 else{
@@ -153,6 +154,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
                 WebClient.updateUser(self.user!, completion: { (response) -> Void in
                     if ((response["pin"]) != nil){
                         UserSettings.currentUser.populateUser(response)
+                        UserSettings.syncSettings()
                         self.mapsegue();
                     }
                     else{

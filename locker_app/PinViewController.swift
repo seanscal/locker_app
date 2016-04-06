@@ -89,7 +89,8 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
         WebClient.sendUserData(self.user!, completion: { (response) -> Void in
             WebClient.updateUser(self.user!, completion: { (response) -> Void in
                 UserSettings.currentUser.populateUser(response)
-                self.dismissModalStack();
+                UserSettings.syncSettings()
+                self.dismissModalStack()
             }) { (error) -> Void in
                 //TODO: handle error
             }
