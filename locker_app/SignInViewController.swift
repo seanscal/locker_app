@@ -166,9 +166,11 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
                     }
                 }) { (error) -> Void in
                     //TODO: handle error
+                    self.displayError(error.description)
                 }
             }) { (error) -> Void in
                 //TODO: handle error
+                self.displayError(error.description)
             }
             
         }

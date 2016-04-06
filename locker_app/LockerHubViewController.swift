@@ -468,7 +468,11 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func cancelReservation() {
-        // deallocate
+        WebClient.endRental(rental!.uid!, completion: { (response) -> Void in
+            self.displayMessage("Success!", message: "Your reservation was cancelled.")
+            }) { (error) -> Void in
+                self.displayError("An error occurred cancelling your reservation. Please contact support for assistance.");
+        }
     }
     
     func beginRental() {
