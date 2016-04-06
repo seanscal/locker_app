@@ -71,8 +71,8 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
             displayError("Please enter 4-digit PINs")
         }
         else{
-            self.user!["pin"] = nil;
-            putInfo();
+            self.user!["pin"] = enterPIN.text
+            putInfo()
         }
     }
     
@@ -89,7 +89,7 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
         WebClient.sendUserData(self.user!, completion: { (response) -> Void in
             WebClient.updateUser(self.user!, completion: { (response) -> Void in
                 UserSettings.currentUser.populateUser(response)
-//              self.dismissModalStack();
+                self.dismissModalStack();
             }) { (error) -> Void in
                 //TODO: handle error
             }
