@@ -70,23 +70,23 @@ class UserSettings: NSObject {
         super.init()
         
         if(data[kUserID] != nil) {
-            userId = data[kUserID] as! String
+            userId = data[kUserID] as! String!
         }
         
         if(data[kUserName] != nil) {
-            name = data[kUserName] as! String
+            name = data[kUserName] as! String!
         }
         
         if(data[kUserEmail] != nil) {
-            email = data[kUserEmail] as! String
+            email = data[kUserEmail] as! String!
         }
         
         if(data[kUserPicture] != nil) {
-            picture = data[kUserPicture] as! String
+            picture = data[kUserPicture] as! String!
         }
         
         if(data[kUserPIN] != nil) {
-            pin = data[kUserPIN] as! Int
+            pin = data[kUserPIN] as! NSInteger!
         }
         
         if(data[kUserBirthday] != nil) {
@@ -98,15 +98,15 @@ class UserSettings: NSObject {
         }
         
         if(data[kUserProximity] != nil) {
-            proximity = data[kUserProximity] as! Int!
+            proximity = data[kUserProximity] as! NSInteger!
         }
         
         if(data[kUserDurationNotif] != nil) {
-            durationNotif = data[kUserDurationNotif] as! Int!
+            durationNotif = data[kUserDurationNotif] as! NSInteger!
         }
         
         if(data[kUserUpdateTimeStamp] != nil) {
-            updateTimeStamp = data[kUserUpdateTimeStamp] as! Int!
+            updateTimeStamp = data[kUserUpdateTimeStamp] as! NSInteger!
         }
         
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
