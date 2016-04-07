@@ -151,7 +151,6 @@ class UserSettings: NSObject {
             let serverTime = response["updateTimeStamp"] as! Int
             if(serverTime < Static.instance!.updateTimeStamp) {
                 let userInfo: [String: AnyObject] = [
-                    "userId": Static.instance!.userId,
                     "pin": Static.instance!.pin,
                     "name": Static.instance!.name,
                     "birthday": Static.instance!.birthday,
