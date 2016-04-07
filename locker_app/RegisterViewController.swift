@@ -39,15 +39,12 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
     
     let dict : Dictionary = [ "userId" : NSUUID().UUIDString, "name" : name, "email" : emailField.text!, "picture" : picture, "updateTimeStamp" : NSDate.init()]
     WebClient.sendUserData(dict, completion: { (response) -> Void in
-      if ((response["pin"]) != nil){
         UserSettings(data: dict)
         print(response);
-      }
       }) { (error) -> Void in
         //TODO: handle error
     }
-
-    performSegueWithIdentifier("mapSegue", sender: self);
+    dismissModalStack();
   }
     
   // TODO: add validation for text fields
@@ -63,6 +60,17 @@ class RegisterViewController: UIViewController, UITableViewDelegate, UITextField
             //nada
         }
     }
-   
+  
+  func dismissModalStack() {
+    let signInVc = presentingViewController
+    signInVc?.dismissViewControllerAnimated(false) { () -> Void in
+      signInVc?.dismissViewControllerAnimated(false, completion: { () -> Void in
+        //whatever
+      })
+    }
+    
+  }
+
+  
 
 }
