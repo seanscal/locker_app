@@ -64,7 +64,6 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     WebClient.sendUserData(dict, completion: { (response) -> Void in
       UserSettings(data: dict);
-        print(response);
         self.dismissModalStack();
       }) { (error) -> Void in
         self.displayError(error.description)

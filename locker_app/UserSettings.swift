@@ -133,9 +133,9 @@ class UserSettings: NSObject {
         // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
         if ((UserSettings.currentUser.userId) != nil) {
           WebClient.getUserByID(UserSettings.currentUser.userId, completion: { (response) -> Void in
-            completion(needsAuth: true)
+            completion(needsAuth: false)
             if (UserSettings.currentUser.name == response["name"] as! String){
-              completion(needsAuth: true)
+              completion(needsAuth: false)
             }
             else
             {

@@ -158,7 +158,13 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
                         self.mapsegue();
                     }
                     else{
-                        if (self.isViewLoaded() && self.view.window != nil) {
+                        if (self.isViewLoaded() && self.view.window != nil && self.presentingViewController?.presentingViewController != nil) {
+                          
+                            print("viewcontroller")
+                              print (self.presentingViewController?.presentingViewController);
+                              print (self.presentingViewController?.presentedViewController);
+                    
+                          
                             self.pinsegue()
                         } else {
                             self.pushToPin = true
