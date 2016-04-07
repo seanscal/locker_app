@@ -47,7 +47,7 @@ class UserSettings: NSObject {
         {
             // DELETE THIS LINE!!!
             // Using to remove NSUserDefaults before app load to force login screen
-//             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
+             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
             
             
             
@@ -68,16 +68,46 @@ class UserSettings: NSObject {
     
     init(data: [String: AnyObject]) {
         super.init()
-        userId = data[kUserID] as! String
-        name = data[kUserName] as! String
-        email = data[kUserEmail] as! String
-        picture = data[kUserPicture] as! String
-        pin = data[kUserPIN] as! Int
-        birthday = data[kUserBirthday] as! String!
-        gender = data[kUserGender] as! String!
-        proximity = data[kUserProximity] as! Int!
-        durationNotif = data[kUserDurationNotif] as! Int!
-        updateTimeStamp = data[kUserUpdateTimeStamp] as! Int!
+        
+        if(data[kUserID] != nil) {
+            userId = data[kUserID] as! String
+        }
+        
+        if(data[kUserName] != nil) {
+            name = data[kUserName] as! String
+        }
+        
+        if(data[kUserEmail] != nil) {
+            email = data[kUserEmail] as! String
+        }
+        
+        if(data[kUserPicture] != nil) {
+            picture = data[kUserPicture] as! String
+        }
+        
+        if(data[kUserPIN] != nil) {
+            pin = data[kUserPIN] as! Int
+        }
+        
+        if(data[kUserBirthday] != nil) {
+            birthday = data[kUserBirthday] as! String!
+        }
+        
+        if(data[kUserGender] != nil) {
+            gender = data[kUserGender] as! String!
+        }
+        
+        if(data[kUserProximity] != nil) {
+            proximity = data[kUserProximity] as! Int!
+        }
+        
+        if(data[kUserDurationNotif] != nil) {
+            durationNotif = data[kUserDurationNotif] as! Int!
+        }
+        
+        if(data[kUserUpdateTimeStamp] != nil) {
+            updateTimeStamp = data[kUserUpdateTimeStamp] as! Int!
+        }
         
         NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
         
@@ -94,7 +124,6 @@ class UserSettings: NSObject {
     }
     
     static func checkAuth(completion: (needsAuth: Bool) -> Void) {
-      print(UserSettings.currentUser);
         // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
         if ((UserSettings.currentUser.userId) != nil) {
           WebClient.getUserByID(UserSettings.currentUser.userId, completion: { (response) -> Void in
@@ -113,7 +142,7 @@ class UserSettings: NSObject {
         else{
             completion(needsAuth: true)
         }
-        
+      
     }
     
     static func syncSettings() -> Void {

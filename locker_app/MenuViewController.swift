@@ -27,7 +27,7 @@ class MenuViewController: AbstractTableViewController {
         tableViewType = .Both
         
         // set header & cell titles for menu
-        initTableViewWithTitles(header("Account"), "Profile", "Payment", "Settings", header("Help"), "About", "Report an issue")
+        initTableViewWithTitles(header("Account"), "Profile", "Payment", "Settings", header("Help"), "About", "Report an issue", header(""), "Log out")
         
         // configure images for cells
         registerImageNameForTitles("profileIcon", titles: "Profile")
@@ -87,6 +87,8 @@ class MenuViewController: AbstractTableViewController {
                 break
             case "Report an issue":
                 performReportSegue()
+                break
+            case "Log out":
                 break
             default:
                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)

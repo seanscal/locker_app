@@ -25,9 +25,11 @@ class WebClient {
                     completion: (json: JSON) -> Void,
                     failure: (error: NSError) -> Void)
     {
-    
-        // send userId with all requests
-        parameters["userId"] = 0 //UserSettings.currentUser.userId!
+        
+        if let userId = UserSettings.currentUser.userId {
+            // send userId with all requests
+            parameters["userId"] = userId
+        }
         
         Alamofire.request(.GET, kLockrAPI + method, parameters: parameters)
             .responseJSON { response in
@@ -49,8 +51,10 @@ class WebClient {
                              failure: (error: NSError) -> Void)
     {
         
-        // send userId with all requests
-        parameters["userId"] = 0 //UserSettings.currentUser.userId!
+        if let userId = UserSettings.currentUser.userId {
+            // send userId with all requests
+            parameters["userId"] = userId
+        }
         
         Alamofire.request(.POST, kLockrAPI + method, parameters: parameters)
             .responseJSON { response in

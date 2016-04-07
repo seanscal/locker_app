@@ -96,9 +96,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
   func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
 
     if error != nil {
-        // error
-        // for now, just send to map
-        // TODO: handle error
         displayError(error.description)
     }
 
@@ -108,18 +105,28 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         let name = user.profile.name
         let email = user.profile.email
         
-        let dict : Dictionary = [ "id" : idToken, "email" : email, "name" : name]
-
-      WebClient.sendUserData(dict, completion: { (response) -> Void in
-          if ((response["pin"]) != nil){
-            self.mapsegue();
-          }
-          else{
-            self.pushToPin = true
-          }
-          }) { (error) -> Void in
+        self.user = ["name" : name, "email" : email, "updateTimeStamp" : Int(NSDate.init().timeIntervalSince1970)]
+        
+        WebClient.sendUserData(self.user!, completion: { (response) -> Void in
+            WebClient.updateUser(self.user!, completion: { (response) -> Void in
+                if ((response["pin"]) != nil){
+                    UserSettings.currentUser.populateUser(response)
+                    UserSettings.syncSettings()
+                    self.mapsegue();
+                }
+                else{
+                    if (self.isViewLoaded() && self.view.window != nil) {
+                        self.pinsegue()
+                    } else {
+                        self.pushToPin = true
+                    }
+                }
+            }) { (error) -> Void in
+                //TODO: handle error
+            }
+        }) { (error) -> Void in
             //TODO: handle error
-          }
+        }
     }
   }
   
@@ -138,26 +145,32 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
         }
         else
         {
-          let id = result.valueForKey("id") as! String
           let email = result.valueForKey("email") as! String
           let name = result.valueForKey("name") as! String
           let picture : NSString = result.valueForKey("picture")!.valueForKey("data")!.valueForKey("url") as! String
-            self.user = ["name" : name, "email" : email, "updateTimeStamp" : NSDate.init().timeIntervalSince1970, "picture": picture]
+            self.user = ["name" : name, "email" : email, "updateTimeStamp" : Int(NSDate.init().timeIntervalSince1970), "picture": picture]
             
             WebClient.sendUserData(self.user!, completion: { (response) -> Void in
                 WebClient.updateUser(self.user!, completion: { (response) -> Void in
                     if ((response["pin"]) != nil){
                         UserSettings.currentUser.populateUser(response)
+                        UserSettings.syncSettings()
                         self.mapsegue();
                     }
                     else{
-                        self.pushToPin = true
+                        if (self.isViewLoaded() && self.view.window != nil) {
+                            self.pinsegue()
+                        } else {
+                            self.pushToPin = true
+                        }
                     }
                 }) { (error) -> Void in
                     //TODO: handle error
+                    self.displayError(error.description)
                 }
             }) { (error) -> Void in
                 //TODO: handle error
+                self.displayError(error.description)
             }
             
         }

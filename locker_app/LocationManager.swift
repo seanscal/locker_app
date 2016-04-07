@@ -55,6 +55,8 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
         
         RentalManager.getRentalsForUser(true, completion: { (rentals) -> Void in
             
+            Static.lastRentalPull = NSDate()
+            
             for rental in rentals {
                 if rental.status == .Active {
                     let rentalLocation = CLLocation(latitude: rental.lat!, longitude: rental.long!)
