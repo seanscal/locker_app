@@ -16,6 +16,7 @@ let kUserPicture = "picture"
 let kUserProximity = "proximity"
 let kUserDurationNotif = "durationNotif"
 let kUserUpdateTimeStamp = "updateTimeStamp"
+let kUserPassword = "password"
 
 //userId = 1 // TODO: implement this class
 //static let userName = "Test Guy"
@@ -34,6 +35,7 @@ class UserSettings: NSObject {
     var proximity: Int!
     var durationNotif: Int!
     var updateTimeStamp: Int!
+    var password: String!
     
     struct Static
     {
@@ -47,11 +49,11 @@ class UserSettings: NSObject {
         {
             // DELETE THIS LINE!!!
             // Using to remove NSUserDefaults before app load to force login screen
-             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
+             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserEmail)
             
             
             
-            if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserID)
+            if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserEmail)
             {
                 Static.instance = UserSettings(data: load as! [String: AnyObject])
                 
@@ -85,6 +87,10 @@ class UserSettings: NSObject {
             picture = data[kUserPicture] as! String!
         }
         
+        if(data[kUserPassword] != nil) {
+            password = data[kUserPassword] as! String!
+        }
+        
         if(data[kUserPIN] != nil) {
             pin = data[kUserPIN] as! NSInteger!
         }
@@ -109,7 +115,7 @@ class UserSettings: NSObject {
             updateTimeStamp = data[kUserUpdateTimeStamp] as! NSInteger!
         }
         
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserEmail)
         
     }
     
