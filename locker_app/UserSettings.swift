@@ -16,6 +16,7 @@ let kUserPicture = "picture"
 let kUserProximity = "proximity"
 let kUserDurationNotif = "durationNotif"
 let kUserUpdateTimeStamp = "updateTimeStamp"
+let kUserPassword = "password"
 
 //userId = 1 // TODO: implement this class
 //static let userName = "Test Guy"
@@ -34,6 +35,7 @@ class UserSettings: NSObject {
     var proximity: Int!
     var durationNotif: Int!
     var updateTimeStamp: Int!
+    var password: String!
     
     struct Static
     {
@@ -47,11 +49,11 @@ class UserSettings: NSObject {
         {
             // DELETE THIS LINE!!!
             // Using to remove NSUserDefaults before app load to force login screen
-             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
+             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserEmail)
             
             
             
-            if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserID)
+            if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserEmail)
             {
                 Static.instance = UserSettings(data: load as! [String: AnyObject])
                 
@@ -70,23 +72,27 @@ class UserSettings: NSObject {
         super.init()
         
         if(data[kUserID] != nil) {
-            userId = data[kUserID] as! String
+            userId = data[kUserID] as! String!
         }
         
         if(data[kUserName] != nil) {
-            name = data[kUserName] as! String
+            name = data[kUserName] as! String!
         }
         
         if(data[kUserEmail] != nil) {
-            email = data[kUserEmail] as! String
+            email = data[kUserEmail] as! String!
         }
         
         if(data[kUserPicture] != nil) {
-            picture = data[kUserPicture] as! String
+            picture = data[kUserPicture] as! String!
+        }
+        
+        if(data[kUserPassword] != nil) {
+            password = data[kUserPassword] as! String!
         }
         
         if(data[kUserPIN] != nil) {
-            pin = data[kUserPIN] as! Int
+            pin = data[kUserPIN] as! NSInteger!
         }
         
         if(data[kUserBirthday] != nil) {
@@ -98,18 +104,18 @@ class UserSettings: NSObject {
         }
         
         if(data[kUserProximity] != nil) {
-            proximity = data[kUserProximity] as! Int!
+            proximity = data[kUserProximity] as! NSInteger!
         }
         
         if(data[kUserDurationNotif] != nil) {
-            durationNotif = data[kUserDurationNotif] as! Int!
+            durationNotif = data[kUserDurationNotif] as! NSInteger!
         }
         
         if(data[kUserUpdateTimeStamp] != nil) {
-            updateTimeStamp = data[kUserUpdateTimeStamp] as! Int!
+            updateTimeStamp = data[kUserUpdateTimeStamp] as! NSInteger!
         }
         
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserEmail)
         
     }
     
@@ -125,24 +131,24 @@ class UserSettings: NSObject {
     
     static func checkAuth(completion: (needsAuth: Bool) -> Void) {
         // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
-//        if ((UserSettings.currentUser.userId) != nil) {
-//          WebClient.getUserByID(UserSettings.currentUser.userId, completion: { (response) -> Void in
-//            completion(needsAuth: false)
-//            if (UserSettings.currentUser.name == response["name"] as! String){
-//              completion(needsAuth: false)
-//            }
-//            else
-//            {
-//              completion(needsAuth: true)
-//            }
-//          }) { (error) -> Void in
-//              //TODO: handle error
-//          }
-//        }
-//        else{
+        if ((UserSettings.currentUser.userId) != nil) {
+          WebClient.getUserByID(UserSettings.currentUser.userId, completion: { (response) -> Void in
+            completion(needsAuth: false)
+            if (UserSettings.currentUser.name == response["name"] as! String){
+              completion(needsAuth: false)
+            }
+            else
+            {
+              completion(needsAuth: true)
+            }
+          }) { (error) -> Void in
+              //TODO: handle error
+          }
+        }
+        else{
             completion(needsAuth: true)
-//        }
-        
+        }
+      
     }
     
     static func syncSettings() -> Void {
@@ -151,7 +157,6 @@ class UserSettings: NSObject {
             let serverTime = response["updateTimeStamp"] as! Int
             if(serverTime < Static.instance!.updateTimeStamp) {
                 let userInfo: [String: AnyObject] = [
-                    "userId": Static.instance!.userId,
                     "pin": Static.instance!.pin,
                     "name": Static.instance!.name,
                     "birthday": Static.instance!.birthday,

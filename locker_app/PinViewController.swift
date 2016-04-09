@@ -88,6 +88,9 @@ class PinViewController: UIViewController, UITableViewDelegate, UITextFieldDeleg
     func putInfo(){
         WebClient.sendUserData(self.user!, completion: { (response) -> Void in
             WebClient.updateUser(self.user!, completion: { (response) -> Void in
+              print("FUCK O");
+              
+              print(response);
                 UserSettings.currentUser.populateUser(response)
                 UserSettings.syncSettings()
                 self.dismissModalStack()

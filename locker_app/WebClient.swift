@@ -155,6 +155,16 @@ class WebClient {
     }
   }
   
+  static func getUserOnSignIn(email: String, password: String, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
+  {
+    get(WebUtils.kApiMethodUser + "?email="+email+"&password="+password,
+      completion: { (json) -> Void in
+        completion(response: json.object as! Dictionary<String, AnyObject>)
+      }) { (error) -> Void in
+        failure(error: error)
+    }
+  }
+  
   static func updatePIN(params: Dictionary<String, AnyObject>, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
   {
     put(WebUtils.kApiMethodUsers, parameters: params,

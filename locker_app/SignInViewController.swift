@@ -32,6 +32,18 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
       regsegue()
   }
   @IBAction func signInPressed(sender: AnyObject) {
+    WebClient.getUserOnSignIn(emailField.text!, password: passwordField.text!, completion: { (response) -> Void in
+      print(response);
+      if (response["email"] != nil){
+        UserSettings.currentUser.populateUser(response)
+        UserSettings.syncSettings()
+        self.mapsegue();
+      }
+      else{
+        self.displayError("User not recognized");
+      }
+      }) { (error) -> Void in
+    }
   }
   
   override func viewDidLoad() {
@@ -158,7 +170,13 @@ class SignInViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDele
                         self.mapsegue();
                     }
                     else{
-                        if (self.isViewLoaded() && self.view.window != nil) {
+                        if (self.isViewLoaded() && self.view.window != nil && self.presentingViewController?.presentingViewController != nil) {
+                          
+                            print("viewcontroller")
+                              print (self.presentingViewController?.presentingViewController);
+                              print (self.presentingViewController?.presentedViewController);
+                    
+                          
                             self.pinsegue()
                         } else {
                             self.pushToPin = true

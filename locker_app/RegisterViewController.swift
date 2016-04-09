@@ -52,20 +52,19 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     func keyboardHidden(notification: NSNotification) {
         scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
     }
-    
+  
     
   func register() {
     let name:String = firstNameField.text!+" "+lastNameField.text!
-    let dict : Dictionary<String, AnyObject> = [ "name" : name, "email" : emailField.text!, "updateTimeStamp" : Int(NSDate().timeIntervalSince1970) ]
+    let pin:Int = Int(pinField.text!)!
+    let picture : String = "http://orig13.deviantart.net/10e3/f/2013/114/8/4/facebook_default_profile_picture___clone_trooper_by_captaintom-d62v2dr.jpg"
+    let password:String = passwordField.text!
+    
+    let dict : Dictionary<String, AnyObject> = [ "name" : name, "email" : emailField.text!, "picture" : picture, "updateTimeStamp" : Int(NSDate().timeIntervalSince1970), "pin": pin, "password": password]
     
     WebClient.sendUserData(dict, completion: { (response) -> Void in
-        if ((response["pin"]) != nil){
-            UserSettings(data: dict)
-            print(response);
-            self.dismissModalStack()
-        } else {
-            // TODO: handle this case?
-        }
+      UserSettings(data: dict);
+        self.dismissModalStack();
       }) { (error) -> Void in
         self.displayError(error.description)
     }
@@ -97,5 +96,4 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             //nada
         }
     }
-   
 }
