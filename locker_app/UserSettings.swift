@@ -22,6 +22,7 @@ let kUserPassword = "password"
 //static let userName = "Test Guy"
 //static let userCards = ["Debit", "Credit"]
 //static let userEmail = "test.guy@lockr.com"
+//TODO: sjflkdshjfl
 
 class UserSettings: NSObject {
     var userId: String!
@@ -49,8 +50,8 @@ class UserSettings: NSObject {
         {
             // DELETE THIS LINE!!!
             // Using to remove NSUserDefaults before app load to force login screen
-             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserEmail)
-            
+//             NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserEmail)
+          
             
             
             if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserEmail)
