@@ -333,9 +333,9 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         WebClient.makeReservation(hub!.uid!, completion: { (response) -> Void in
             
             if let rental = Rental.fromJSON(response) {
-                //RentalManager.push(rental)
                 self.initWithRental(rental)
                 self.initReservationTimer()
+                self.displayMode = .Reservation
             } else {
                 self.displayError("An error occurred processing your rental. Please contact support for assistance.")
             }
