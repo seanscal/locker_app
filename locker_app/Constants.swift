@@ -37,3 +37,5 @@ let kDefaultCellHeight = CGFloat.init(72)
 let kHeaderPrefix = "@header:"
 
 let kSecondsPerHour = 3600.0
+
+let kLocationRefreshInterval = 1.0

@@ -20,7 +20,8 @@ let kPrimaryBorderColor     = UIColor.whiteColor().CGColor
 let kPrimaryFont            = UIFont.boldSystemFontOfSize(16)
 let kPrimaryBackgroundColor = UIColor(red: 0, green: 215, blue: 0)
 let kLocationActiveColor    = UIColor(red: 150, green: 150, blue: 255)
-let kTransparentWhite       = UIColor(red: 255, green: 255, blue: 255, alpha: 0.75)
+let kTransparentWhite       = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
+let kTransparentBlue        = UIColor(red: 150/255, green: 150/255, blue: 1, alpha: 0.75)
 
 class ScreenUtils {
     

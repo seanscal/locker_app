@@ -15,7 +15,12 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet var loadingView: UIView!
     var locationButton: UIButton! = nil
     var locationLabel: UILabel! = nil
+    var nearestHubButton: UIButton! = nil
+    var nearestHubLabel: UILabel! = nil
     var trackingLocation = true
+    var displayError = true
+    
+    var markers: Array<GMSMarker> = []
     
     var tintedView: UIView!
     var activityIndicator: UIActivityIndicatorView!
@@ -99,7 +104,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         mapView.addSubview(historyButton)
       
         // create track location button overlay (top)
-        locationButton = UIButton(type: .Custom) as UIButton
+        locationButton = UIButton(type: .Custom)
         locationButton.setImage(UIImage(named: "location")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         locationButton.tintColor = UIColor.whiteColor()
         locationButton.frame = CGRectMake((ScreenUtils.screenWidth-173)/2, 20, 36, 36)
@@ -123,6 +128,32 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         locationLabel.layer.cornerRadius = 12.0
         mapView.addSubview(locationLabel)
         
+        // create nearest hub button overlay (top)
+        nearestHubButton = UIButton(type: .Custom)
+        nearestHubButton.setImage(UIImage(named: "locate")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        nearestHubButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        nearestHubButton.tintColor = UIColor.whiteColor()
+        nearestHubButton.frame = CGRectMake((ScreenUtils.screenWidth-173)/2, 60, 36, 36)
+        nearestHubButton.layer.cornerRadius = 18
+        nearestHubButton.layer.borderWidth = kPrimaryBorderWidth
+        nearestHubButton.layer.borderColor = kPrimaryBorderColor
+        nearestHubButton.backgroundColor = kLocationActiveColor
+        nearestHubButton.addTarget(self, action: "nearestHubPressed", forControlEvents: .TouchUpInside)
+        mapView.addSubview(nearestHubButton)
+        
+        // create nearest hub label
+        nearestHubLabel = UILabel()
+        nearestHubLabel.text = "Find nearest hub"
+        nearestHubLabel.textAlignment = .Center
+        nearestHubLabel.font = UIFont.boldSystemFontOfSize(14.0)
+        nearestHubLabel.textColor = kLocationActiveColor
+        nearestHubLabel.sizeToFit()
+        nearestHubLabel.frame = CGRectMake(nearestHubButton.frame.origin.x + nearestHubButton.frame.size.width + 10, 64, nearestHubLabel.frame.size.width + 10, nearestHubLabel.frame.size.height + 10)
+        nearestHubLabel.backgroundColor = kTransparentWhite
+        nearestHubLabel.layer.masksToBounds = true
+        nearestHubLabel.layer.cornerRadius = 12.0
+        mapView.addSubview(nearestHubLabel)
+        
         // add insets to preserve Google logo
         let mapInsets = UIEdgeInsets(top: 0, left: ScreenUtils.screenWidth/2 - 34, bottom: 20, right: ScreenUtils.screenWidth/2 - 34) as UIEdgeInsets
         mapView.padding = mapInsets
@@ -130,11 +161,46 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         self.view = mapView
         
         // follow current location with camera
-        NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(kLocationRefreshInterval, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
         
         setupLoadingView()
+
+    }
+    
+    func nearestHubPressed() {
         
-        NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: Selector("fetchHubs"), userInfo: nil, repeats: false)
+        if let mapView = self.view as? GMSMapView, let currentLocation = LocationManager.Static.lastLocation {
+            
+            var nearestMarker: GMSMarker? = nil
+            var nearestDistance: Double = 0
+            
+            for marker in markers {
+                
+                let markerLocation = CLLocation(latitude: marker.position.latitude, longitude: marker.position.longitude)
+                
+                if nearestMarker == nil {
+                    nearestMarker = marker
+                    nearestDistance = currentLocation.distanceFromLocation(markerLocation)
+                } else {
+                    if currentLocation.distanceFromLocation(markerLocation) < nearestDistance {
+                        nearestMarker = marker
+                        nearestDistance = currentLocation.distanceFromLocation(markerLocation)
+                    }
+                }
+            }
+            
+            if let marker = nearestMarker {
+                
+                if trackingLocation {
+                    locationPressed()
+                }
+                
+                mapView.animateToLocation(marker.position)
+                
+                hideNearestHub()
+            }
+            
+        }
 
     }
     
@@ -167,27 +233,79 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         if trackingLocation, let mapView = self.view as? GMSMapView, let location = LocationManager.userLocation() {
             mapView.animateToLocation(location.coordinate)
         }
+        
+        var visibleMarker = false
+        
+        for marker in markers {
+            if markerIsVisible(marker) {
+                hideNearestHub()
+                visibleMarker = true
+                break
+            }
+        }
+        
+        if !visibleMarker {
+            showNearestHub()
+        }
+    }
+    
+    func showNearestHub() {
+        
+        nearestHubButton.hidden = false
+        nearestHubLabel.hidden = false
+        
+        UIView.animateWithDuration(kDefaultAnimationDuration) { () -> Void in
+            self.nearestHubButton.alpha = 1.0
+            self.nearestHubLabel.alpha = 1.0
+        }
+        
+    }
+    
+    func hideNearestHub() {
+        
+        UIView.animateWithDuration(kDefaultAnimationDuration, animations: { () -> Void in
+            self.nearestHubButton.alpha = 0.0
+            self.nearestHubLabel.alpha = 0.0
+            }) { (completed) -> Void in
+                self.nearestHubButton.hidden = true
+                self.nearestHubLabel.hidden = true
+        }
+        
+    }
+    
+    func markerIsVisible(marker: GMSMarker) -> Bool {
+        if let mapView = self.view as? GMSMapView {
+            return mapView.bounds.contains(mapView.projection.pointForCoordinate(marker.position))
+        }
+        return false
     }
     
     override func viewWillAppear(animated: Bool) {
         loading = true
+        displayError = true
         fetchHubs()
     }
     
     func fetchHubs() {
         WebClient.getAllHubs( { (response) -> Void in
             self.loading = false
+            (self.view as! GMSMapView).clear()
+            self.markers = []
             for jsonHub in response {
                 let hub = LockerHub.fromJSON(jsonHub)!
                 if let lat = hub.lat, let long = hub.long, let name = hub.name, let _ = hub.openUnits, let _ = hub.totalUnits {
                     let marker = MapManager.customMarkerWithLatitude(lat, longitude: long, title: name, snippet: hub.availabilityString())
                     marker.userData = hub
                     marker.map = self.view as? GMSMapView
+                    self.markers.append(marker)
                 }
             }
             }) { (error) -> Void in
                 self.loading = false
-                self.displayError("Could not fetch locker data from the server. Please try again soon.")
+                if(self.displayError) {
+                    self.displayError("Could not fetch locker data from the server. Please try again soon.")
+                    self.displayError = false
+                }
         }
     }
     

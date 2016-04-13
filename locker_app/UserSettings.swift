@@ -16,6 +16,7 @@ let kUserPicture = "picture"
 let kUserProximity = "proximity"
 let kUserDurationNotif = "durationNotif"
 let kUserUpdateTimeStamp = "updateTimeStamp"
+let kUserPassword = "password"
 
 //userId = 1 // TODO: implement this class
 //static let userName = "Test Guy"
@@ -34,6 +35,7 @@ class UserSettings: NSObject {
     var proximity: Int!
     var durationNotif: Int!
     var updateTimeStamp: Int!
+    var password: String!
     
     struct Static
     {
@@ -45,12 +47,11 @@ class UserSettings: NSObject {
         
         if Static.instance == nil
         {
-            // DELETE THIS LINE!!!
-            // Using to remove NSUserDefaults before app load to force login screen
-            NSUserDefaults.standardUserDefaults().removeObjectForKey(kUserID)
-            if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserID)
+            if let load: AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(kUserEmail)
             {
                 Static.instance = UserSettings(data: load as! [String: AnyObject])
+                
+                syncSettings()
             }
             else
             {
@@ -63,23 +64,56 @@ class UserSettings: NSObject {
     
     init(data: [String: AnyObject]) {
         super.init()
-        userId = data[kUserID] as! String
-        name = data[kUserName] as! String
-        email = data[kUserEmail] as! String
-        picture = data[kUserPicture] as! String
-        pin = data[kUserPIN] as! Int
-        birthday = data[kUserBirthday] as! String!
-        gender = data[kUserGender] as! String!
-        proximity = data[kUserProximity] as! Int!
-        durationNotif = data[kUserDurationNotif] as! Int!
-        updateTimeStamp = data[kUserUpdateTimeStamp] as! Int!
         
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserID)
+        if(data[kUserID] != nil) {
+            userId = data[kUserID] as! String!
+        }
+        
+        if(data[kUserName] != nil) {
+            name = data[kUserName] as! String!
+        }
+        
+        if(data[kUserEmail] != nil) {
+            email = data[kUserEmail] as! String!
+        }
+        
+        if(data[kUserPicture] != nil) {
+            picture = data[kUserPicture] as! String!
+        }
+        
+        if(data[kUserPassword] != nil) {
+            password = data[kUserPassword] as! String!
+        }
+        
+        if(data[kUserPIN] != nil) {
+            pin = data[kUserPIN] as! NSInteger!
+        }
+        
+        if(data[kUserBirthday] != nil) {
+            birthday = data[kUserBirthday] as! String!
+        }
+        
+        if(data[kUserGender] != nil) {
+            gender = data[kUserGender] as! String!
+        }
+        
+        if(data[kUserProximity] != nil) {
+            proximity = data[kUserProximity] as! NSInteger!
+        }
+        
+        if(data[kUserDurationNotif] != nil) {
+            durationNotif = data[kUserDurationNotif] as! NSInteger!
+        }
+        
+        if(data[kUserUpdateTimeStamp] != nil) {
+            updateTimeStamp = data[kUserUpdateTimeStamp] as! NSInteger!
+        }
+        
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: kUserEmail)
         
     }
     
     func populateUser(data: [String: AnyObject]) {
-        
         Static.instance = UserSettings(data: data)
         
     }
@@ -90,22 +124,59 @@ class UserSettings: NSObject {
     }
     
     static func checkAuth(completion: (needsAuth: Bool) -> Void) {
-        
-//        // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
-//        if ((UserSettings.currentUser.userId) != nil) {
+        // TODO: check tokens/credentials in NSUserSettings, and validate with server asynchronously
+        if ((UserSettings.currentUser.userId) != nil) {
+          WebClient.getUserByID(UserSettings.currentUser.userId, completion: { (response) -> Void in
             completion(needsAuth: false)
-//        }
-//        else{
-//            completion(needsAuth: true)
-//        }
-        
+            if (UserSettings.currentUser.name == response["name"] as! String){
+              completion(needsAuth: false)
+            }
+            else
+            {
+              completion(needsAuth: true)
+            }
+          }) { (error) -> Void in
+              //TODO: handle error
+          }
+        }
+        else{
+            completion(needsAuth: true)
+        }
+      
     }
     
     static func syncSettings() -> Void {
-        // TODO: sync current user settings with server user and see which is more recent. update respected model
-        // serverUser = WebClient.getUserByID(UserID)
-        // if serverUser.time more recent than currentUser.time ...etc.
-        //      set UserSettings();
+        WebClient.getUserByID(Static.instance!.userId, completion: { (response) -> Void in
+            
+            let serverTime = response["updateTimeStamp"] as! Int
+            if(serverTime < Static.instance!.updateTimeStamp) {
+                let userInfo: [String: AnyObject] = [
+                    "pin": Static.instance!.pin,
+                    "name": Static.instance!.name,
+                    "birthday": Static.instance!.birthday,
+                    "gender": Static.instance!.gender,
+                    "email": Static.instance!.email,
+                    "picture": Static.instance!.picture,
+                    "proximity": Static.instance!.proximity,
+                    "durationNotif": Static.instance!.durationNotif,
+                    "updateTimeStamp": Static.instance!.updateTimeStamp
+                ]
+                //update server
+                WebClient.updateUser(userInfo, completion: { (response) -> Void in
+                    //set current user
+                    UserSettings.currentUser.populateUser(response)
+                    
+                }) { (error) -> Void in
+                    //TODO: handle error
+                }
+            }
+            else {
+                //just set current user to the user on the server
+                UserSettings.currentUser.populateUser(response)
+            }
+        }) { (error) -> Void in
+            //TODO: handle error
+        }
         
     }
     

@@ -11,6 +11,7 @@ import UIKit
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let kActiveRentalSegueId = "activeRentalSegue"
+    let kReceiptSegueId = "receiptSegue"
     
     @IBOutlet weak var tableView: UITableView!
     var activeRentals : Array<Rental> = []
@@ -48,6 +49,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         RentalManager.getRentalsForUser(false,
             completion: { (rentals) -> Void in
                 self.pastRentals = rentals
+                self.pastRentals = self.pastRentals.reverse()
                 self.refresh()
             }) { (error) -> Void in
                 self.displayError("An error occurred loading past rentals. Try again in a few moments.")
@@ -103,6 +105,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else {
                 let blankCell = tableView.dequeueReusableCellWithIdentifier("NoRentals", forIndexPath: indexPath) 
                 blankCell.textLabel?.text = "No active rental"
+                blankCell.userInteractionEnabled = false
                 
                 return blankCell
             }
@@ -114,7 +117,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.fareLabel.text = rental.runningTotalString()
             cell.hubNameLabel.text = rental.hubName!
             cell.elapsedTimeLabel.text = rental.elapsedTimeString()
-            cell.userInteractionEnabled = false
             
             return cell
         }
@@ -131,6 +133,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         if indexPath.section == 0 {
             let rental = activeRentals[indexPath.row]
             performSegueWithIdentifier(kActiveRentalSegueId, sender: rental)
+        } else {
+            let rental = pastRentals[indexPath.row]
+            performSegueWithIdentifier(kReceiptSegueId, sender: rental)
         }
     }
     
@@ -144,6 +149,11 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
             let rental = sender as! Rental
             
             hubVc.initWithRental(rental)
+        } else if (segue.identifier == kReceiptSegueId) {
+            let receiptVc = segue.destinationViewController as! ReceiptViewController
+            let rental = sender as! Rental
+            
+            receiptVc.rental = rental
         }
     }
     

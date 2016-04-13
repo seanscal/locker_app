@@ -19,6 +19,8 @@ class NotificationManager: NSObject {
         
         let settings = UIUserNotificationSettings(forTypes: [.Badge, .Alert], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "getExpirationNotifs", userInfo: nil, repeats: true)
     }
     
     static func fireNotification(notification: UILocalNotification) {
@@ -32,6 +34,30 @@ class NotificationManager: NSObject {
             lastNotifTime = NSDate()
         }
         
+    }
+    
+    func getExpirationNotifs() {
+        WebClient.getExpirationNotifs({ (response) -> Void in
+            for jsonRental in response {
+                if let rental = Rental.fromJSON(jsonRental) {
+                    let notification = UILocalNotification()
+                    notification.alertTitle = "Reservation Expired"
+                    notification.alertBody = String(format: "Your reservation at @% has expired.", rental.hubName!)
+                    
+                    NotificationManager.fireNotification(notification)
+                    
+                    WebClient.firedNotif(rental.uid!, type: .Expiration, completion: { (response) -> Void in
+                        print("Successfully notified server of notification.")
+                        }, failure: { (error) -> Void in
+                            print("Error notifying server of notification.")
+                    })
+                    
+                }
+            }
+            }) { (error) -> Void in
+                // silently fail
+                print("Error fetching expiration notifs.")
+        }
     }
     
 }

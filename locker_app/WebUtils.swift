@@ -26,12 +26,21 @@ class WebUtils {
     
     static let webApi = ApiVersions.Remote.rawValue
     static let locApi = ApiVersions.Local.rawValue
+   
     
-    static let kApiMethodHubs           = "hubs"
-    static let kApiMethodUsers           = "users"
+    static let kApiMethodUsers                  = "users"
+    static let kApiMethodUser           		= "user"
 
-    static let kApiMethodReserve        = "allocate"
-    static let kApiMethodUnlock         = "unlock"
-    static let kApiMethodRentals        = "rentals"
+    static let kApiMethodHubs                   = "hubs"
+    static let kApiMethodRentals                = "rentals"
+
+    static let kApiMethodReserve                = "reserve"
+    static let kApiMethodRent                   = "rent"
+    static let kApiMethodUnlock                 = "unlock"
+    static let kApiMethodCheckOut               = "checkOut"
+    static let kApiMethodDoorStatus             = "doorStatus"
+    
+    static let kApiMethodGetExpirationNotifs    = "getExpirationNotifs"
+    static let kApiMethodFiredNotif             = "firedNotif"
     
 }
