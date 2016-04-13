@@ -44,11 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
   
   func application(application: UIApplication,
     openURL url: NSURL, options: [String: AnyObject]) -> Bool {
-      return true
-//      return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: nil)  ||
-//        GIDSignIn.sharedInstance().handleURL(url,
-//          sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String,
-//          annotation: options[UIApplicationOpenURLOptionsAnnotationKey] as? String)
+      return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as! String, annotation: nil)  ||
+        GIDSignIn.sharedInstance().handleURL(url,
+          sourceApplication: options[UIApplicationOpenURLOptionsSourceApplicationKey] as? String,
+          annotation: options[UIApplicationOpenURLOptionsAnnotationKey] as? String)
   }
   
   
