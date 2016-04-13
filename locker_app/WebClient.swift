@@ -127,7 +127,7 @@ class WebClient {
     
     static func beginRental(uid: String?, hubId: Int, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void)
     {
-        post(WebUtils.kApiMethodRent, parameters: ["uid" : uid == nil ? "gb5fhv" : uid!, "hubId" : hubId], completion: { (json) -> Void in
+        post(WebUtils.kApiMethodRent, parameters: ["uid" : uid == nil ? "null" : uid!, "hubId" : hubId], completion: { (json) -> Void in
                 completion(response: json.object as! Dictionary<String, AnyObject>)
             }) { (error) -> Void in
                 failure(error: error)
