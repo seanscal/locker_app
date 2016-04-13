@@ -892,7 +892,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxo-TQ-Yp6" userLabel="OpenUnitsCountLabel">
-                                                        <rect key="frame" x="68.5" y="60" width="23" height="60"/>
+                                                        <rect key="frame" x="68" y="60" width="23" height="60"/>
                                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -912,7 +912,7 @@
                                                 <rect key="frame" x="160" y="0.0" width="160" height="160"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htJ-MC-MVb" userLabel="InUseCountLabel">
-                                                        <rect key="frame" x="68.5" y="60" width="23" height="60"/>
+                                                        <rect key="frame" x="68" y="60" width="23" height="60"/>
                                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="50"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -1018,7 +1018,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6O3-ap-IKM" userLabel="Reservation Countdown">
-                                                                <rect key="frame" x="111.5" y="57" width="97.5" height="51.5"/>
+                                                                <rect key="frame" x="111" y="57" width="97.5" height="51.5"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="43"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -1221,16 +1221,23 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlock" translatesAutoresizingMaskIntoConstraints="NO" id="wcf-Gb-pm1" userLabel="Open locker image">
+                                                <rect key="frame" x="35" y="30" width="90" height="100"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="9NX-BX-hJT" secondAttribute="height" id="5QF-MF-Ubn"/>
+                                            <constraint firstItem="wcf-Gb-pm1" firstAttribute="leading" secondItem="9NX-BX-hJT" secondAttribute="leading" constant="35" id="72N-RU-MmK"/>
+                                            <constraint firstAttribute="bottom" secondItem="wcf-Gb-pm1" secondAttribute="bottom" constant="30" id="7PK-vX-Ka3"/>
                                             <constraint firstItem="r47-yi-KtL" firstAttribute="centerX" secondItem="9NX-BX-hJT" secondAttribute="centerX" id="9iX-2A-Mr3"/>
+                                            <constraint firstItem="wcf-Gb-pm1" firstAttribute="top" secondItem="9NX-BX-hJT" secondAttribute="top" constant="30" id="SZt-sz-fsq"/>
                                             <constraint firstItem="r47-yi-KtL" firstAttribute="centerY" secondItem="9NX-BX-hJT" secondAttribute="centerY" id="WZN-Ko-kKO"/>
+                                            <constraint firstAttribute="trailing" secondItem="wcf-Gb-pm1" secondAttribute="trailing" constant="35" id="ug8-r4-7cO"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCKER OPEN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQq-po-Top">
-                                        <rect key="frame" x="55" y="111" width="210" height="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCKER UNLOCKED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="nQq-po-Top">
+                                        <rect key="frame" x="30" y="111" width="260" height="36"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -1241,9 +1248,11 @@
                                     <constraint firstAttribute="bottom" secondItem="a1X-j8-OE1" secondAttribute="bottom" id="03l-Ob-efZ"/>
                                     <constraint firstItem="nQq-po-Top" firstAttribute="centerX" secondItem="jAE-Us-c3c" secondAttribute="centerX" id="7en-gY-dw7"/>
                                     <constraint firstItem="9NX-BX-hJT" firstAttribute="top" secondItem="nQq-po-Top" secondAttribute="bottom" constant="32" id="8k6-Bf-v5b"/>
+                                    <constraint firstItem="nQq-po-Top" firstAttribute="leading" secondItem="jAE-Us-c3c" secondAttribute="leading" constant="30" id="9Lp-k2-Qn1"/>
                                     <constraint firstItem="9NX-BX-hJT" firstAttribute="centerX" secondItem="jAE-Us-c3c" secondAttribute="centerX" id="9nm-Bu-qKW"/>
                                     <constraint firstAttribute="centerY" secondItem="9NX-BX-hJT" secondAttribute="centerY" constant="15" id="AWR-IQ-LWB"/>
                                     <constraint firstAttribute="trailing" secondItem="a1X-j8-OE1" secondAttribute="trailing" id="ApX-IN-qUo"/>
+                                    <constraint firstAttribute="trailing" secondItem="nQq-po-Top" secondAttribute="trailing" constant="30" id="Cf8-g3-38Q"/>
                                     <constraint firstItem="a1X-j8-OE1" firstAttribute="leading" secondItem="jAE-Us-c3c" secondAttribute="leading" id="Uzy-Cf-fYf"/>
                                     <constraint firstItem="a1X-j8-OE1" firstAttribute="top" secondItem="jAE-Us-c3c" secondAttribute="top" id="WjG-x7-SGf"/>
                                     <constraint firstItem="9NX-BX-hJT" firstAttribute="width" secondItem="jAE-Us-c3c" secondAttribute="width" multiplier="1:2" id="Xfu-d4-WQC"/>
@@ -1283,6 +1292,8 @@
                         <outlet property="inUseView" destination="Mgl-bK-ldb" id="rXh-HN-Iwi"/>
                         <outlet property="mapHeightConstraint" destination="8N8-oC-zZk" id="B0p-po-M4T"/>
                         <outlet property="mapView" destination="4sb-Uj-zqb" id="N8d-uJ-wxt"/>
+                        <outlet property="openLockerImage" destination="wcf-Gb-pm1" id="0kY-uB-nTA"/>
+                        <outlet property="openLockerTitle" destination="nQq-po-Top" id="Hk5-ak-EVE"/>
                         <outlet property="openLockerView" destination="jAE-Us-c3c" id="t0g-J9-Y3B"/>
                         <outlet property="openUnitsCountLabel" destination="dxo-TQ-Yp6" id="nh6-nK-hGJ"/>
                         <outlet property="openUnitsView" destination="gb4-3K-Fhh" id="Idf-fC-pBF"/>
@@ -1472,6 +1483,9 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="unlock" width="256" height="256"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="k0y-z0-Sfi"/>
         <segue reference="l4b-Oe-tZf"/>

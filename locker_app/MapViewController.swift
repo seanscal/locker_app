@@ -164,8 +164,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         NSTimer.scheduledTimerWithTimeInterval(kLocationRefreshInterval, target: self, selector: "updateLocation", userInfo: nil, repeats: true)
         
         setupLoadingView()
-        
-        fetchHubs()
 
     }
     

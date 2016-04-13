@@ -39,8 +39,8 @@ class Rental : Mappable {
     var baseRate : Double?
     var hourlyRate : Double?
     
-    var firedProximityNotif = false
-    var firedDurationNotif = false
+    var firedProximityNotif: Bool = false
+    var firedDurationNotif: Bool = false
     
     func mapping(map: Map) {
         uid             <- map["_id"]
@@ -56,6 +56,8 @@ class Rental : Mappable {
         status          <- map["status"]
         baseRate        <- map["baseRate"]
         hourlyRate      <- map["hourlyRate"]
+        firedProximityNotif <- map["firedProximityNotif"]
+        firedDurationNotif <- map["firedDurationNotif"]
     }
     
     static func fromJSON(json : AnyObject!) -> Rental? {

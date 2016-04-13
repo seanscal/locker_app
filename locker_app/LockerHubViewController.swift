@@ -20,6 +20,11 @@ enum DisplayMode {
     case PreRental
 }
 
+enum LockerStatus {
+    case Open
+    case Closed
+}
+
 class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 
     @IBOutlet var translucentView: UIView!
@@ -38,11 +43,15 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var inUseView: UIView!
     @IBOutlet weak var openUnitsView: UIView!
     @IBOutlet weak var mapView: GMSMapView!
-    
+
     // open locker view
+    @IBOutlet var openLockerImage: UIImageView!
+    @IBOutlet var openLockerTitle: UILabel!
     @IBOutlet var openLockerView: UIView!
     @IBOutlet var countdownContainer: UIView!
     @IBOutlet var countdownLabel: UILabel!
+    var openLockerTimestamp: Int! = nil
+    var openLockerStatus: LockerStatus = .Closed
 
     @IBOutlet weak var detailsBarHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonHeightConstraint: NSLayoutConstraint!
@@ -132,20 +141,28 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         openLockerView.alpha = 0
         openLockerView.hidden = false
         
+        openLockerImage.image = UIImage(named: "unlock")?.imageWithRenderingMode(.AlwaysTemplate)
+        openLockerImage.tintColor = UIColor.whiteColor()
+        openLockerImage.alpha = 0
+        
         UIView.animateWithDuration(kDefaultAnimationDuration) { () -> Void in
             self.openLockerView.alpha = 1
         }
         
-        countdownLabel.text = String(kCountdownTime)
+        updateTimer()
         openLockerTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
     }
     
     func dismissOpenLockerView() {
+        
+        openLockerTimestamp = nil
+        
         UIView.animateWithDuration(kDefaultAnimationDuration, animations: { () -> Void in
+            self.openLockerImage.alpha = 0
             self.openLockerView.alpha = 0
             }) { (completed) -> Void in
                 self.openLockerView.hidden = true
-                self.displayMessage("Time expired", message: "Your unit automatically re-locked after " + String(kCountdownTime) + " seconds.")
+                self.displayMessage("Unit locked", message: "Your unit has automatically re-locked.")
         }
         if openLockerTimer != nil {
             openLockerTimer.invalidate()
@@ -155,12 +172,32 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func updateTimer() {
-        var currentTime = Int(countdownLabel.text!)!
-        if currentTime == 0 {
-            dismissOpenLockerView()
+        WebClient.lockerDoorStatus(rental!.hubId!, lockerId: rental!.lockerId!, completion: { (response) -> Void in
+            if response == "OPEN" {
+                self.openLockerStatus = .Open
+                self.countdownLabel.text = ""
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.openLockerImage.alpha = 1
+                })
+            } else {
+                self.openLockerStatus = .Closed
+            }
+            }) { (error) -> Void in
+                //fail silently, but dismiss view if locker was previously open
+                if self.openLockerStatus == .Open {
+                    self.dismissOpenLockerView()
+                }
+        }
+        
+        let elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(openLockerTimestamp!))))
+        let remainingTime = kCountdownTime - elapsedTime
+        
+        if remainingTime <= 0 {
+            if openLockerStatus == .Closed {
+                dismissOpenLockerView()
+            }
         } else {
-            currentTime--
-            countdownLabel.text = String(currentTime)
+            countdownLabel.text = String(remainingTime)
         }
     }
     
@@ -187,6 +224,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func updateRate() {
+        print(String(format: "Calculating rate until date: %@", String(Int(NSDate().timeIntervalSince1970))))
         let elapsedHours = NSDate().timeIntervalSinceDate(rental!.checkInTime!) / kSecondsPerHour
         let runningTotal = hub!.baseRate! + (hub!.hourlyRate! * elapsedHours)
         self.runningTotal.text = String(format:"$%.2f", runningTotal)
@@ -483,6 +521,10 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             }
             self.rental = Rental.fromJSON(response)
             self.calculateRate()
+            
+            self.openLockerTimestamp = response["checkInTime"] as! Int
+            self.initiateOpenLockerView()
+            
             NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
             }) { (error) -> Void in
                 self.displayError("An error occurred processing your rental request. Please contact support for assistance.")
@@ -490,8 +532,9 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func unlock() {
-        WebClient.unlockLocker(hub!.uid!, lockerId: rental!.lockerId!, completion: { (response) -> Void in
-            // completion
+        WebClient.unlockLocker(rental!.uid!, completion: { (response) -> Void in
+            
+            self.openLockerTimestamp = response["timestamp"] as! Int
             self.initiateOpenLockerView()
             
             }) { (error) -> Void in

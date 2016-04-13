@@ -83,7 +83,11 @@ class LocationManager : NSObject, CLLocationManagerDelegate {
             notif.alertBody = "You're now "+String(format: "%.2f", distance/kMetersPerMile)+" miles from your locker hub. Don't forget to check out and claim your belongings!"
             
             NotificationManager.fireNotification(notif)
-            rental.firedProximityNotif = true
+            WebClient.firedNotif(rental.uid!, type: .Proximity, completion: { (response) -> Void in
+                //nada
+                }, failure: { (error) -> Void in
+                    //nada
+            })
         }
         
     }

@@ -9,9 +9,15 @@
 import Alamofire
 import SwiftyJSON
 
+enum NotificationType : String {
+    case Expiration = "EXPIRATION"
+    case Proximity = "PROXIMITY"
+    case Duration = "DURATION"
+}
+
 class WebClient {
 
-    static let kLockrAPI = WebUtils.webApi
+    static let kLockrAPI = WebUtils.locApi
     
     private static func get(method: String,
                             completion: (json: JSON) -> Void,
@@ -137,9 +143,9 @@ class WebClient {
         }
     }
     
-    static func unlockLocker(hubId: Int, lockerId: Int, completion: (response: String) -> Void, failure: (error: NSError) -> Void) {
-        get(WebUtils.kApiMethodUnlock, parameters: ["locker_id" : lockerId, "hub_id" : hubId], completion: { (json) -> Void in
-            completion(response: json.object as! String)
+    static func unlockLocker(rentalId: String, completion: (response: Dictionary<String, AnyObject>) -> Void, failure: (error: NSError) -> Void) {
+        post(WebUtils.kApiMethodUnlock, parameters: ["uid" : rentalId ], completion: { (json) -> Void in
+            completion(response: json.object as! Dictionary<String, AnyObject>)
             }) { (error) -> Void in
                 failure(error: error)
         }
@@ -202,5 +208,33 @@ static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObje
                 failure(error: error)
             }
     }
-  }
+    
+    static func getExpirationNotifs(completion: (response: Array<AnyObject>) -> Void, failure: (error: NSError) -> Void)
+    {
+        get(WebUtils.kApiMethodGetExpirationNotifs, completion: { (json) -> Void in
+            completion(response: json.object as! Array<AnyObject>)
+            }) { (error) -> Void in
+                failure(error: error)
+        }
+    }
+    
+    static func firedNotif(rentalUid: String, type: NotificationType, completion: (response: String) -> Void, failure: (error: NSError) -> Void) {
+        post(WebUtils.kApiMethodFiredNotif, parameters: ["uid" : rentalUid, "type" : type.rawValue], completion: { (json) -> Void in
+            completion(response: json.object as! String)
+            }) { (error) -> Void in
+                failure(error: error)
+        }
+    }
+    
+    static func lockerDoorStatus(hubId: Int, lockerId: Int, completion: (response: String) -> Void, failure: (error: NSError) -> Void) {
+        self.get(WebUtils.kApiMethodDoorStatus, parameters: ["hubId": hubId, "lockerId": lockerId], completion: { (json) -> Void in
+            completion(response: json.object as! String)
+            }) { (error) -> Void in
+                failure(error: error)
+        }
+    }
+    
+}
+
+
 
