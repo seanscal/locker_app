@@ -59,6 +59,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     var openLockerTimer: NSTimer!
     var reservationTimer: NSTimer!
+    var rateTimer: NSTimer!
     
     var hub: LockerHub?
     
@@ -190,7 +191,11 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
                 }
         }
         
-        let elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(openLockerTimestamp!))))
+        
+        var elapsedTime = 0
+        if let stamp = openLockerTimestamp {
+            elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(openLockerTimestamp!))))
+        }
         let remainingTime = kCountdownTime - elapsedTime
         
         if remainingTime <= 0 {
@@ -206,7 +211,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         RentalManager.checkForActiveRental(hub!.uid!, completion: { (rental) -> Void in
             self.rental = rental
             self.calculateRate()
-            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
+            self.rateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
         }) { (error) -> Void in
             //TODO: handle error
         }
@@ -378,6 +383,8 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             self.view.userInteractionEnabled = true
             self.navigationController?.navigationBar.userInteractionEnabled = true
             self.rental = nil
+            self.rateTimer.invalidate()
+            self.rateTimer = nil
             self.displayMessage("Success!", message: "Your rental was successfully ended.", completion: { () -> Void in
                 self.performSegueWithIdentifier("checkOutSegue", sender: nil)
             })
