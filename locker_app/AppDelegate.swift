@@ -23,8 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
-    //RentalManager.pull()
-    
     // initilaize location services
     locationManager = LocationManager()
     notificationManager = NotificationManager()

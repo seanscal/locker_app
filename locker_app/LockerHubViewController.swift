@@ -59,6 +59,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     var openLockerTimer: NSTimer!
     var reservationTimer: NSTimer!
+    var rateTimer: NSTimer!
     
     var hub: LockerHub?
     
@@ -140,10 +141,12 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     func initiateOpenLockerView() {
         openLockerView.alpha = 0
         openLockerView.hidden = false
+        self.openLockerTitle = "LOCKER UNLOCKED"
         
         openLockerImage.image = UIImage(named: "unlock")?.imageWithRenderingMode(.AlwaysTemplate)
         openLockerImage.tintColor = UIColor.whiteColor()
         openLockerImage.alpha = 0
+        countdownLabel.alpha = 1
         
         UIView.animateWithDuration(kDefaultAnimationDuration) { () -> Void in
             self.openLockerView.alpha = 1
@@ -155,8 +158,6 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func dismissOpenLockerView() {
         
-        openLockerTimestamp = nil
-        
         UIView.animateWithDuration(kDefaultAnimationDuration, animations: { () -> Void in
             self.openLockerImage.alpha = 0
             self.openLockerView.alpha = 0
@@ -167,20 +168,37 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         if openLockerTimer != nil {
             openLockerTimer.invalidate()
             openLockerTimer = nil
+            openLockerTimestamp = nil
         }
 
     }
     
     func updateTimer() {
         WebClient.lockerDoorStatus(rental!.hubId!, lockerId: rental!.lockerId!, completion: { (response) -> Void in
-            if response == "OPEN" {
+            if response["status"] == "OPEN" {
                 self.openLockerStatus = .Open
-                self.countdownLabel.text = ""
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.openLockerTitle = "DOOR OPEN"
+                    self.countdownLabel.alpha = 0
                     self.openLockerImage.alpha = 1
                 })
             } else {
                 self.openLockerStatus = .Closed
+                
+//                var elapsedTime = 0
+//                if let stamp = self.openLockerTimestamp {
+//                    elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(stamp))))
+//                }
+//                let remainingTime = kCountdownTime - elapsedTime
+//                
+//                if remainingTime <= 0 {
+//                    self.dismissOpenLockerView()
+//                }
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.openLockerTitle = "LOCKER UNLOCKED"
+                    self.countdownLabel.alpha = 1
+                    self.openLockerImage.alpha = 0
+                })
             }
             }) { (error) -> Void in
                 //fail silently, but dismiss view if locker was previously open
@@ -189,7 +207,11 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
                 }
         }
         
-        let elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(openLockerTimestamp!))))
+        
+        var elapsedTime = 0
+        if let stamp = openLockerTimestamp {
+            elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(stamp))))
+        }
         let remainingTime = kCountdownTime - elapsedTime
         
         if remainingTime <= 0 {
@@ -205,7 +227,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         RentalManager.checkForActiveRental(hub!.uid!, completion: { (rental) -> Void in
             self.rental = rental
             self.calculateRate()
-            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
+            self.rateTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateRate", userInfo: nil, repeats: true)
         }) { (error) -> Void in
             //TODO: handle error
         }
@@ -376,6 +398,9 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         WebClient.endRental(rental!.uid!, completion: { (response) -> Void in
             self.view.userInteractionEnabled = true
             self.navigationController?.navigationBar.userInteractionEnabled = true
+            self.rental = nil
+            self.rateTimer.invalidate()
+            self.rateTimer = nil
             self.displayMessage("Success!", message: "Your rental was successfully ended.", completion: { () -> Void in
                 self.performSegueWithIdentifier("checkOutSegue", sender: nil)
             })
@@ -507,6 +532,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func cancelReservation() {
         WebClient.endRental(rental!.uid!, completion: { (response) -> Void in
+            self.rental = nil
             self.displayMessage("Success!", message: "Your reservation was cancelled.")
             }) { (error) -> Void in
                 self.displayError("An error occurred cancelling your reservation. Please contact support for assistance.");
