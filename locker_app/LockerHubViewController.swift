@@ -399,7 +399,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             self.view.userInteractionEnabled = true
             self.navigationController?.navigationBar.userInteractionEnabled = true
             self.rental = nil
-            if self.rateTimer {
+            if self.rateTimer != nil {
                 self.rateTimer.invalidate()
                 self.rateTimer = nil
             }
