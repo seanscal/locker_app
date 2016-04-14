@@ -247,9 +247,11 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func updateRate() {
         print(String(format: "Calculating rate until date: %@", String(Int(NSDate().timeIntervalSince1970))))
-        let elapsedHours = NSDate().timeIntervalSinceDate(rental!.checkInTime!) / kSecondsPerHour
-        let runningTotal = hub!.baseRate! + (hub!.hourlyRate! * elapsedHours)
-        self.runningTotal.text = String(format:"$%.2f", runningTotal)
+        if rental != nil {
+            let elapsedHours = NSDate().timeIntervalSinceDate(rental!.checkInTime!) / kSecondsPerHour
+            let runningTotal = hub!.baseRate! + (hub!.hourlyRate! * elapsedHours)
+            self.runningTotal.text = String(format:"$%.2f", runningTotal)
+        }
     }
     
     func updateDisplay() {
