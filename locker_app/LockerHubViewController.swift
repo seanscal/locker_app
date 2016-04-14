@@ -141,6 +141,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     func initiateOpenLockerView() {
         openLockerView.alpha = 0
         openLockerView.hidden = false
+        self.openLockerTitle = "LOCKER UNLOCKED"
         
         openLockerImage.image = UIImage(named: "unlock")?.imageWithRenderingMode(.AlwaysTemplate)
         openLockerImage.tintColor = UIColor.whiteColor()
@@ -156,8 +157,6 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     }
     
     func dismissOpenLockerView() {
-        
-
         
         UIView.animateWithDuration(kDefaultAnimationDuration, animations: { () -> Void in
             self.openLockerImage.alpha = 0
@@ -179,6 +178,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             if response["status"] == "OPEN" {
                 self.openLockerStatus = .Open
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.openLockerTitle = "DOOR OPEN"
                     self.countdownLabel.alpha = 0
                     self.openLockerImage.alpha = 1
                 })
@@ -195,6 +195,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
 //                    self.dismissOpenLockerView()
 //                }
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.openLockerTitle = "LOCKER UNLOCKED"
                     self.countdownLabel.alpha = 1
                     self.openLockerImage.alpha = 0
                 })
