@@ -12,7 +12,7 @@ import GoogleMaps
 import MapKit
 
 let kCountdownTime = 15
-let kSecondsToExpiration = 20 * 60 //20 minutes
+let kSecondsToExpiration = 30 //20 minutes
 
 enum DisplayMode {
     case ActiveRental
@@ -380,7 +380,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         let remainingSeconds = kSecondsToExpiration - Int(elapsedSeconds)
         
         if remainingSeconds <= 0 {
-            displayMessage("Reservation Expired", message: "Your reservation expired after 20 minutes.")
+            displayMessage("Reservation Expired", message: "Your reservation expired after 30 seconds.")
             reservationTimer.invalidate()
             reservationTimer = nil
             rental = nil
