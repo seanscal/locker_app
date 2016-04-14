@@ -17,7 +17,7 @@ enum NotificationType : String {
 
 class WebClient {
 
-    static let kLockrAPI = WebUtils.webApi
+    static let kLockrAPI = WebUtils.webApi 
     
     private static func get(method: String,
                             completion: (json: JSON) -> Void,
