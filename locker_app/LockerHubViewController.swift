@@ -376,6 +376,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         WebClient.endRental(rental!.uid!, completion: { (response) -> Void in
             self.view.userInteractionEnabled = true
             self.navigationController?.navigationBar.userInteractionEnabled = true
+            self.rental = nil
             self.displayMessage("Success!", message: "Your rental was successfully ended.", completion: { () -> Void in
                 self.performSegueWithIdentifier("checkOutSegue", sender: nil)
             })
@@ -507,6 +508,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func cancelReservation() {
         WebClient.endRental(rental!.uid!, completion: { (response) -> Void in
+            self.rental = nil
             self.displayMessage("Success!", message: "Your reservation was cancelled.")
             }) { (error) -> Void in
                 self.displayError("An error occurred cancelling your reservation. Please contact support for assistance.");
