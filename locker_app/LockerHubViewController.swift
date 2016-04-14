@@ -155,7 +155,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func dismissOpenLockerView() {
         
-        openLockerTimestamp = nil
+
         
         UIView.animateWithDuration(kDefaultAnimationDuration, animations: { () -> Void in
             self.openLockerImage.alpha = 0
@@ -167,6 +167,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         if openLockerTimer != nil {
             openLockerTimer.invalidate()
             openLockerTimer = nil
+            openLockerTimestamp = nil
         }
 
     }
