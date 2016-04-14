@@ -399,8 +399,10 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
             self.view.userInteractionEnabled = true
             self.navigationController?.navigationBar.userInteractionEnabled = true
             self.rental = nil
-            self.rateTimer.invalidate()
-            self.rateTimer = nil
+            if self.rateTimer {
+                self.rateTimer.invalidate()
+                self.rateTimer = nil
+            }
             self.displayMessage("Success!", message: "Your rental was successfully ended.", completion: { () -> Void in
                 self.performSegueWithIdentifier("checkOutSegue", sender: nil)
             })
