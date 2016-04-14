@@ -226,9 +226,9 @@ static func getRentalsForUser(active: Bool, completion: (response: Array<AnyObje
         }
     }
     
-    static func lockerDoorStatus(hubId: Int, lockerId: Int, completion: (response: String) -> Void, failure: (error: NSError) -> Void) {
+    static func lockerDoorStatus(hubId: Int, lockerId: Int, completion: (response: Dictionary<String, String>) -> Void, failure: (error: NSError) -> Void) {
         self.get(WebUtils.kApiMethodDoorStatus, parameters: ["hubId": hubId, "lockerId": lockerId], completion: { (json) -> Void in
-            completion(response: json.object as! String)
+            completion(response: json.object as! Dictionary<String, String>)
             }) { (error) -> Void in
                 failure(error: error)
         }

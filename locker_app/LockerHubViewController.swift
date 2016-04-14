@@ -145,6 +145,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         openLockerImage.image = UIImage(named: "unlock")?.imageWithRenderingMode(.AlwaysTemplate)
         openLockerImage.tintColor = UIColor.whiteColor()
         openLockerImage.alpha = 0
+        countdownLabel.alpha = 1
         
         UIView.animateWithDuration(kDefaultAnimationDuration) { () -> Void in
             self.openLockerView.alpha = 1
@@ -175,14 +176,28 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
     
     func updateTimer() {
         WebClient.lockerDoorStatus(rental!.hubId!, lockerId: rental!.lockerId!, completion: { (response) -> Void in
-            if response == "OPEN" {
+            if response["status"] == "OPEN" {
                 self.openLockerStatus = .Open
-                self.countdownLabel.text = ""
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.countdownLabel.alpha = 0
                     self.openLockerImage.alpha = 1
                 })
             } else {
                 self.openLockerStatus = .Closed
+                
+//                var elapsedTime = 0
+//                if let stamp = self.openLockerTimestamp {
+//                    elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(stamp))))
+//                }
+//                let remainingTime = kCountdownTime - elapsedTime
+//                
+//                if remainingTime <= 0 {
+//                    self.dismissOpenLockerView()
+//                }
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.countdownLabel.alpha = 1
+                    self.openLockerImage.alpha = 0
+                })
             }
             }) { (error) -> Void in
                 //fail silently, but dismiss view if locker was previously open
@@ -194,7 +209,7 @@ class LockerHubViewController : UIViewController, GMSMapViewDelegate {
         
         var elapsedTime = 0
         if let stamp = openLockerTimestamp {
-            elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(openLockerTimestamp!))))
+            elapsedTime = Int(NSDate().timeIntervalSinceDate(NSDate(timeIntervalSince1970: Double(stamp))))
         }
         let remainingTime = kCountdownTime - elapsedTime
         
