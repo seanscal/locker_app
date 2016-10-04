@@ -1,3 +1,2 @@
 # locker_app
-swift, yo
-word
+This is the working repository for the LockrHub App
